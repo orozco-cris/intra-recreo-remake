@@ -2,104 +2,218 @@
 /**
  * Description of Usuarios
  *
- * @author CRISTHIAN_OROZCO 2022-06-06
+ * @author CRISTHIAN_OROZCO 2022-09-28
  */
     class Usuario
     {
-        private $idUsuario;
-        private $nombre;
-        private $apellido;
-        private $cedula;
-        private $clave;
-        private $contacto;
-        private $rol;
-        private $estado;
+        private $id_usuario;
+        private $id_tipo_usuario;
+        private $nombre_usuario;
+        private $apellido_usuario;
+        private $cedula_usuario;
+        private $login_usuario;
+        private $clave_usuario;
+        private $correo_usuario;
+        private $direccion_usuario;
+        private $estado_usuario;
 
-        public function getIdUsuario()
+        /**
+         * Get the value of id_usuario
+         */ 
+        public function getId_usuario()
         {
-                return $this->idUsuario;
+                return $this->id_usuario;
         }
 
-        public function setIdUsuario($idUsuario)
+        /**
+         * Set the value of id_usuario
+         *
+         * @return  self
+         */ 
+        public function setId_usuario($id_usuario)
         {
-                $this->idUsuario = $idUsuario;
+                $this->id_usuario = $id_usuario;
+
                 return $this;
         }
 
-        public function getNombre()
+        /**
+         * Get the value of id_tipo_usuario
+         */ 
+        public function getId_tipo_usuario()
         {
-                return $this->nombre;
+                return $this->id_tipo_usuario;
         }
 
-        public function setNombre($nombre)
+        /**
+         * Set the value of id_tipo_usuario
+         *
+         * @return  self
+         */ 
+        public function setId_tipo_usuario($id_tipo_usuario)
         {
-                $this->nombre = $nombre;
+                $this->id_tipo_usuario = $id_tipo_usuario;
+
                 return $this;
         }
 
-        public function getApellido()
+        /**
+         * Get the value of nombre_usuario
+         */ 
+        public function getNombre_usuario()
         {
-                return $this->apellido;
+                return $this->nombre_usuario;
         }
 
-        public function setApellido($apellido)
+        /**
+         * Set the value of nombre_usuario
+         *
+         * @return  self
+         */ 
+        public function setNombre_usuario($nombre_usuario)
         {
-                $this->apellido = $apellido;
+                $this->nombre_usuario = $nombre_usuario;
+
                 return $this;
         }
 
-        public function getCedula()
+        /**
+         * Get the value of apellido_usuario
+         */ 
+        public function getApellido_usuario()
         {
-                return $this->cedula;
+                return $this->apellido_usuario;
         }
 
-        public function setCedula($cedula)
+        /**
+         * Set the value of apellido_usuario
+         *
+         * @return  self
+         */ 
+        public function setApellido_usuario($apellido_usuario)
         {
-                $this->cedula = $cedula;
+                $this->apellido_usuario = $apellido_usuario;
+
                 return $this;
         }
 
-        public function getClave()
+        /**
+         * Get the value of cedula_usuario
+         */ 
+        public function getCedula_usuario()
         {
-                return $this->clave;
+                return $this->cedula_usuario;
         }
 
-        public function setClave($clave)
+        /**
+         * Set the value of cedula_usuario
+         *
+         * @return  self
+         */ 
+        public function setCedula_usuario($cedula_usuario)
         {
-                $this->clave = $clave;
+                $this->cedula_usuario = $cedula_usuario;
+
                 return $this;
         }
 
-        public function getContacto()
+        /**
+         * Get the value of login_usuario
+         */ 
+        public function getLogin_usuario()
         {
-                return $this->contacto;
+                return $this->login_usuario;
         }
 
-        public function setContacto($contacto)
+        /**
+         * Set the value of login_usuario
+         *
+         * @return  self
+         */ 
+        public function setLogin_usuario($login_usuario)
         {
-                $this->contacto = $contacto;
+                $this->login_usuario = $login_usuario;
+
                 return $this;
         }
 
-        public function getRol()
+        /**
+         * Get the value of clave_usuario
+         */ 
+        public function getClave_usuario()
         {
-                return $this->rol;
+                return $this->clave_usuario;
         }
 
-        public function setRol($rol)
+        /**
+         * Set the value of clave_usuario
+         *
+         * @return  self
+         */ 
+        public function setClave_usuario($clave_usuario)
         {
-                $this->rol = $rol;
+                $this->clave_usuario = $clave_usuario;
+
                 return $this;
         }
 
-        public function getEstado()
+        /**
+         * Get the value of correo_usuario
+         */ 
+        public function getCorreo_usuario()
         {
-                return $this->estado;
+                return $this->correo_usuario;
         }
 
-        public function setEstado($estado)
+        /**
+         * Set the value of correo_usuario
+         *
+         * @return  self
+         */ 
+        public function setCorreo_usuario($correo_usuario)
         {
-                $this->estado = $estado;
+                $this->correo_usuario = $correo_usuario;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of direccion_usuario
+         */ 
+        public function getDireccion_usuario()
+        {
+                return $this->direccion_usuario;
+        }
+
+        /**
+         * Set the value of direccion_usuario
+         *
+         * @return  self
+         */ 
+        public function setDireccion_usuario($direccion_usuario)
+        {
+                $this->direccion_usuario = $direccion_usuario;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of estado_usuario
+         */ 
+        public function getEstado_usuario()
+        {
+                return $this->estado_usuario;
+        }
+
+        /**
+         * Set the value of estado_usuario
+         *
+         * @return  self
+         */ 
+        public function setEstado_usuario($estado_usuario)
+        {
+                $this->estado_usuario = $estado_usuario;
+
                 return $this;
         }
     }

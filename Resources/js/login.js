@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-	function loginUsuario(cedula, clave)
+	/* function loginUsuario(cedula, clave)
 	{
 		var dat = {
 			crud: "read",
@@ -34,7 +34,7 @@ $(document).ready(function(){
 	$("#id_ingresar").click(function(e){
 		e.preventDefault();
 		loginUsuario($("#id_cedula").val(), $("#id_clave").val());
-	});
+	}); */
 
 	/* $("#id_cedula").keyup(function(e){
 		if(e.keyCode == 13)

@@ -3,7 +3,7 @@
 require_once "./../Controller/Conexion.php";
 require_once "./../Class/Usuario.php";
 //require_once "./../Controller/FechaController.php";
-session_start();
+//session_start();
 
 class UsuarioController extends Conexion
 {
@@ -13,7 +13,7 @@ class UsuarioController extends Conexion
 		$this->conn = Conexion::getInstance()->getConexion();
 	}
 
-    public function readOne($query)
+    /* public function readOne($query)
 	{
 		$result = $this->conn->query($query);
 		$usuarios = null;
@@ -35,33 +35,31 @@ class UsuarioController extends Conexion
 		$result->close();
 		$this->conn->next_result();
 		return $usuarios;
-	}
+	} */
 
-	public function listAll31($query)
+	public function listClientes($query)
 	{
-		$result = $this->conn->query($query);
+		//$result = $this->conn->query("select * from usuario");
+		$conect = new Conexion();
+		$conect2 = $conect->getConexion(); 
+		$result = pg_query($conect2, "select * from usuario");
 		$datos = array();
-        if($result->num_rows > 0)
+        if($result)
 		{
-            while($info = mysqli_fetch_array($result))
+            while($info = pg_fetch_array($result))
 			{
                 $datos[] = array(
                     "success" => true,
-                    "idFecha" => $info[0],
-                    "nombreDia" => $info[1],
-                    "fecha" => $info[2],
-                    "A0" => $info[3],
-                    "A1" => $info[4],
-					"A2" => $info[5],
-                    "A3" => $info[6],
-					"A4" => $info[7],
-                    "A5" => $info[8],
-					"A6" => $info[9],
-                    "A7" => $info[10],
-					"A8" => $info[11],
-                    "Posterior0" => $info[12],
-					"SubANT" => $info[13],
-                    "SubMEGA" => $info[14]
+                    "id_usuario" => $info[0],
+                    "id_tipo_usuario" => $info[1],
+                    "nombre_usuario" => $info[2],
+                    "apellido_usuario" => $info[3],
+                    "cedula_usuario" => $info[4],
+					"login_usuario" => $info[5],
+                    "clave_usuario" => $info[6],
+					"correo_usuario" => $info[7],
+                    "direccion_usuario" => $info[8],
+					"estado_usuario" => $info[9]
                 );
             }
         }
@@ -69,12 +67,12 @@ class UsuarioController extends Conexion
 		{
 			$datos[] = array("success" => false);
 		}
-        $result->close();
-		$this->conn->next_result();
+        //$result->close();
+		//$this->conn->next_result();
 		return $datos;
 	}
 
-	public function create($nombreDia, $dia, $mes, $anio, 
+	/* public function create($nombreDia, $dia, $mes, $anio, 
 	$A0, $A1, $A2, $A3, $A4, $A5, $A6, $A7, $A8, $posterior0, $subAnt, $subMega)
 	{
 		$dia = intval($dia);
@@ -160,7 +158,7 @@ class UsuarioController extends Conexion
         
 		$result->close();
 		$this->conn->next_result();
-	}
+	} */
 
 }
 
