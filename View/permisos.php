@@ -1,32 +1,8 @@
-<?php  
-/*if(!isset($_SESSION["perfil"]) || $_SESSION["perfil"] == "ADM"
-	|| $_SESSION["perfil"] == "SIS")
-	header("Location: ?page=login");
 
-if ($_SESSION["perfil"] == "VIS" || $_SESSION["perfil"] == "ADM")
-	{ 
-		echo '<div class="d-grid gap-1 d-md-flex justify-content-md-end">';		
-		echo '<button class="btn btn-primary" id="btnAtras" type="button">';			
-		echo '<span class="fa-solid fa-angles-left"></span>';				
-		echo 'Atrás';				
-		echo '</button>';				
-		echo '</div>';		
-	}else{
-		echo '<div class="d-grid gap-1 d-md-flex justify-content-md-end">';	
-		echo '<a href="?page=logout">';		
-		echo '<button class="btn btn-danger" id="btnLogout" type="button">';			
-		echo '<span class="fa-solid fa-right-from-bracket"></span>';				
-		echo 'Cerrar sesión';				
-		echo '</button>';			
-		echo '</a>';		
-		echo '</div>';	
-	}*/
-?>
-
-<div class="container-fluid">
+    <div class="container-fluid">
         <div class="row" style="position: relative;">
             <div class="encabezado" style="padding: 0px">
-                <img style="object-fit: cover;width:20%;height:100%;" src="Resources/images/logo.PNG" alt="">
+                <img style="object-fit: cover;width:25%;height:100%;" src="Resources/images/logo.PNG" alt="">
             </div>
             <div class="inicio">
                 <button type="button" class="form-control btn btn-danger btnCerrar" data-bs-toggle="modal"
@@ -46,7 +22,7 @@ if ($_SESSION["perfil"] == "VIS" || $_SESSION["perfil"] == "ADM")
           						<a class="nav-link dropdown-toggle opcion" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
             						COMERCIAL
           						</font></font></a>
-          						<ul class="dropdown-menu bg-primary" style="border: none !important; left:30%">
+          						<ul class="dropdown-menu  bg-primary" style="border: none !important ; left:30%">
             						<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Clientes</font></font></a></li>
            
           						</ul>
@@ -55,8 +31,8 @@ if ($_SESSION["perfil"] == "VIS" || $_SESSION["perfil"] == "ADM")
               					<a class="nav-link dropdown-toggle opcion" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
                 					PERMISOS
               					</font></font></a>
-              					<ul class="dropdown-menu bg-primary" style="border: none !important; left:20%">
-                					<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Solicitudes</font></font></a></li>
+              					<ul class="dropdown-menu  bg-primary" style="border: none !important ; left:20%">
+                                  <li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Solicitudes</font></font></a></li>
                 					<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Solicitudes no aprobadas</font></font></a></li>
                 					<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Solicitudes aprobadas</font></font></a></li>       
               					</ul>
@@ -66,16 +42,37 @@ if ($_SESSION["perfil"] == "VIS" || $_SESSION["perfil"] == "ADM")
       			</div>
     		</nav>
 		</div>
-		<div class="row">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 0px">
-                <img class="hidden-xs" style="width:100%; height:auto;" src="../imagenes/fondo.jpg" alt="">
+		<div class="row  justify-content-center" style="position: relative;">
+		    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 0px">
+                <img class="hidden-xs" style="width:100%; height: auto" src="Resources/imagenes/fondo.jpg" alt="">
+            </div>
+            <div class="contenido border border-primary">
+                <div class="col-lg-12 col-md-12">
+                    <div class="card-body" style="padding:15px">
+                       
+                            <div class="row text-center">
+                                <div class="col-sm-3">ASUNTO</div>   
+                                <div class="col-sm-3">FECHA</div> 
+                                <div class="col-sm-3">EMPRESA</div> 
+                                <div class="col-sm-3"></div>                             
+                            </div>
+                            <div class="row  justify-content-center" style="padding:5px">
+                                <div class="col-sm-12 border border-dark text-center fila">
+                                    <label for=""></label>
+                                 </div>
+                            </div>
+                            <div class="row  justify-content-center" style="padding:5px">
+                                <div class="col-sm-12 border border-dark text-center fila">
+                                    <label for=""></label>
+                                 </div>
+                            </div>
+                            <div class="row  justify-content-center" style="padding:5px">
+                                <div class="col-sm-12 border border-dark text-center fila">
+                                    <label for=""></label>
+                                 </div>
+                            </div>
+                    </div>
+                </div>
             </div>
 		</div>
     </div>
-
-
-
-
-
-<script type="text/javascript" src="./Resources/js/general.js"></script>
-<script type="text/javascript" src="./Resources/js/depSeguridad.js"></script>

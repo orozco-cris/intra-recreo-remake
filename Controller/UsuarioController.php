@@ -13,36 +13,38 @@ class UsuarioController extends Conexion
 		$this->conn = Conexion::getInstance()->getConexion();
 	}
 
-    /* public function readOne($query)
+     public function readOne($query)
 	{
-		$result = $this->conn->query($query);
+		$result = pg_query($this->conn, $query);
 		$usuarios = null;
-		if($result->num_rows > 0)
+		if(pg_num_rows($result) > 0)
 		{
-			while ($info = mysqli_fetch_array($result)) 
+			while($info = pg_fetch_array($result))
 			{
 				$usuarios = new Usuario();
-				$usuarios->setIdUsuario($info[0]);
-				$usuarios->setNombre(utf8_encode($info[1]));
-				$usuarios->setApellido(utf8_encode($info[2]));
-				$usuarios->setCedula($info[3]);
-				$usuarios->setClave($info[4]);
-				$usuarios->setContacto($info[5]);
-				$usuarios->setRol($info[6]);
-				$usuarios->setEstado($info[7]);
+				$usuarios->setId_usuario($info[0]);
+				$usuarios->setId_tipo_usuario($info[1]);
+				$usuarios->setNombre_usuario(utf8_encode($info[2]));
+				$usuarios->setApellido_usuario(utf8_encode($info[3]));
+				$usuarios->setCedula_usuario($info[4]);
+				$usuarios->setLogin_usuario($info[5]);
+				$usuarios->setClave_usuario($info[6]);
+				$usuarios->setCorreo_usuario($info[7]);				
+				$usuarios->setEstado_usuario($info[9]);
 			}
 		}
-		$result->close();
-		$this->conn->next_result();
+		pg_close($this->conn);
+		//$this->conn->next_result();
+		//implode ($usuarios);
 		return $usuarios;
-	} */
+	} 
 
 	public function listClientes($query)
 	{
 		//$result = $this->conn->query("select * from usuario");
 		$conect = new Conexion();
 		$conect2 = $conect->getConexion(); 
-		$result = pg_query($conect2, "select * from usuario");
+		$result = pg_query($conect2, "select *from usuario");
 		$datos = array();
         if($result)
 		{

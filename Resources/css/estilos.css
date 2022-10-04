@@ -1,0 +1,67 @@
+.btnInicio{
+    width:12% !important;
+    color: white !important;
+    border-radius: 2px;
+    font-weight: bold !important ;
+    border-color: white !important;
+    margin-left: 83%;
+}
+
+.inicio{
+    position: absolute; 
+    top: 10%;
+}
+
+.btnlogin{
+    font-weight: bold; 
+    color: white !important;
+}
+
+.encabezado{
+    height: 120px;
+    background-color: #edf3f1;
+}
+
+
+.btnCerrar{
+    width:12% !important;
+    margin-left: 83%;
+}
+
+.opcion{    
+    color: white !important;
+}
+
+
+.contenido{
+    position: absolute; 
+    background-color: antiquewhite;
+    width: 80% !important;
+    opacity: 0.8;
+    border-color: midnightblue !important;
+    border-radius: 2px;
+    height: auto;
+}
+
+.fila{
+    background-color: white;
+    padding: 5px;
+    border-radius: 8px;
+    height: 35px;
+}
+
+
+.solicitud{
+    width: 15% !important;
+    margin-left: 83%;
+}
+
+.contenido1{
+    position: absolute; 
+    background-color: #CCD1D1 ;
+    width: 80% !important;
+    opacity: 0.8;
+    border-color: midnightblue !important;
+    border-radius: 2px;
+    height: auto;
+}
