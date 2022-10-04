@@ -4,14 +4,17 @@ if(!isset($_SESSION["perfil"]))
 {
 	header("?page=login");
 }
+
+
 else
 {
-	if($_SESSION["perfil"] === "ADM")
+	//$consulta=();
+	if($_SESSION["perfil"] == 1)
 	{
-		//header("Location: ?page=homeAdm");
+		header("Location:?page=homeAdmin");
         //echo 'ADM';
 	}
-	elseif($_SESSION["perfil"] === "perfil")
+	/*elseif($_SESSION["perfil"] === "SEG")
 	{
 		header("Location: ?page=homeSeg");
         //echo 'SEG';
@@ -28,7 +31,7 @@ else
 	}
 	else
 	{
-		header("Location: ?page=logout");
-	}
+		//header("Location: ?page=logout");
+	}*/
 }
 ?>
