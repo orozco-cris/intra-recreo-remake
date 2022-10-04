@@ -10,6 +10,7 @@
 </div>
 
 <main class="text-center">
+<button class="w-100 btn btn-lg btn-primary" id="id_ingresar" name="btn_ingresar">Ingresar</button>
     <!-- <form class="col-5" style="margin: 0 auto">
         <img class="" src="./Resources/images/logoRecreo.png" alt="" width="70%">
         <h1 class="h4 fw-normal">Favor inicie sesión</h1>

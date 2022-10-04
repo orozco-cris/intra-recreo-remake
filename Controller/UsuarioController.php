@@ -2,7 +2,8 @@
 
 require_once "./../Controller/Conexion.php";
 require_once "./../Class/Usuario.php";
-//require_once "./../Controller/FechaController.php";
+require_once "./../Class/TipoUsuario.php";
+require_once "./../Controller/TipoUsuarioController.php";
 //session_start();
 
 class UsuarioController extends Conexion
@@ -39,12 +40,9 @@ class UsuarioController extends Conexion
 
 	public function listClientes($query)
 	{
-		//$result = $this->conn->query("select * from usuario");
-		$conect = new Conexion();
-		$conect2 = $conect->getConexion(); 
-		$result = pg_query($conect2, "select * from usuario");
+		$result = pg_query($this->conn, $query);
 		$datos = array();
-        if($result)
+        if(pg_num_rows($result) > 0)
 		{
             while($info = pg_fetch_array($result))
 			{
@@ -67,7 +65,7 @@ class UsuarioController extends Conexion
 		{
 			$datos[] = array("success" => false);
 		}
-        //$result->close();
+		pg_close($this->conn);
 		//$this->conn->next_result();
 		return $datos;
 	}
@@ -159,6 +157,35 @@ class UsuarioController extends Conexion
 		$result->close();
 		$this->conn->next_result();
 	} */
+
+	public function listParameter($parameter)
+	{
+        $query = "select * from usuario where id_usuario = ".$parameter;
+		$result = pg_query($this->conn, $query);
+        $usuario = null;
+        if(pg_num_rows($result) > 0)
+		{
+            while($info = pg_fetch_array($result))
+			{
+                $tipo_usuario = new TipoUsuario();
+                $con_tipo_usuario = new TipoUsuarioController();
+                $tipo_usuario = $con_tipo_usuario->listParameter($info[1]);
+
+				$usuario = new Usuario();
+                $usuario->setId_usuario($info[0]);
+                $usuario->setId_tipo_usuario($tipo_usuario);
+                $usuario->setNombre_usuario($info[2]);
+                $usuario->setApellido_usuario($info[3]);
+                $usuario->setCedula_usuario($info[4]);
+                $usuario->setLogin_usuario($info[5]);
+                $usuario->setClave_usuario($info[6]);
+                $usuario->setCorreo_usuario($info[7]);
+                $usuario->setDireccion_usuario($info[8]);
+            }
+            pg_close($this->conn);
+            return $usuario;
+        }
+    }
 
 }
 

@@ -1,4 +1,5 @@
 <?php  
+
 if(!isset($_SESSION["perfil"]))
 {
 	header("?page=login");
@@ -10,9 +11,9 @@ else
 		//header("Location: ?page=homeAdm");
         //echo 'ADM';
 	}
-	elseif($_SESSION["perfil"] === "SEG")
+	elseif($_SESSION["perfil"] === "perfil")
 	{
-		//header("Location: ?page=homeSeg");
+		header("Location: ?page=homeSeg");
         //echo 'SEG';
 	}
 	elseif ($_SESSION["perfil"] === "SIS") 

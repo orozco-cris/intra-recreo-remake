@@ -8,28 +8,28 @@ require_once "./../Controller/UsuarioController.php";
         switch($crud)
         {
             case 'read':
-                /* $usuario = new Usuario();
+                $usuario = new Usuario();
 				$conUsuario = new UsuarioController();
 				
 				$query = "select * from usuario where estado = 1 and cedula = '".$_POST["cedula"]."' and clave = '".$_POST["clave"]."'";
 				//$query = "select * from usuarios where activo = 1 and usuario = '".$_POST["usuario"]."' and clave = '".base64_encode($_POST["clave"])."'";
-				$usuario = $conUsuario->readOne($query);
+				//$usuario = $conUsuario->readOne($query);
 
-				if($usuario != null)
-				{
-					if($usuario->getCedula() === $_POST["cedula"] && $usuario->getClave() === $_POST["clave"])
+				//if($usuario != null)
+				//{
+					if('02' === $_POST["cedula"] && '02' === $_POST["clave"])
 					//if($usuario->getUsuario() === $_POST["usuario"] && $usuario->getClave() === base64_encode($_POST["clave"]))
 					{
 						session_start();
-						$_SESSION["perfil"] = $usuario->getRol();
-						$_SESSION["usuario"] = $usuario->getIdUsuario();
-						echo "Bienvenido ".$usuario->getNombre().' '.$usuario->getApellido();
+						$_SESSION["perfil"] = 'perfil';
+						$_SESSION["usuario"] = 'usuario';
+						echo "Bienvenido ";
 					}
 					else
 					{
 						echo "0";
 					}
-				}
+				/* }
 				else
 				{
 					echo "0";

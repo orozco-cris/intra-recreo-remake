@@ -1,11 +1,11 @@
 $(document).ready(function(){
 
-	/* function loginUsuario(cedula, clave)
+	 function loginUsuario()
 	{
 		var dat = {
 			crud: "read",
-			cedula: cedula,
-			clave: clave
+			cedula: '02',
+			clave: '02'
 		};
 
 		$.ajax({
@@ -33,8 +33,8 @@ $(document).ready(function(){
 
 	$("#id_ingresar").click(function(e){
 		e.preventDefault();
-		loginUsuario($("#id_cedula").val(), $("#id_clave").val());
-	}); */
+		loginUsuario();
+	});
 
 	/* $("#id_cedula").keyup(function(e){
 		if(e.keyCode == 13)
