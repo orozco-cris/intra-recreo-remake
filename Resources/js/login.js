@@ -1,7 +1,7 @@
 
 $(document).ready(function(){
 
-	 function loginUsuario()
+	/* function loginUsuario()
 	{
 		var dat = {
 			crud: "read",

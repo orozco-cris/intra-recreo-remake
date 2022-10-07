@@ -44,35 +44,18 @@
 		</div>
 		<div class="row  justify-content-center" style="position: relative;">
 		    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 0px">
-                <img class="hidden-xs" style="width:100%; height: auto" src="Resources/imagenes/fondo.jpg" alt="">
+                <img class="hidden-xs" style="width:100%; height: auto" src="Resources/images/fondo.jpg" alt="">
             </div>
             <div class="contenido border border-primary">
                 <div class="col-lg-12 col-md-12">
-                    <div class="card-body" style="padding:15px">
+                    <div class="card-body" style="padding:15px" id="tablaPermisos">
                        
-                            <div class="row text-center">
-                                <div class="col-sm-3">ASUNTO</div>   
-                                <div class="col-sm-3">FECHA</div> 
-                                <div class="col-sm-3">EMPRESA</div> 
-                                <div class="col-sm-3"></div>                             
-                            </div>
-                            <div class="row  justify-content-center" style="padding:5px">
-                                <div class="col-sm-12 border border-dark text-center fila">
-                                    <label for=""></label>
-                                 </div>
-                            </div>
-                            <div class="row  justify-content-center" style="padding:5px">
-                                <div class="col-sm-12 border border-dark text-center fila">
-                                    <label for=""></label>
-                                 </div>
-                            </div>
-                            <div class="row  justify-content-center" style="padding:5px">
-                                <div class="col-sm-12 border border-dark text-center fila">
-                                    <label for=""></label>
-                                 </div>
-                            </div>
+                           
                     </div>
                 </div>
             </div>
 		</div>
     </div>
+
+    
+<script type="text/javascript" src="./Resources/js/permisos.js"></script>

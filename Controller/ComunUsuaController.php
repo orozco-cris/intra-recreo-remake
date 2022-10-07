@@ -73,6 +73,82 @@ class ComunUsuaController extends Conexion
             return $comunicado_usuario;
         }
     }
+
+    public function listadoPermSegOperaciones($query)
+    {
+        $result = pg_query($this->conn, $query);
+        $datos = array();
+        if(pg_num_rows($result) > 0)
+		{
+            while($info = pg_fetch_array($result))
+			{
+                $obj_comunicado = new Comunicado();
+                $con_comunicado = new ComunicadoController();
+                $obj_comunicado = $con_comunicado->listaPermisos($info[0]);
+                $datos[] = array(
+                    "success" => true,
+                    "comunicado" => $obj_comunicado,
+                    "check" => $info[3]
+                );
+            }
+        }
+        else
+		{
+			$datos[] = array("success" => false);
+		}
+        pg_close($this->conn);
+        return $datos;
+    }
+
+    public function PermisoDeterminado($query)
+    {        
+        $result = pg_query($this->conn, $query);
+        $datos = array();
+        if(pg_num_rows($result) > 0)
+		{
+            while($info = pg_fetch_array($result))
+			{
+                $obj_comunicado = new Comunicado();
+                $con_comunicado = new ComunicadoController();
+                $obj_comunicado = $con_comunicado->listaPermisos($info[0]);
+                $datos[] = array(
+                    "success" => true,
+                    "comunicado" => $obj_comunicado,
+                    "check" => $info[3]
+                );
+            }
+        }
+        else
+		{
+			$datos[] = array("success" => false);
+		}
+       //pg_close($this->conn);
+        return $datos;
+    }
+
+
+    public function aceptarPermiso($query)
+    {        
+        $query;
+        $result = pg_query($this->conn, $query);
+        $datos = array();
+        if(pg_num_rows($result) > 0)
+		{
+            while($info = pg_fetch_array($result))
+			{
+                $datos[] = array(
+                    "success" => true,
+                    "check" => $info[3]
+                );
+            }
+        }
+        else
+		{
+			$datos[] = array("success" => false);
+		}
+       //pg_close($this->conn);
+        return $datos;
+    }
 }
 
 ?>
