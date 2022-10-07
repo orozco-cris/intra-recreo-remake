@@ -60,7 +60,6 @@ $(document).ready(function(){
 			usuario: usuario,
 			clave: clave
 		};
-
 		$.ajax({
 			data: dat,
 			url: "./Model/UsuariosAjax.php",
