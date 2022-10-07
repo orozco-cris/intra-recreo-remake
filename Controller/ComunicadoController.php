@@ -96,10 +96,36 @@ class ComunicadoController extends Conexion
 
     public function createPermiso($comunicado)
     {
-        $query = "";
+        $query = "insert into comunicado (id_usuario_creador, de_comunicado, para_comunicado, 
+        codigo_comunicado, asunto_comunicado, mensaje_comunicado, detalle_comunicado, dia_comunicado, 
+        mes_comunicado, anio_comunicado, hora_comunicado, fecha_caducidad_comunicado, foto_comunicado, 
+        tipo_comunicado) values 
+        (".$comunicado->getId_usuario_creador().", '".$comunicado->getDe_comunicado()."', 
+        '".$comunicado->getPara_comunicado()."', '".$comunicado->getCodigo_comunicado()."',
+        '".$comunicado->getAsunto_comunicado()."', '".$comunicado->getMensaje_comunicado()."', 
+        '".$comunicado->getDetalle_comunicado()."', ".$comunicado->getDia_comunicado().", 
+        ".$comunicado->getMes_comunicado().", ".$comunicado->getAnio_comunicado().", 
+        '".$comunicado->getHora_comunicado()."', '".$comunicado->getFecha_caducidad_comunicado()."', 
+        '".$comunicado->getFoto_comunicado()."', '".$comunicado->getTipo_comunicado()."')";
         $result = pg_query($this->conn, $query);
-        pg_close($this->conn);
+        //pg_close($this->conn);
         return $result;
+    }
+
+    public function getLastId()
+    {
+        $query = "select max(id_comunicado) from comunicado";
+        $result = pg_query($this->conn, $query);
+		$id = 0;
+		if(pg_num_rows($result) > 0)
+		{
+            while($info = pg_fetch_array($result))
+			{
+				$id = $info[0];
+			}
+		}
+		//pg_close($this->conn);
+		return $id;
     }
 }
 
