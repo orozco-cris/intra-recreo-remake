@@ -26,7 +26,7 @@ class Conexion
 		$this->db_user="ADMrecreo";
 		$this->db_pass="RecreoIntraRemake+2022";
 		$this->db_name="intra_recreo_remake";
-		$this->conn = pg_connect("host=127.0.0.1 user=adminrecreo password=recreointraremake+2022 dbname=remake_intra_recreo port=5432") or die("No se ha podido establecer la conexion con la base de datos :( dbc");
+		$this->conn = pg_pconnect("host=127.0.0.1 user=adminrecreo password=recreointraremake+2022 dbname=remake_intra_recreo port=5432") or die("No se ha podido establecer la conexion con la base de datos :( dbc");
     }
 
 	public function getConexion()

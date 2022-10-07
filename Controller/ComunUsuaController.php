@@ -149,6 +149,16 @@ class ComunUsuaController extends Conexion
        //pg_close($this->conn);
         return $datos;
     }
+
+    public function create($comunicado_usuario)
+    {
+        $query = "insert into comunicado_usuario (id_comunicado, id_usuario, revision)
+        values(".$comunicado_usuario->getId_comunicado().", 
+        ".$comunicado_usuario->getId_usuario().", ".$comunicado_usuario->getRevision().")";
+        $result = pg_query($this->conn, $query);
+        //pg_close($this->conn);
+        return $result;
+    }
 }
 
 ?>
