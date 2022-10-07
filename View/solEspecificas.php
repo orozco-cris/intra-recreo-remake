@@ -43,7 +43,7 @@
 		</div>
 		<div class="row  justify-content-center" style="position: relative;">
 		    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 0px">
-                <img class="hidden-xs" style="width:100%; height: auto" src="Resources/imagenes/fondo.jpg" alt="">
+                <img class="hidden-xs" style="width:100%; height: auto" src="Resources/images/fondo.jpg" alt="">
             </div>
             <div class="contenido border border-primary">
                 <div class="card-content">
@@ -52,50 +52,15 @@
                             <div class="col-md-10">
                                 <br>
                                 <form class="form form-horizontal">
-                                    <div class="form-body">
-                                        <div class="row">    
-                                            <div class="row" style="padding: 8px !important">                                   
-                                                <div class="col-md-3">
-                                                    <label>DE:</label>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <label> FECHA:</label>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <label>HORA:</label>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <label>CÓDIGO:</label>
-                                                </div>
-                                            </div>
-                                            <div class="row" style="padding: 8px !important">  
-                                                <div class="col-md-12">
-                                                    <label>ASUNTO:</label>
-                                                </div>
-                                            </div>
-                                            <div class="row" style="padding: 8px !important">  
-                                                <div class="col-md-12">
-                                                    <label> MENSAJE:</label>
-                                                </div>
-                                            </div>
-                                            <div class="row" style="padding: 8px !important">  
-                                                <div class="col-md-12">
-                                                    <label>DETALLE:</label>
-                                                </div>
-                                            </div>
-                                            <div class="row" style="padding: 8px !important">  
-                                                <div class="col-md-12 form-group">
-                                                    <div class="position-relative has-icon-left">
-                                                                  
-                                                                    
-                                                    </div>
-                                                </div> 
-                                            </div>
-                                            <div class="row" style="padding: 8px !important">  
+                                    <div class="form-body"  >
+                                        <div class="row" id="permisoDeterminado" >    
+                                            
+                                            
+                                        </div>
+                                        <div class="row" style="padding: 8px !important">  
                                                 <div class="col-12 d-flex justify-content-end">
-                                                    <input class="btn float-right login_btn btn-primary" type="submit" value="ACEPTAR">
+                                                    <input class="btn float-right login_btn btn-primary" type="submit" id="id_aceptar"  name="id_aceptar" value="ACEPTAR">
                                                 </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </form><br>
@@ -106,3 +71,6 @@
             </div>
 		</div>
     </div>
+
+    <script type="text/javascript" src="./Resources/js/permDeterminado.js"></script>
+    <script type="text/javascript" src="./Resources/js/solEspecificas.js"></script>

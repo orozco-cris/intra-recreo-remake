@@ -125,7 +125,7 @@
                                                 <div class="col-md-6">
                                                     <div class="row">
                                                         <div class="col-md-10 form-group border-primary">
-                                                            <img style="width:100%;height:100%;" src="../imagenes/logo.PNG" alt="">
+                                                            <img style="width:100%;height:100%;" src="Resources/images/logo.PNG" alt="">
                                                         </div>
                                                         <div class="col-md-10 form-group" style="padding:10px">
                                                             <input type="file" class="btn btn-primary" name="fimagen" accept="image/gif, image/jpeg, image/png" value="Subir imagen">
