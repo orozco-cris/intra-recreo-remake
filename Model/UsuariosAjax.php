@@ -24,12 +24,10 @@ require_once "./../Controller/UsuarioController.php";
 					}
 					else{
 						echo "0";
-						//echo $_POST["clave"];
 					}
 				}		
 				else
 				{
-					//echo $_POST["clave"];
 					echo "0";
 				} 
                 break;

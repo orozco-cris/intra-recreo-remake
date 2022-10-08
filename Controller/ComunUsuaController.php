@@ -84,7 +84,7 @@ class ComunUsuaController extends Conexion
 			{
                 $obj_comunicado = new Comunicado();
                 $con_comunicado = new ComunicadoController();
-                $obj_comunicado = $con_comunicado->listaPermisos($info[0]);
+                $obj_comunicado = $con_comunicado->listParameter($info[0]);
                 $datos[] = array(
                     "success" => true,
                     "comunicado" => $obj_comunicado,
@@ -110,7 +110,7 @@ class ComunUsuaController extends Conexion
 			{
                 $obj_comunicado = new Comunicado();
                 $con_comunicado = new ComunicadoController();
-                $obj_comunicado = $con_comunicado->listaPermisos($info[0]);
+                $obj_comunicado = $con_comunicado->listParameter($info[0]);
                 $datos[] = array(
                     "success" => true,
                     "comunicado" => $obj_comunicado,
@@ -129,10 +129,9 @@ class ComunUsuaController extends Conexion
 
     public function aceptarPermiso($query)
     {        
-        $query;
         $result = pg_query($this->conn, $query);
         $datos = array();
-        if(pg_num_rows($result) > 0)
+        if($result)
 		{
             while($info = pg_fetch_array($result))
 			{

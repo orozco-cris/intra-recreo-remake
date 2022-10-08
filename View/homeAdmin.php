@@ -57,10 +57,3 @@
             </div>
 		</div>
     </div>
-
-
-
-
-
-<script type="text/javascript" src="Resources/js/general.js"></script>
-<script type="text/javascript" src="Resources/js/depSeguridad.js"></script>

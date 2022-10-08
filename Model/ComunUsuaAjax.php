@@ -37,15 +37,15 @@ if($_POST["crud"])
                     </tr>';
                     
                 }
-                //$html = 'Positivo';
             }
             else
 				{
-					$html .= "<tr><td colspan='4' class='text-center'>No existen ventas auditadas</td></tr>";
+					$html .= "<tr><td colspan='4' class='text-center'>No existen circulares disponibles</td></tr>";
 				}
 				$html .= '</tbody></table>';
 				echo $html;
         break;
+
         case 'listPermisosSegOpe':
             session_start();
             $con_usuario_comunicado_controller = new ComunUsuaController();
@@ -73,10 +73,10 @@ if($_POST["crud"])
                             $row["comunicado"]->getMes_comunicado().'/'.
                             $row["comunicado"]->getDia_comunicado().'</td>
                     <td>'.$row["comunicado"]->getMensaje_comunicado().'</td>
+                    <td><a class="btn btn-link" href="?page=solEspecificas&comu='.base64_encode($row["comunicado"]->getId_comunicado()).'">Ver detalles</a></td>
                     </tr>';
                     
                 }
-                //$html = 'Positivo';
             }
             else
 				{
@@ -85,8 +85,10 @@ if($_POST["crud"])
 				$html .= '</tbody></table>';
 				echo $html;
         break;
+
         case 'permisoDeterminado':
-           $id_permiso=1;
+            $id_permiso = 0;
+            $id_permiso = $_POST["usuario"];
             $con_usuario_comunicado_controller = new ComunUsuaController();
             $query = " select *from comunicado where id_comunicado=".$id_permiso."";
             $con_usuario_comunicado = $con_usuario_comunicado_controller->PermisoDeterminado($query);
@@ -130,42 +132,31 @@ if($_POST["crud"])
                 </div>
                 <div class="row" style="padding: 8px !important">  
                     <div class="col-md-12 form-group">
-                        <div class="position-relative has-icon-left">
-                                      
-                                        
+                        <div class="position-relative has-icon-left">                 
                         </div>
                     </div> 
-                </div>
-                
-                
-               ';
+                </div>';
                 }
-                //$html = 'Positivo';
             }
             else
 				{
-					//$html .= "<tr><td colspan='4' class='text-center'>No existen ventas auditadas</td></tr>";
+					$html .= "<tr><td colspan='1' class='text-center'>Error al recuperar los datos</td></tr>";
 				}
-				//$html .= '</tbody></table>';
-				echo $html;
+            echo $html;
         break;
         case 'aceptarPermiso':
-            echo "variable";
-             $con_usuario_comunicado_controller = new ComunUsuaController();
-             $query = "update comunicado_usuario set revision=1 where id_comunicado=".$_POST["id_comunicado"]."";
-             $con_usuario_comunicado = $con_usuario_comunicado_controller->aceptarPermiso($query);
- 
-             if($con_usuario_comunicado[0]["success"])
-             {
+            $con_usuario_comunicado_controller = new ComunUsuaController();
+            $query = "update comunicado_usuario set revision=1 where id_comunicado=".$_POST["id_comunicado"]."";
+            $con_usuario_comunicado = $con_usuario_comunicado_controller->aceptarPermiso($query);
+            if($con_usuario_comunicado[0]["success"])
+            {
                 echo "usuario modificado";
-             }
-             else
-                 {
-                     //$html .= "<tr><td colspan='4' class='text-center'>No existen ventas auditadas</td></tr>";
-                 }
-                 //$html .= '</tbody></table>';
-                 
-         break;
+            }
+            else
+            {
+                echo 0;
+            }    
+        break;
     }
 }
 

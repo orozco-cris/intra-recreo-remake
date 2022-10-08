@@ -30,7 +30,7 @@ class TipoUsuarioController extends Conexion
                 $tipo_usuario->setNombre_tipo_usuario($info[1]);
                 $tipo_usuario->setDescripcion_tipo_usuario($info[2]);
             }
-            pg_close($this->conn);
+            //pg_close($this->conn);
             return $tipo_usuario;
         }
     }

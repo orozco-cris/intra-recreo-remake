@@ -35,8 +35,6 @@ class UsuarioController extends Conexion
 			}
 		}
 		//pg_close($this->conn);
-		//$this->conn->next_result();
-		//implode ($usuarios);
 		return $usuarios;
 	} 
 
@@ -72,94 +70,6 @@ class UsuarioController extends Conexion
 		return $datos;
 	}
 
-	/* public function create($nombreDia, $dia, $mes, $anio, 
-	$A0, $A1, $A2, $A3, $A4, $A5, $A6, $A7, $A8, $posterior0, $subAnt, $subMega)
-	{
-		$dia = intval($dia);
-        $mes = intval($mes);
-        $anio = intval($anio);
-		$A0 = intval($A0);
-        $A1 = intval($A1);
-        $A2 = intval($A2);
-        $A3 = intval($A3);
-        $A4 = intval($A4);
-		$A5 = intval($A5);
-        $A6 = intval($A6);
-        $A7 = intval($A7);
-        $A8 = intval($A8);
-		$posterior0 = intval($posterior0);
-        $subAnt = intval($subAnt);
-        $subMega = intval($subMega);
-        $conFecha = new FechaController();
-
-		$idFecha = $conFecha->consultaFecha($nombreDia, $dia, $mes, $anio, 5);
-        $idUsuario = $_SESSION["usuario"];
-        if($idFecha != 0)
-        {
-            $query = "insert into valor(idAcceso, idFecha, idUsuario, valor) 
-            values (11, ".$idFecha.", ".$idUsuario.", ".$A0.")";
-            $result = $this->conn->query($query);
-            if($result)
-            {
-                $query = "insert into valor(idAcceso, idFecha, idUsuario, valor) 
-                values (1, ".$idFecha.", ".$idUsuario.", ".$A1.")";
-                $result = $this->conn->query($query);
-                if($result)
-                {
-                    return "ok";
-                }
-            }  
-		    else
-            {
-                return "nok";
-            }  
-        }
-        else
-            {
-                return "nok";
-            } 
-		$result->close();
-		$this->conn->next_result();
-	}
-
-	public function edit($A0, $A1, $A2, $A3, $A4, $A5, $A6, 
-	$A7, $A8, $posterior0, $subAnt, $subMega, $fecha)
-	{
-		$A0 = intval($A0);
-        $A1 = intval($A1);
-        $A2 = intval($A2);
-        $A3 = intval($A3);
-        $A4 = intval($A4);
-		$A5 = intval($A5);
-        $A6 = intval($A6);
-        $A7 = intval($A7);
-        $A8 = intval($A8);
-		$posterior0 = intval($posterior0);
-        $subAnt = intval($subAnt);
-        $subMega = intval($subMega);
-        $idFecha = intval($fecha);
-        $idUsuario = $_SESSION["usuario"];
-		
-		$query = "select * from usuario 
-			where idUsuario = ".$idUsuario." and rol = 'VIS'";
-		$result = $this->conn->query($query);
-		if($result->num_rows > 0)
-		{
-			return "vnok";
-		}else{
-			if($idFecha != 0)
-			{
-			}
-			else
-				{
-					return "nok";
-				} 
-		}
-        
-		$result->close();
-		$this->conn->next_result();
-	} */
-
 	public function listParameter($parameter)
 	{
         $query = "select * from usuario where id_usuario = ".$parameter;
@@ -184,7 +94,7 @@ class UsuarioController extends Conexion
                 $usuario->setCorreo_usuario($info[7]);
                 $usuario->setDireccion_usuario($info[8]);
             }
-            pg_close($this->conn);
+            //pg_close($this->conn);
             return $usuario;
         }
     }

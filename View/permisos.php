@@ -6,7 +6,7 @@
             </div>
             <div class="inicio">
                 <button type="button" class="form-control btn btn-danger btnCerrar" data-bs-toggle="modal"
-                    data-bs-target="#iniciar">Cerrar Sesión</button>
+                    data-bs-target="#iniciar" onclick="window.location.href='?page=logout'">Cerrar Sesión</button>
             </div>
         </div>
 		<div class="row ">

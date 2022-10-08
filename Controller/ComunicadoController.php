@@ -22,7 +22,7 @@ class ComunicadoController extends Conexion
 
     public function listParameter($parameter)
 	{
-        $query = "select * from comunicado where id_comunicado = ".$parameter;
+        $query = "select *from comunicado where id_comunicado = ".$parameter;
         $result = pg_query($this->conn, $query);
         $comunicado = null;
         if(pg_num_rows($result) > 0)
@@ -48,7 +48,7 @@ class ComunicadoController extends Conexion
                 $comunicado->setFecha_caducidad_comunicado($info[12]);
                 $comunicado->setFoto_comunicado($info[13]);
             }
-            pg_close($this->conn);
+            //pg_close($this->conn);
             return $comunicado;
         }
     }
@@ -110,37 +110,6 @@ class ComunicadoController extends Conexion
         $result = pg_query($this->conn, $query);
         //pg_close($this->conn);
         return $result;
-    }
-
-    public function listaPermisos($parameter)
-	{
-        $query = "select *from comunicado where id_comunicado = ".$parameter;
-        $result = pg_query($this->conn, $query);
-        $comunicado = null;
-        if(pg_num_rows($result) > 0)
-		{
-            while($info = pg_fetch_array($result))
-			{
-                $comunicado = new Comunicado();
-                $comunicado->setId_comunicado($info[0]);
-                $comunicado->setId_usuario_creador($info[1]);
-                $comunicado->setDe_comunicado($info[2]);
-                $comunicado->setPara_comunicado($info[3]);
-                $comunicado->setCodigo_comunicado($info[4]);
-                $comunicado->setAsunto_comunicado($info[5]);
-                $comunicado->setMensaje_comunicado($info[6]);
-                $comunicado->setDetalle_comunicado($info[7]);
-                $comunicado->setDia_comunicado($info[8]);
-                $comunicado->setMes_comunicado($info[9]);
-                $comunicado->setAnio_comunicado($info[10]);
-                $comunicado->setHora_comunicado($info[11]);
-                $comunicado->setFecha_caducidad_comunicado($info[12]);
-                $comunicado->setFoto_comunicado($info[13]);
-            }
-           // pg_close($this->conn);
-            return $comunicado;
-        
-        }
     }
 
     public function getLastId()

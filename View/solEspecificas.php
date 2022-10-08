@@ -1,3 +1,11 @@
+    <?php 
+        $comunicado = 0;
+        if(isset($_GET["comu"]))
+        {
+            $comunicado = $_GET["comu"];
+        }
+    ?>
+
     <div class="container-fluid">
         <div class="row" style="position: relative;">
             <div class="encabezado" style="padding: 0px">
@@ -71,6 +79,8 @@
             </div>
 		</div>
     </div>
+<div class="d0">
+	<input type="hidden" id="id_comunicado_especifico" value="<?php echo $comunicado; ?>">
+</div>
 
-    <script type="text/javascript" src="./Resources/js/permDeterminado.js"></script>
     <script type="text/javascript" src="./Resources/js/solEspecificas.js"></script>
