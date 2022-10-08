@@ -34,7 +34,7 @@ class UsuarioController extends Conexion
 				$usuarios->setEstado_usuario($info[9]);
 			}
 		}
-		pg_close($this->conn);
+		//pg_close($this->conn);
 		//$this->conn->next_result();
 		//implode ($usuarios);
 		return $usuarios;
