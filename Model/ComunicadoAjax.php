@@ -97,6 +97,9 @@ if($_POST["crud"])
                 echo 'incorrecto';
             }
         break;
+
+        case 'listCircularesParaCliente':
+        break;
     }
 }
 

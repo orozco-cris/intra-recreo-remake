@@ -144,6 +144,7 @@ if($_POST["crud"])
 				}
             echo $html;
         break;
+        
         case 'aceptarPermiso':
             $con_usuario_comunicado_controller = new ComunUsuaController();
             $query = "update comunicado_usuario set revision=1 where id_comunicado=".$_POST["id_comunicado"]."";
