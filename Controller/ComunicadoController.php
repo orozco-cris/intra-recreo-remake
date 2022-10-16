@@ -53,6 +53,42 @@ class ComunicadoController extends Conexion
         }
     }
 
+    public function listAll()
+	{
+        $query = "select * from comunicado order by id_comunicado desc limit 25";
+        $result = pg_query($this->conn, $query);
+        $datos = array();
+        if(pg_num_rows($result) > 0)
+		{
+            while($info = pg_fetch_array($result))
+			{
+                $datos[] = array(
+                    "success" => true,
+                    "id_comunicado" => $info[0],
+                    "id_usuario_creador" => $info[1],
+                    "de_comunicado" => $info[2],
+                    "para_comunicado" => $info[3],
+                    "codigo_comunicado" => $info[4],
+					"asunto_comunicado" => $info[5],
+                    "mensaje_comunicado" => $info[6],
+					"detalle_comunicado" => $info[7],
+                    "dia_comunicado" => $info[8],
+					"mes_comunicado" => $info[9],
+                    "anio_comunicado" => $info[10],
+					"hora_comunicado" => $info[11],
+                    "fecha_caducidad_comunicado" => $info[12],
+					"foto_comunicado" => $info[13]
+                );
+            }
+        }
+        else
+		{
+			$datos[] = array("success" => false);
+		}
+        pg_close($this->conn);
+        return $datos;
+    }
+
     public function getPermisosParaCliente($query)
     {
         $result = pg_query($this->conn, $query);
