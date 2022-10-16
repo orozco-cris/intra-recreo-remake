@@ -11,7 +11,6 @@ $(document).ready(function(){
             url:"./Model/ComunUsuaAjax.php",
             method: "POST",
             success: function(data){
-                console.log("Si: "+data);
                 $("#tablaPermisos").html(data);
             },
     
@@ -23,7 +22,5 @@ $(document).ready(function(){
     }
 
     getPermisosSegOpe();
-
-    
 
 });
