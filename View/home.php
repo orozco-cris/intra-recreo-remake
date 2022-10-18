@@ -15,6 +15,7 @@ if(!isset($_SESSION["perfil"]))
 	{
 		header("Location: ?page=homeCliente");
         //echo 'SEG';
+		//texto de prueba
 	}
 	elseif ($_SESSION["perfil"] == 3 || $_SESSION["perfil"] == 4) 
 	{
