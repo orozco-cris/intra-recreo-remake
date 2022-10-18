@@ -11,11 +11,11 @@ if(!isset($_SESSION["perfil"]))
 		header("Location:?page=homeAdmin");
         //echo 'ADM';
 	}
-	/*elseif($_SESSION["perfil"] === "SEG")
+	elseif($_SESSION["perfil"] == 2)
 	{
-		header("Location: ?page=homeSeg");
+		header("Location: ?page=homeCliente");
         //echo 'SEG';
-	}*/
+	}
 	elseif ($_SESSION["perfil"] == 3 || $_SESSION["perfil"] == 4) 
 	{
 		header("Location: ?page=homeSeg");

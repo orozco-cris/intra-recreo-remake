@@ -1,5 +1,6 @@
 
-    <div class="container-fluid">
+    <!-- Listado de permisos para el departamento de seguridad o de operaciones -->
+	<div class="container-fluid">
         <div class="row" style="position: relative;">
             <div class="encabezado" style="padding: 0px">
                 <img style="object-fit: cover;width:25%;height:100%;" src="Resources/images/logo.PNG" alt="">

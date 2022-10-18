@@ -34,7 +34,7 @@
               					<ul class="dropdown-menu bg-primary" style="border: none !important ; left:15%">
                 					<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Solicitudes aprobada</font></font></a></li>
                 					<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Solicitudes no revisadas</font></font></a></li>
-                					<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Crear solicitud</font></font></a></li>       
+                					<li><a class="dropdown-item opcion" href="?page=menuCliente"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Crear solicitud</font></font></a></li>       
               					</ul>
             				</li>
           				</ul>

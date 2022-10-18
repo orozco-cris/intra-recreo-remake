@@ -1,4 +1,4 @@
-
+   <!-- Listado de permisos para el los clientes -->
 <div class="container-fluid">
         <div class="row" style="position: relative;">
             <div class="encabezado" style="padding: 0px">

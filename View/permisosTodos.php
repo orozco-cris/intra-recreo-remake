@@ -1,3 +1,4 @@
+   <!-- Listado de permisos para el departamento de consola, no necesitan iniciar sesión -->
 <?php 
         $comunicado = 0;
         if(isset($_GET["comu"]))
