@@ -23,15 +23,15 @@
             						COMERCIAL
           						</font></font></a>
           						<ul class="dropdown-menu bg-primary" style="border: none !important; left:50%">
-            						<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Clientes</font></font></a></li>
-           
+            						<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">	Mix Comercial</font></font></a></li>
+									<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">	Empresas</font></font></a></li>
           						</ul>
         					</li>
            					<li class="nav-item dropdown" style="padding-left:30%">
               					<a class="nav-link dropdown-toggle opcion" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
                 					CIRCULARES
               					</font></font></a>
-              					<ul class="dropdown-menu bg-primary" style="border: none !important; left:25%">
+              					<ul class="dropdown-menu bg-primary" style="border: none !important; left:35%">
                 					<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Añadir usuario interno</font></font></a></li>
                 					<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Circulares no reviados</font></font></a></li>
                 					<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Crear circulares</font></font></a></li>       
@@ -41,9 +41,13 @@
               					<a class="nav-link dropdown-toggle opcion" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
                 					ADMINISTRACIÓN
               					</font></font></a>
-              					<ul class="dropdown-menu bg-primary" style="border: none !important; left:30%">
+              					<ul class="dropdown-menu bg-primary" style="border: none !important; left:42%">
                 					<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Usuarios</font></font></a></li>
-                					<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Crear local / publicidad / isla</font></font></a></li>
+                					<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Locales</font></font></a></li>
+									<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Islas</font></font></a></li>
+									<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Publicidades</font></font></a></li>
+									<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Etapas</font></font></a></li>
+									<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Arriendos</font></font></a></li>
               					</ul>
             				</li>
           				</ul>

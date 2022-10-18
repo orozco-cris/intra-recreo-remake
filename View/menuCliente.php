@@ -41,6 +41,7 @@
       			</div>
     		</nav>
 		</div>
+
 		<div class="row  justify-content-center" style="position: relative;">
 		    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 0px">
                 <img class="hidden-xs" style="width:100%; height: auto" src="Resources/images/fondo.jpg" alt="">
@@ -52,6 +53,7 @@
                        <div class="row">
                        <button type="button" class="form-control btn btn-success solicitud" data-bs-toggle="modal"  data-bs-target="#solicitud">Nueva Solicitud</button>
                     </div>
+                    <div id="tblAuditadasRep">
                             <div class="row text-center">
                                 <div class="col-sm-3">ASUNTO</div>   
                                 <div class="col-sm-3">FECHA</div> 
@@ -73,6 +75,7 @@
                                     <label for=""></label>
                                  </div>
                             </div>
+                            </div>
                     </div>
                 </div>
             </div>
@@ -91,61 +94,62 @@
                         <div class="card-body">
                             <div class="row justify-content-center">
                                 <div class="col-md-12">
-                                    <form class="form form-horizontal" >
+                                    <form class="form form-horizontal" id="uploadForm">
                                         <div class="form-body">
                                             <div class="row" style="position: relative;" >
                                                 <div class="col-md-6">
                                                     <div class="row" style="padding:5px">
-                                                        <div class="col-md-4">
+                                                        <div class="col-md-4" style="padding:15px">
                                                             <label> DE:</label>
                                                         </div>
                                                         <div class="col-md-8 form-group">
-                                                            <input id="nombre" class="form-control" type="text">
+                                                            <input id="de" class="form-control" type="text">
                                                         </div>
-                                                        <div class="col-md-4">
+                                                        <div class="col-md-4" style="padding:15px"> 
                                                             <label> PARA:</label>
                                                         </div>
                                                         <div class="col-md-8 form-group">
-                                                            <input id="nombre" class="form-control" type="text">
+                                                            <input id="para" class="form-control" type="text">
                                                         </div>
-                                                        <div class="col-md-4">
+                                                        <div class="col-md-4" style="padding:15px">
                                                             <label> ASUNTO:</label>
                                                         </div>
                                                         <div class="col-md-8 form-group">
-                                                            <input id="nombre" class="form-control" type="text">
+                                                            <input id="asunto" class="form-control" type="text">
                                                         </div>
-                                                        <div class="col-md-4">
+                                                        <div class="col-md-4" style="padding:15px">
                                                             <label> MENSAJE:</label>
                                                         </div>
                                                         <div class="col-md-8 form-group">
-                                                            <input id="nombre" class="form-control" type="text">
+                                                            <input id="mensaje" class="form-control" type="text">
+                                                            <input id="tipo" class="form-control" type="hidden" value="permiso">
+                                                            <input id="fechacaducidad" class="form-control" type="hidden" value="">
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <div class="row">
-                                                        <div class="col-md-10 form-group border-primary">
-                                                            <img style="width:100%;height:100%;" src="Resources/images/logo.PNG" alt="">
+                                                    <div class="row" id="val">   
+                                                    <div class="col-md-10 form-group" id="imagen"></div>                                                     
+                                                        <div class="col-md-10 form-group" style="padding:10px" >
+                                                            <input type="file" class="btn btn-primary" id="file" name="file" accept="image/gif, image/jpeg, image/png">
                                                         </div>
-                                                        <div class="col-md-10 form-group" style="padding:10px">
-                                                            <input type="file" class="btn btn-primary" name="fimagen" accept="image/gif, image/jpeg, image/png" value="Subir imagen">
-                                                        </div>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-2">
+                                                <div class="col-md-2" style="padding:10px">
                                                     <label> DESCRIPCION:</label>
                                                 </div>
                                                 <div class="col-md-8 form-group">
-                                                    <textarea type="text" class="fom-control" name="txtDescripcion" id="txtDescripcion" rows="8"></textarea> 
+                                                    <textarea type="text" class="fom-control" id="descripcion" name="descripcion" id="txtDescripcion" rows="8"></textarea> 
                                                 </div>
                                                     <div class="col-md-1 form-group" style="padding-top:18%">
-                                                    <input type="button" class="btn btn-danger" value="Cancelar">
+                                                    <input type="button" class="btn btn-danger" data-bs-dismiss="modal" value="Cancelar">
                                                 </div>
-                                                    <div class="col-md-1 form-group"  style="padding-top:18%">
-                                                <input type="button" class="btn btn-primary" value="Crear">
-                                            </div>
+                                                <div class="col-md-1 form-group"  style="padding-top:18%">
+                                                        <input class="btn btn-primary"  type="submit" id="id_aceptar"  name="id_aceptar" value="Crear">
+                                                </div>        
                                         </div>
                                     </form>
                                 </div>
@@ -164,10 +168,4 @@
 }
 </style>
 
-<script>
-        ClassicEditor
-            .create( document.querySelector( '#txtDescripcion' ) )
-            .catch( error => {
-            console.error( error );
-            } );
-</script>
+<script type="text/javascript" src="./Resources/js/permisosClientes.js"></script>

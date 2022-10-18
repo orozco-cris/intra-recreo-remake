@@ -16,7 +16,7 @@
             <div class="row  justify-content-center" style="position:absolute;">
                 <div class="contenido1 border border-primary" >
                     <div class="col-lg-12 col-md-12">
-                        <div class="card-body" style="padding:15px" id="tablaPermisos">
+                        <div class="card-body" style="padding:15px" id="permisoTodos">
                             
                         </div>
                     </div>
@@ -42,6 +42,7 @@
                                                         <br>
                                                         <form class="form form-horizontal">
                                                             <div class="form-body"  >
+                                                                
                                                                 <div class="row" id="permiso" >    
                                                                     
                                                                     
