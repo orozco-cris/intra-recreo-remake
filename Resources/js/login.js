@@ -37,7 +37,7 @@ $(document).ready(function(){
 				{
 					toastr["success"]("Datos ingresados correctamente.", "Éxito");
 					setTimeout(() => {
-						window.location = "?page=home";
+						window.location = "?page=homeAdmin";
 					 }, 4000);
 				}
 			},

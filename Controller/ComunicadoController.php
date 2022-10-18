@@ -126,9 +126,33 @@ class ComunicadoController extends Conexion
 			$datos[] = array("success" => false);
 		}
         pg_close($this->conn);
-        return $datos;
-    
+        return $datos;    
     }
+
+    public function listParameterComunUsuari($parameter)
+	{
+        $query = "select *from comunicado_usuario where id_comunicado = ".$parameter;
+        $result = pg_query($this->conn, $query);
+        $comunicado_usuario=null;
+        if(pg_num_rows($result) > 0)
+		{
+            while($info = pg_fetch_array($result))
+			{
+                $usuario = new Usuario();
+                $con_usuario = new UsuarioController();
+                $usuario = $con_usuario->listParameter($info[2]);
+                $comunicado_usuario =new ComunicadoUsuario();
+                $comunicado_usuario ->setId_comunicado_usuario($info[0]);
+                $comunicado_usuario ->setId_usuario($usuario);
+                $comunicado_usuario ->setId_comunicado($info[1]);
+                $comunicado_usuario ->setRevision($info[3]);
+            }
+            //pg_close($this->conn);
+           
+            return $comunicado_usuario;
+        }
+    }
+
 
     public function createPermiso($comunicado)
     {
@@ -143,6 +167,7 @@ class ComunicadoController extends Conexion
         ".$comunicado->getMes_comunicado().", ".$comunicado->getAnio_comunicado().", 
         '".$comunicado->getHora_comunicado()."', '".$comunicado->getFecha_caducidad_comunicado()."', 
         '".$comunicado->getFoto_comunicado()."', '".$comunicado->getTipo_comunicado()."')";
+        echo $query;
         $result = pg_query($this->conn, $query);
         //pg_close($this->conn);
         return $result;

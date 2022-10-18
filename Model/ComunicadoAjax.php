@@ -10,9 +10,13 @@ if($_POST["crud"])
     switch($crud)
     {
         case 'listPermisosParaCliente':
-            $id_usuario = $_POST["usuario"];
+            //$id_usuario = $_POST["usuario"];
+            session_start();
+            $id_usuario=$_SESSION["usuario"];
             $con_comunicado_controller = new ComunicadoController();
-            $query = "select * from comunicado as co where co.id_usuario_creador =".$id_usuario."
+            $query = "select * from comunicado as co inner join comunicado_usuario as cu
+            on co.id_comunicado=cu.id_comunicado
+            where co.id_usuario_creador =".$id_usuario."
                 and co.tipo_comunicado = 'permiso'";
             $con_comunicado = $con_comunicado_controller->getPermisosParaCliente($query);
             $html = '<table class="table table-bordered table-striped" id="tblAuditadasRep">
@@ -28,14 +32,24 @@ if($_POST["crud"])
             if($con_comunicado[0]["success"])
             {
                 foreach ($con_comunicado as $row) 
-                {
+                {$color=$row["destinatario"]->getRevision();
+                    $c='';
+                    if($color==0){
+                        $c='text-danger';
+                    }
+                    else if($color==1){
+                        $c='text-success';
+                    }
+                    else if($color==2){
+                        $c='text-warning';
+                    }
                     $html .= '<tr>
                         <td>'.$row["asunto_comunicado"].'</td>
                         <td>'.$row["anio_comunicado"].'/'.
                             $row["mes_comunicado"].'/'.
                             $row["dia_comunicado"].'</td>
                         <td>'.$row["destinatario"]->getId_usuario()->getId_tipo_usuario()->getNombre_tipo_usuario().'</td>
-                        <td>'.$row["destinatario"]->getRevision().'</td>
+                        <td><i class="fa fa-circle '.$c.'"></i>   </td>
                     </tr>';
                     
                 }
@@ -49,6 +63,7 @@ if($_POST["crud"])
         break;
 
         case 'createSolicitudPermiso':
+            session_start();
             $comunicado = new Comunicado();
             $con_comunicado = new ComunicadoController();
             $comunicado_usuario = new ComunicadoUsuario();
@@ -61,8 +76,9 @@ if($_POST["crud"])
             $anio = $hoy["year"];
             $circular_codigo = "".$hoy["year"].$hoy["mon"] . $hoy["mday"] . $hoy["hours"] . $hoy["minutes"] . $hoy["seconds"] ."";
             $hora = $hoy["hours"] . ":" . $hoy["minutes"] . ":" . $hoy["seconds"];
-
-            $comunicado->setId_usuario_creador($_POST["usuario"]);
+            
+            //$comunicado->setId_usuario_creador($_POST["usuario"]);
+            $comunicado->setId_usuario_creador($_SESSION["usuario"]);
             $comunicado->setDe_comunicado($_POST["de_comunicado"]);
             $comunicado->setPara_comunicado($_POST["para_comunicado"]);
             $comunicado->setCodigo_comunicado($circular_codigo);
@@ -73,16 +89,18 @@ if($_POST["crud"])
             $comunicado->setMes_comunicado($mes);
             $comunicado->setAnio_comunicado($anio);
             $comunicado->setHora_comunicado($hora);
-            $comunicado->setFecha_caducidad_comunicado($_POST["fecha_caducidad"]);
+            $comunicado->setFecha_caducidad_comunicado("2022-10-15");
             $comunicado->setFoto_comunicado($_POST["foto_comunicado"]);
             $comunicado->setTipo_comunicado($_POST["tipo_comunicado"]);
+
+            
             $result_comunicado = $con_comunicado->createPermiso($comunicado);
             
             if($result_comunicado)
             {
-                $id_comunicado = $con_comunicado->getLastId();
-                $comunicado_usuario->setId_comunicado($id_comunicado);
-                $comunicado_usuario->setId_usuario($_POST["usuario"]);
+                $id_comunicado = $con_comunicado->getLastId();    
+                $comunicado_usuario->setId_comunicado($id_comunicado);            
+                $comunicado_usuario->setId_usuario($_SESSION["usuario"]);                
                 $comunicado_usuario->setRevision(0);
                 $result_comunicado_usuario = $con_comunicado_usuario->create($comunicado_usuario);
                 if($result_comunicado_usuario)

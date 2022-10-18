@@ -69,13 +69,14 @@ class ComunUsuaController extends Conexion
                 $comunicado_usuario->setId_comunicado($info[1]);
                 $comunicado_usuario->setRevision($info[3]);
             }
-            pg_close($this->conn);
+            //pg_close($this->conn);
             return $comunicado_usuario;
         }
     }
 
     public function listadoPermSegOperaciones($query)
     {
+        $query;
         $result = pg_query($this->conn, $query);
         $datos = array();
         if(pg_num_rows($result) > 0)
@@ -84,10 +85,14 @@ class ComunUsuaController extends Conexion
 			{
                 $obj_comunicado = new Comunicado();
                 $con_comunicado = new ComunicadoController();
+                $obj_comunicado_usuario= new ComunicadoUsuario();
+                $con_comunicado_usuario= new ComunicadoController();
                 $obj_comunicado = $con_comunicado->listParameter($info[0]);
+                $obj_comunicado_usuario = $con_comunicado_usuario->listParameterComunUsuari($info[0]);
                 $datos[] = array(
                     "success" => true,
                     "comunicado" => $obj_comunicado,
+                    "comunicado_usuario"=> $obj_comunicado_usuario,
                     "check" => $info[3]
                 );
             }
@@ -96,7 +101,8 @@ class ComunUsuaController extends Conexion
 		{
 			$datos[] = array("success" => false);
 		}
-        pg_close($this->conn);
+        //pg_close($this->conn);
+        
         return $datos;
     }
 
