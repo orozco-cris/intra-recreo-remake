@@ -57,9 +57,9 @@ $(document).ready(function(){
 									success: function(datos){
 										if (datos != 0) {
 											toastr["success"]("SOLICITUD CREADA.", "Éxito");
-												 setTimeout(() => {
+												/*  setTimeout(() => {
 													window.location = "?page=menuCliente";
-												}, 4000); 
+												}, 4000);  */
 										} else {
 											toastr["error"]("No se puedo crear la solicitud.", "Error");
 										}
@@ -67,7 +67,7 @@ $(document).ready(function(){
 									});
 								
 						} else {
-							toastr["error"]("No se puedo crear la solicitud.", "Error")
+							toastr["error"]("Imagen no permitida.", "Error")
 						}
 					}
 			});
