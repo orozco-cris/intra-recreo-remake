@@ -3,7 +3,7 @@ if(!empty($_FILES['file']['name'])){
     $tamano = $_FILES['file']['size'];
     echo "tamaño";
     echo $tamano;
-  if($tamano<3264989){
+  if($tamano<32649899){
     if(move_uploaded_file($_FILES['file']['tmp_name'],"../Resources/uploads/".$_FILES['file']['name'])){
         echo "Archivo subido correctamente";
         return 1;
@@ -16,6 +16,10 @@ if(!empty($_FILES['file']['name'])){
     echo "Imagen sobrepasa el peso permitido";
     return 0;
 }
+}
+else {
+    echo "No se cargo ninguna imagen";
+        return 1;
 }
 
 ?>

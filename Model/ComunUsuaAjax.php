@@ -107,7 +107,6 @@ if($_POST["crud"])
             $con_usuario_comunicado_controller = new ComunUsuaController();
             $query = " select *from comunicado where id_comunicado=".$id_permiso."";
             $con_usuario_comunicado = $con_usuario_comunicado_controller->PermisoDeterminado($query);
-
             $html = '';
             if($con_usuario_comunicado[0]["success"])
             {
@@ -144,16 +143,30 @@ if($_POST["crud"])
                         <label>DETALLE:'.$row["comunicado"]->getDetalle_comunicado().'</label>
                         <input type="hidden" id="id_comunicado" value='.$row["comunicado"]->getId_comunicado().'>
                     </div>
-                </div>
-                <div class="row" style="padding: 8px !important">  
+                </div>';
+                $var=$row["comunicado"]->getFoto_comunicado();
+                $img="logo.PNG";
+                if ( empty($var)) {
+                    
+                        $html .=  '<div class="row" style="padding: 8px !important">  
                     <div class="col-md-12 form-group">
                         <div class="position-relative has-icon-left"> 
-                        <img style="width:80%"; heigth:50px" src="./Resources/uploads/'.$row["comunicado"]->getFoto_comunicado().'">                
+                        <img style="width:80%"; heigth:50px" src="Resources/images/'.$img.'">                
                         </div>
                     </div> 
                 </div>';
-                }
+                    }
+                    else {                        
+                        $html .= '<div class="row" style="padding: 8px !important">  
+                        <div class="col-md-12 form-group">
+                            <div class="position-relative has-icon-left"> 
+                            <img style="width:80%"; heigth:50px" src="./Resources/uploads/'.$row["comunicado"]->getFoto_comunicado().'">                
+                            </div>
+                        </div> 
+                    </div>';   
+                    }
             }
+        }
             else
 				{
 					$html .= "<tr><td colspan='1' class='text-center'>Error al recuperar los datos</td></tr>";

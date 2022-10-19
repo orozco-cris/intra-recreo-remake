@@ -1,6 +1,7 @@
 <?php
 require_once "./../Class/Usuario.php";
 require_once "./../Controller/UsuarioController.php";
+require_once "./../Controller/ComunUsuaController.php";
 
     if($_POST["crud"])
     {
@@ -80,6 +81,28 @@ require_once "./../Controller/UsuarioController.php";
 				$status = $conUsuario->edit($A0, $A1, $A2, $A3, $A4, $A5, 
 				$A6, $A7, $A8, $posterior0, $subAnt, $subMega, $fecha);
 				echo $status; */
+				break;
+				case 'listUsuarios':
+					$usuario_comunicado = new UsuarioController();
+					$seguridad=4;
+					$operaciones=3;
+					$query = " select *from usuario where id_tipo_usuario=".$seguridad." or id_tipo_usuario=".$operaciones." ";
+					$con_usuario_comunicado = $usuario_comunicado->listClientes($query);
+					$html = ' <div id="usuarios">
+					<select class="form-control" id="destinatario">';
+					if($con_usuario_comunicado[0]["success"])
+					{
+						foreach ($con_usuario_comunicado as $row) 
+						{
+							
+							$html .= '<option value="'.$row["id_usuario"].'">'.$row["nombre_usuario"].' '.$row["apellido_usuario"].'</option>';
+						}
+					}
+					$html .='</select>
+						</div>';
+					
+					
+						echo $html;
 				break;
         }
     }

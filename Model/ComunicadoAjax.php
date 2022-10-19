@@ -10,14 +10,13 @@ if($_POST["crud"])
     switch($crud)
     {
         case 'listPermisosParaCliente':
-            //$id_usuario = $_POST["usuario"];
             session_start();
-            $id_usuario=$_SESSION["usuario"];
+            //id_usuario=$_POST["usuario"];
+            $id_usuario = 2;
             $con_comunicado_controller = new ComunicadoController();
-            $query = "select * from comunicado as co inner join comunicado_usuario as cu
-            on co.id_comunicado=cu.id_comunicado
-            where co.id_usuario_creador =".$id_usuario."
+            $query = "select * from comunicado as co where co.id_usuario_creador =".$id_usuario."
                 and co.tipo_comunicado = 'permiso'";
+            $con_comunicado_controller = new ComunicadoController();           
             $con_comunicado = $con_comunicado_controller->getPermisosParaCliente($query);
             $html = '<table class="table table-bordered table-striped" id="tblAuditadasRep">
 				<thead>
@@ -89,7 +88,7 @@ if($_POST["crud"])
             $comunicado->setMes_comunicado($mes);
             $comunicado->setAnio_comunicado($anio);
             $comunicado->setHora_comunicado($hora);
-            $comunicado->setFecha_caducidad_comunicado("2022-10-15");
+            $comunicado->setFecha_caducidad_comunicado($_POST["fecha_comunicado"]);
             $comunicado->setFoto_comunicado($_POST["foto_comunicado"]);
             $comunicado->setTipo_comunicado($_POST["tipo_comunicado"]);
 
@@ -100,7 +99,7 @@ if($_POST["crud"])
             {
                 $id_comunicado = $con_comunicado->getLastId();    
                 $comunicado_usuario->setId_comunicado($id_comunicado);            
-                $comunicado_usuario->setId_usuario($_SESSION["usuario"]);                
+                $comunicado_usuario->setId_usuario($_POST["usuario"]);                
                 $comunicado_usuario->setRevision(0);
                 $result_comunicado_usuario = $con_comunicado_usuario->create($comunicado_usuario);
                 if($result_comunicado_usuario)

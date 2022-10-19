@@ -23,7 +23,7 @@ $(document).ready(function(){
 
     getPermisosClientes();
 
-	function crearSolicitud(de, para, asunto, mensaje, imagen, descripcion,tipo,fecha)
+	function crearSolicitud(de, para, asunto, mensaje, imagen, descripcion,tipo,destinatario,fecha)
 	{
 		var formData = new FormData();
 		var files = $('#file')[0].files[0];
@@ -38,7 +38,7 @@ $(document).ready(function(){
 					console.log("respuesta",response);
 						if (response != 0) {							
 							$(".card-img-top").attr("src", response);
-							var today = new Date();
+							
 							var dat = {
 								crud: "createSolicitudPermiso",
 								de_comunicado: de,
@@ -48,18 +48,21 @@ $(document).ready(function(){
 								foto_comunicado:imagen,
 								detalle_comunicado:descripcion,
 								tipo_comunicado:tipo,
-								fecha_comunicado:today
+								usuario:destinatario,
+								fecha_comunicado:fecha
 								};
+								console.log("datos",dat);
 								$.ajax({
 									data: dat,
 									url: "./Model/ComunicadoAjax.php",
 									method: "POST",
 									success: function(datos){
+										console.log("datos1",datos);
 										if (datos != 0) {
 											toastr["success"]("SOLICITUD CREADA.", "Éxito");
-												/*  setTimeout(() => {
+												  setTimeout(() => {
 													window.location = "?page=menuCliente";
-												}, 4000);  */
+												}, 4000); 
 										} else {
 											toastr["error"]("No se puedo crear la solicitud.", "Error");
 										}
@@ -85,21 +88,29 @@ $(document).ready(function(){
 						filename,
 						desc,
 						$("#tipo").val(),
+						$("#destinatario").val(),
 						$("#fechacaducidad").val());
 
 	}); 
 
 
+	$("#id_cancelar").click(function(e)
+	{			
+		$("#uploadForm")[0].reset();			
+		ClassicEditor.instances['#descripcion'].setData('');
+	});
+
 	var myEditor;
 
     ClassicEditor
-        .create( document.querySelector( "#descripcion" ) )
+        .create( document.querySelector("#descripcion") )
         .then( editor => {
            myEditor = editor;
         } )
         .catch( err => {
             console.error( err.stack );
         } );
+	
 
 	function filePreview(input) {
 		if (input.files && input.files[0]) {

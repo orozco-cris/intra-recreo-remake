@@ -118,12 +118,18 @@
                                                             <input id="asunto" class="form-control" type="text">
                                                         </div>
                                                         <div class="col-md-4" style="padding:15px">
+                                                            <label> DESTINATARIO:</label>
+                                                        </div>
+                                                        <div class="col-md-8 form-group" id="usuarios">
+                                                           
+                                                        </div>
+                                                        <div class="col-md-4" style="padding:15px">
                                                             <label> MENSAJE:</label>
                                                         </div>
                                                         <div class="col-md-8 form-group">
-                                                            <input id="mensaje" class="form-control" type="text">
+                                                            <textarea id="mensaje" class="form-control" type="text" rows="3"></textarea>
                                                             <input id="tipo" class="form-control" type="hidden" value="permiso">
-                                                            <input id="fechacaducidad" class="form-control" type="hidden" value="">
+                                                            <input id="fechacaducidad" class="form-control" type="hidden" value="2022/10/15">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -144,10 +150,10 @@
                                                 <div class="col-md-8 form-group">
                                                     <textarea type="text" class="fom-control" id="descripcion" name="descripcion" id="txtDescripcion" rows="8"></textarea> 
                                                 </div>
-                                                    <div class="col-md-1 form-group" style="padding-top:18%">
-                                                    <input type="button" class="btn btn-danger" data-bs-dismiss="modal" value="Cancelar">
+                                                    <div class="col-md-1 form-group"style="padding-top:13%">
+                                                    <input type="button" class="btn btn-danger" data-bs-dismiss="modal" id="id_cancelar" value="Cancelar">
                                                 </div>
-                                                <div class="col-md-1 form-group"  style="padding-top:18%">
+                                                <div class="col-md-1 form-group"  style="padding-top:13%">
                                                         <input class="btn btn-primary"  type="submit" id="id_aceptar"  name="id_aceptar" value="Crear">
                                                 </div>        
                                         </div>
@@ -164,8 +170,9 @@
 
 <style>
 .ck-editor__editable_inline {
-    min-height: 200px;
+    min-height: 150px;
 }
 </style>
 
 <script type="text/javascript" src="./Resources/js/permisosClientes.js"></script>
+<script type="text/javascript" src="./Resources/js/usuarios.js"></script>
