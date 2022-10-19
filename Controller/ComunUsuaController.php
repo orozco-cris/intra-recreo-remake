@@ -11,6 +11,7 @@ require_once "./../Controller/UsuarioController.php";
 require_once "./../Class/Comunicado.php";
 require_once "./../Class/Usuario.php";
 require_once "./../Class/ComunicadoUsuario.php";
+require_once "./../Class/TipoUsuario.php";
 
 class ComunUsuaController extends Conexion
 {
@@ -36,7 +37,7 @@ class ComunUsuaController extends Conexion
                 $obj_usuario = $con_usuario->listParameter($info[2]);
                 $datos[] = array(
                     "success" => true,
-                    "id_comunicado_usuario" => info[0],
+                    "id_comunicado_usuario" => $info[0],
                     "comunicado" => $obj_comunicado,
                     "cliente" => $obj_usuario,
                     "check" => $info[3]
@@ -164,6 +165,7 @@ class ComunUsuaController extends Conexion
         //pg_close($this->conn);
         return $result;
     }
+
 }
 
 ?>
