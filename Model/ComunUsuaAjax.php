@@ -51,17 +51,15 @@ if($_POST["crud"])
             $con_usuario_comunicado_controller = new ComunUsuaController();
             $query = "   
             select *from comunicado as c inner join comunicado_usuario as cu
-                on c.id_comunicado=cu.id_comunicado where cu.id_usuario=".$_SESSION["usuario"]." and tipo_comunicado='permiso'";
+                on c.id_comunicado=cu.id_comunicado where cu.id_usuario=".$_SESSION["usuario"]." and tipo_comunicado='permiso' order by c.id_comunicado desc";
             $con_usuario_comunicado = $con_usuario_comunicado_controller->listadoPermSegOperaciones($query);
-           
-
-            $html = '<table class="table table-bordered text-center table-striped" id="tablaPermisos">
+            $html = '<table class="table table-bordered table-striped" id="tablaPermisos">
 				<thead>
 					<tr>
 						<th class="back-color text-center">Asunto</th>
+                        <th class="back-color text-center">De</th>
 						<th class="back-color text-center">Fecha</th>
-						<th class="back-color text-center">Mensaje</th>
-						<th class="back-color text-center">Ver Permiso</th>                        
+						<th class="back-color text-center">Ver más</th>                        
                         <th class="back-color text-center"></th>
 					</tr>
 				</thead>
@@ -83,12 +81,12 @@ if($_POST["crud"])
                     }
                     $html .= '<tr>
                         <td>'.$row["comunicado"]->getAsunto_comunicado().'</td>
-                        <td>'.$row["comunicado"]->getAnio_comunicado().'/'.
+                        <td class="text-center">'.$row["comunicado"]->getDe_comunicado().'</td>  
+                        <td class="text-center">'.$row["comunicado"]->getAnio_comunicado().'/'.
                             $row["comunicado"]->getMes_comunicado().'/'.
                             $row["comunicado"]->getDia_comunicado().'</td>
-                    <td>'.$row["comunicado"]->getMensaje_comunicado().'</td>   
-                    <td><a class="btn btn-link" href="?page=solEspecificas&comu='.base64_encode($row["comunicado"]->getId_comunicado()).'">Ver detalles</a></td>
-                    <td><i class="fa fa-circle '.$c.'"></i>                    
+                    <td class="text-center"><a class="btn btn-link" href="?page=solEspecificas&comu='.base64_encode($row["comunicado"]->getId_comunicado()).'">Ver más</a></td>
+                    <td class="text-center"><i class="fa fa-circle '.$c.'"></i>                    
                     </td>
                     </tr>';
                 }

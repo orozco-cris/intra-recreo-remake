@@ -11,11 +11,11 @@ if($_POST["crud"])
     {
         case 'listPermisosParaCliente':
             session_start();
-            //id_usuario=$_POST["usuario"];
-            $id_usuario = 2;
+            $id_usuario=$_SESSION["usuario"];
+            //$id_usuario = 2;
             $con_comunicado_controller = new ComunicadoController();
             $query = "select * from comunicado as co where co.id_usuario_creador =".$id_usuario."
-                and co.tipo_comunicado = 'permiso'";
+                and co.tipo_comunicado = 'permiso' order by co.id_comunicado desc";
             $con_comunicado_controller = new ComunicadoController();           
             $con_comunicado = $con_comunicado_controller->getPermisosParaCliente($query);
             $html = '<table class="table table-bordered table-striped" id="tblAuditadasRep">
@@ -24,7 +24,7 @@ if($_POST["crud"])
 						<th class="back-color text-center">Asunto</th>
 						<th class="back-color text-center">Fecha</th>
 						<th class="back-color text-center">Departamento</th>
-						<th class="back-color text-center">Estado</th>
+						<th class="back-color text-center"></th>
 					</tr>
 				</thead>
 				<tbody>';
@@ -44,18 +44,18 @@ if($_POST["crud"])
                     }
                     $html .= '<tr>
                         <td>'.$row["asunto_comunicado"].'</td>
-                        <td>'.$row["anio_comunicado"].'/'.
+                        <td class="text-center">'.$row["anio_comunicado"].'/'.
                             $row["mes_comunicado"].'/'.
                             $row["dia_comunicado"].'</td>
-                        <td>'.$row["destinatario"]->getId_usuario()->getId_tipo_usuario()->getNombre_tipo_usuario().'</td>
-                        <td><i class="fa fa-circle '.$c.'"></i>   </td>
+                        <td class="text-center">'.$row["destinatario"]->getId_usuario()->getId_tipo_usuario()->getNombre_tipo_usuario().'</td>
+                        <td class="text-center"><i class="fa fa-circle '.$c.'"></i></td>
                     </tr>';
                     
                 }
             }
             else
 				{
-					$html .= "<tr><td colspan='4' class='text-center'>No existen permisos solicitados</td></tr>";
+					$html .= "<tr><td colspan='4' class='text-center'>No existen solicitudes de permisos</td></tr>";
 				}
 				$html .= '</tbody></table>';
 				echo $html;
@@ -88,7 +88,7 @@ if($_POST["crud"])
             $comunicado->setMes_comunicado($mes);
             $comunicado->setAnio_comunicado($anio);
             $comunicado->setHora_comunicado($hora);
-            $comunicado->setFecha_caducidad_comunicado($_POST["fecha_comunicado"]);
+            $comunicado->setFecha_caducidad_comunicado('');
             $comunicado->setFoto_comunicado($_POST["foto_comunicado"]);
             $comunicado->setTipo_comunicado($_POST["tipo_comunicado"]);
 

@@ -26,7 +26,9 @@ if ($_SESSION["perfil"] == "VIS" || $_SESSION["perfil"] == "ADM")
 <div class="container-fluid">
         <div class="row" style="position: relative;">
             <div class="encabezado" style="padding: 0px">
+			<a href="?page=home">
                 <img style="object-fit: cover;width:20%;height:100%;" src="Resources/images/logo.PNG" alt="">
+			</a>	
             </div>
             <div class="inicio">
                 <button type="button" class="form-control btn btn-danger btnCerrar" data-bs-toggle="modal"

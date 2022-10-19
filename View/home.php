@@ -11,11 +11,10 @@ if(!isset($_SESSION["perfil"]))
 		header("Location:?page=homeAdmin");
         //echo 'ADM';
 	}
-	elseif($_SESSION["perfil"] == 2)
+	else if($_SESSION["perfil"] == 2)
 	{
-		header("Location: ?page=homeCliente");
+		header("Location:?page=homeCliente");
         //echo 'SEG';
-		//texto de prueba
 	}
 	elseif ($_SESSION["perfil"] == 3 || $_SESSION["perfil"] == 4) 
 	{

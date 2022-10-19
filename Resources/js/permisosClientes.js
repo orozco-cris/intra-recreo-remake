@@ -1,7 +1,6 @@
 $(document).ready(function(){
 
     function getPermisosClientes(){
-        //console.log("entro");
         var dat = {
             crud:"listPermisosParaCliente",
         };
@@ -51,7 +50,7 @@ $(document).ready(function(){
 								usuario:destinatario,
 								fecha_comunicado:fecha
 								};
-								console.log("datos",dat);
+								//console.log("datos",dat);
 								$.ajax({
 									data: dat,
 									url: "./Model/ComunicadoAjax.php",

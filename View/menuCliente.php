@@ -5,7 +5,7 @@
                 <img style="object-fit: cover;width:20%;height:100%;" src="Resources/images/logo.PNG" alt="">
             </div>
             <div class="inicio">
-                <button type="button" class="form-control btn btn-danger btnCerrar">Cerrar Sesión</button>
+                <button type="button" class="form-control btn btn-danger btnCerrar" onclick="window.location.href='?page=logout'">Cerrar Sesión</button>
             </div>
         </div>
 		<div class="row ">
@@ -53,8 +53,8 @@
                        <div class="row">
                        <button type="button" class="form-control btn btn-success solicitud" data-bs-toggle="modal"  data-bs-target="#solicitud">Nueva Solicitud</button>
                     </div>
-                    <div id="tblAuditadasRep">
-                            <div class="row text-center">
+                    <div id="tblAuditadasRep" style="margin-top:15px">
+                            <!-- <div class="row text-center">
                                 <div class="col-sm-3">ASUNTO</div>   
                                 <div class="col-sm-3">FECHA</div> 
                                 <div class="col-sm-3">DEPARTAMENTO</div> 
@@ -74,11 +74,11 @@
                                 <div class="col-sm-12 border border-dark text-center fila">
                                     <label for=""></label>
                                  </div>
-                            </div>
-                            </div>
+                            </div> -->
                     </div>
                 </div>
             </div>
+        </div>
 
              <!-- Modal -->
         <div class="modal fade" id="solicitud" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
