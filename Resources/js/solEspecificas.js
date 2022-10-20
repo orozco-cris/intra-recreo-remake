@@ -1,18 +1,24 @@
 $(document).ready(function(){
 
-	function obtenerPermiso(id_usuario){
+	function obtenerPermiso(id_usuario, id_estado){
         var dat = {
             crud:"permisoDeterminado",
 			usuario: id_usuario
         };
 
-        console.log("datos",dat);
+        //console.log("datos",dat);
+		console.log(id_estado);
         $.ajax({
             data: dat,
             url:"./Model/ComunUsuaAjax.php",
             method: "POST",
             success: function(data){
+				
                 $("#permisoDeterminado").html(data);
+				if(id_estado == 0)
+				{
+					$("#id_aceptar").removeClass("d-none");
+				}
             },
     
             error: function(error){
@@ -22,7 +28,7 @@ $(document).ready(function(){
         });
     }
 
-    obtenerPermiso(atob($("#id_comunicado_especifico").val()));
+    obtenerPermiso(atob($("#id_comunicado_especifico").val()), $("#id_estado_comunicado").val());
 
 	function aceptarPermiso(id_comunicado)
 	{

@@ -85,7 +85,8 @@ if($_POST["crud"])
                         <td class="text-center">'.$row["comunicado"]->getAnio_comunicado().'/'.
                             $row["comunicado"]->getMes_comunicado().'/'.
                             $row["comunicado"]->getDia_comunicado().'</td>
-                    <td class="text-center"><a class="btn btn-link" href="?page=solEspecificas&comu='.base64_encode($row["comunicado"]->getId_comunicado()).'">Ver más</a></td>
+                    <td class="text-center"><a class="btn btn-link" 
+                    href="?page=solEspecificas&comu='.base64_encode($row["comunicado"]->getId_comunicado()).'&estado='.$row["comunicado_usuario"]->getRevision().'">Ver más</a></td>
                     <td class="text-center"><i class="fa fa-circle '.$c.'"></i>                    
                     </td>
                     </tr>';
@@ -163,8 +164,8 @@ if($_POST["crud"])
                         </div> 
                     </div>';   
                     }
+                }
             }
-        }
             else
 				{
 					$html .= "<tr><td colspan='1' class='text-center'>Error al recuperar los datos</td></tr>";

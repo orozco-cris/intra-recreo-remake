@@ -1,8 +1,10 @@
     <?php 
         $comunicado = 0;
+        $estado = 0;
         if(isset($_GET["comu"]))
         {
             $comunicado = $_GET["comu"];
+            $estado = $_GET["estado"];
         }
     ?>
 
@@ -67,7 +69,7 @@
                                         </div>
                                         <div class="row" style="padding: 8px !important">  
                                                 <div class="col-12 d-flex justify-content-end">
-                                                    <input class="btn float-right login_btn btn-primary" type="submit" id="id_aceptar"  name="id_aceptar" value="ACEPTAR">
+                                                    <input class="btn float-right login_btn btn-primary d-none" type="submit" id="id_aceptar"  name="id_aceptar" value="ACEPTAR">
                                                 </div>
                                         </div>
                                     </div>
@@ -81,6 +83,7 @@
     </div>
 <div class="d0">
 	<input type="hidden" id="id_comunicado_especifico" value="<?php echo $comunicado; ?>">
+    <input type="hidden" id="id_estado_comunicado" value="<?php echo $estado; ?>">
 </div>
 
     <script type="text/javascript" src="./Resources/js/solEspecificas.js"></script>
