@@ -113,33 +113,33 @@ if($_POST["crud"])
                 {
                     $html .= '                                   
                     <div class="col-md-3">
-                        <label>DE: '.$row["comunicado"]->getDe_comunicado().'</label>
+                        <label><b>DE:</b> '.$row["comunicado"]->getDe_comunicado().'</label>
                     </div>
                     <div class="col-md-3">
-                        <label> FECHA:'.$row["comunicado"]->getAnio_comunicado().'/'.
+                        <label><b>FECHA:</b> '.$row["comunicado"]->getAnio_comunicado().'/'.
                         $row["comunicado"]->getMes_comunicado().'/'.
                         $row["comunicado"]->getDia_comunicado().'</label>
                     </div>
                     <div class="col-md-3">
-                        <label>HORA:'.$row["comunicado"]->getHora_comunicado().'</label>
+                        <label><b>HORA:</b> '.$row["comunicado"]->getHora_comunicado().'</label>
                     </div>
                     <div class="col-md-3">
-                        <label>CÓDIGO:'.$row["comunicado"]->getCodigo_comunicado().'</label>
+                        <label><b>CÓDIGO:</b> '.$row["comunicado"]->getCodigo_comunicado().'</label>
                     </div>
                 </div>
                 <div class="row" style="padding: 8px !important">  
                     <div class="col-md-12">
-                        <label>ASUNTO:'.$row["comunicado"]->getAsunto_comunicado().'</label>
+                        <label><b>ASUNTO:</b> '.$row["comunicado"]->getAsunto_comunicado().'</label>
                     </div>
                 </div>
                 <div class="row" style="padding: 8px !important">  
                     <div class="col-md-12">
-                        <label> MENSAJE:'.$row["comunicado"]->getMensaje_comunicado().'</label>
+                        <label><b>MENSAJE:</b> '.$row["comunicado"]->getMensaje_comunicado().'</label>
                     </div>
                 </div>
                 <div class="row" style="padding: 8px !important">  
                     <div class="col-md-12">
-                        <label>DETALLE:'.$row["comunicado"]->getDetalle_comunicado().'</label>
+                        <label><b>DETALLE:</b> '.$row["comunicado"]->getDetalle_comunicado().'</label>
                         <input type="hidden" id="id_comunicado" value='.$row["comunicado"]->getId_comunicado().'>
                     </div>
                 </div>';
