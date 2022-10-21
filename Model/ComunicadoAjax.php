@@ -24,6 +24,7 @@ if($_POST["crud"])
 						<th class="back-color text-center">Asunto</th>
 						<th class="back-color text-center">Fecha</th>
 						<th class="back-color text-center">Departamento</th>
+                        <th class="back-color text-center">Ver más</th>   
 						<th class="back-color text-center"></th>
 					</tr>
 				</thead>
@@ -48,6 +49,8 @@ if($_POST["crud"])
                             $row["mes_comunicado"].'/'.
                             $row["dia_comunicado"].'</td>
                         <td class="text-center">'.$row["destinatario"]->getId_usuario()->getId_tipo_usuario()->getNombre_tipo_usuario().'</td>
+                        <td class="text-center"><a class="btn btn-link" 
+                    href="?page=solEspecificas&comu='.base64_encode($row["id_comunicado"]).'&estado=0">Ver más</a></td>
                         <td class="text-center"><i class="fa fa-circle '.$c.'"></i></td>
                     </tr>';
                     
