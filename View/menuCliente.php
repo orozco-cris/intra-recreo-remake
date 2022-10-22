@@ -53,8 +53,8 @@
                        <div class="row">
                        <button type="button" class="form-control btn btn-success solicitud" data-bs-toggle="modal"  data-bs-target="#solicitud">Nueva Solicitud</button>
                     </div>
-                    <div id="tblAuditadasRep" style="margin-top:15px">
-                            <!-- <div class="row text-center">
+                    <div id="tblAuditadasRep">
+                            <div class="row text-center">
                                 <div class="col-sm-3">ASUNTO</div>   
                                 <div class="col-sm-3">FECHA</div> 
                                 <div class="col-sm-3">DEPARTAMENTO</div> 

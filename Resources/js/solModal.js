@@ -12,7 +12,6 @@ $(document).ready(function(){
             success: function(data){
                 $("#permiso").html(data);
             },
-    
             error: function(error){
                 console.error(error);
             }
@@ -23,6 +22,5 @@ $(document).ready(function(){
     $('#solicitud').on('show.bs.modal', function(e) {
         var id = e.relatedTarget.dataset.yourparameter;
         obtenerPermiso(id);
-        // Do some stuff w/ it.
       });
 });
