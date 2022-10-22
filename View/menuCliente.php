@@ -50,10 +50,10 @@
             <div class="contenido1 border border-primary">
                 <div class="col-lg-12 col-md-12">
                     <div class="card-body" style="padding:15px">
-                       <div class="row">
-                       <button type="button" class="form-control btn btn-success solicitud" data-bs-toggle="modal"  data-bs-target="#solicitud">Nueva Solicitud</button>
-                    </div>
-                    <div id="tblAuditadasRep">
+                        <div class="row">
+                         <button type="button" class="form-control btn btn-success solicitud" data-bs-toggle="modal"  data-bs-target="#solicitud">Nueva Solicitud</button>
+                        </div>
+                        <div id="tblAuditadasRep">
                             <div class="row text-center">
                                 <div class="col-sm-3">ASUNTO</div>   
                                 <div class="col-sm-3">FECHA</div> 

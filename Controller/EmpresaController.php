@@ -1,9 +1,8 @@
 <?php 
 require_once "./../Controller/Conexion.php";
-require_once "./../Controller/MixComercialController.php";
-require_once "./../Class/MixComercial.php";
+require_once "./../Class/Empresas.php";
 
-class MixComercialController extends Conexion
+class EmpresaController extends Conexion
 {
     private $conn;
     public function __construct()
@@ -11,7 +10,7 @@ class MixComercialController extends Conexion
         $this->conn = Conexion::getInstance()->getConexion();
     }
 
-    public function listMixComercial($parameter)
+    public function listEmpresas($parameter)
 	{
         $result = pg_query($this->conn, $parameter);
         $datos = array();
@@ -19,13 +18,21 @@ class MixComercialController extends Conexion
 		{
             while($info = pg_fetch_array($result))
 			{               
-                $mix_comercial = new MixComercial();
-                $mix_comercial->setId_mix_comercial($info[0]);
-                $mix_comercial->setNombre_mix($info[1]);
-                $mix_comercial->setDescripcion_mix($info[2]);
+                $empresa = new Empresas();
+                $empresa->setId_empresa($info[0]);
+                $empresa->setId_usuario($info[1]);
+                $empresa->setId_mix_comercial($info[2]);
+                $empresa->setNombre_comercial($info[3]);
+                $empresa->setRuc_empresa($info[4]);
+                $empresa->setTelefono_empresa($info[5]);
+                $empresa->setDireccion_empresa($info[6]);
+                $empresa->setCorreo_empresa($info[7]);
+                $empresa->setFecha_registro($info[8]);
+                $empresa->setFecha_deshabilitado($info[9]);
+                $empresa->setEstado_empresa($info[10]);
                 $datos[] = array(
                     "success" => true,
-                    "mix_comercial" => $mix_comercial,
+                    "empresa" => $empresa,
                 );
             }
             return  $datos;

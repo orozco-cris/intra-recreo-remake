@@ -1,5 +1,5 @@
 
-<div class="container-fluid">
+    <div class="container-fluid">
         <div class="row" style="position: relative;">
             <div class="encabezado" style="padding: 0px">
                 <img style="object-fit: cover;width:20%;height:100%;" src="Resources/images/logo.PNG" alt="">
@@ -31,7 +31,7 @@
               					<a class="nav-link dropdown-toggle opcion" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
                 					CIRCULARES
               					</font></font></a>
-              					<ul class="dropdown-menu bg-primary" style="border: none !important; left:35%">
+              					<ul class="dropdown-menu bg-primary" style="border: none !important; left:40%">
                 					<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Añadir usuario interno</font></font></a></li>
                 					<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Circulares no reviados</font></font></a></li>
                 					<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Crear circulares</font></font></a></li>       
@@ -55,9 +55,24 @@
       			</div>
     		</nav>
 		</div>
-		<div class="row">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 0px">
-                <img class="hidden-xs" style="width:100%; height:auto;" src="Resources/images/fondo.jpg" alt="">
+		<div class="row  justify-content-center" style="position: relative;">
+		    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 0px">
+                <img class="hidden-xs" style="width:100%; height: auto" src="Resources/images/fondo.jpg" alt="">
             </div>
-		</div>
-    </div>
+            
+            <div class="contenido border border-primary">
+                <div class="col-lg-12 col-md-12">
+                <div class="row" style="padding:10px">
+                         <button type="button" class="form-control btn btn-success solicitud"  data-bs-toggle="modal"  datolicituda-bs-target="#solicitud">Nueva Empresa</button>
+                        </div>                           
+                    </div>
+                    <div class="card-body" style="padding:15px" id="tblEmpresas">
+                   
+                </div>
+            </div>
+
+
+
+               
+        </div>
+    <script type="text/javascript" src="./Resources/js/empresas.js"></script>

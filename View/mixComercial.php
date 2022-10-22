@@ -23,8 +23,8 @@
             						COMERCIAL
           						</font></font></a>
           						<ul class="dropdown-menu bg-primary" style="border: none !important; left:50%">
-            						<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">	Mix Comercial</font></font></a></li>
-									<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">	Empresas</font></font></a></li>
+            						<li><a class="dropdown-item opcion" href="?page=mixComercial"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">	Mix Comercial</font></font></a></li>
+									<li><a class="dropdown-item opcion" href="?page=empresas"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">	Empresas</font></font></a></li>
           						</ul>
         					</li>
            					<li class="nav-item dropdown" style="padding-left:30%">
@@ -62,14 +62,16 @@
             
             <div class="contenido border border-primary">
                 <div class="col-lg-12 col-md-12">
-                    <div class="card-body" style="padding:15px" id="tblMixComercial">
-                       
-                           
+                <div class="row" style="padding:10px">
+                         <button type="button" class="form-control btn btn-success solicitud"  data-bs-toggle="modal"  data-bs-target="#solicitud">Nueva Solicitud</button>
+                        </div>                           
                     </div>
+                    <div class="card-body" style="padding:15px" id="tblMixComercial">
+                   
                 </div>
             </div>
 
-                    <!-- Modal -->
+                    <!-- Modal Registro-->
                 <div class="modal fade" id="solicitud" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
                     aria-hidden="true">
                     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
@@ -83,8 +85,9 @@
                                 <div class="card-body">
                                     <div class="row justify-content-center">
                                         <div class="col-md-12">
-                                            <form class="form form-horizontal" id="uploadForm">
+                                            <form class="form form-horizontal" id="mixComercial">
                                                 <div class="form-body">
+                                                    
                                                     <div class="row">
                                                         <div class="col-md-1" style="padding:15px"></div>
                                                         <div class="col-md-2" style="padding:15px">
@@ -99,7 +102,7 @@
                                                             <label> Descripción</label>
                                                         </div>
                                                         <div class="col-md-8 form-group">
-                                                            <textarea id="descripcion" class="form-control" type="text" rows="6"></textarea>
+                                                            <textarea id="descripcion" class="form-control" type="text" rows="6" ></textarea>
                                                         </div>   
                                                         <div class="col-md-1" style="padding:15px"></div>                                        
                                                     </div>
@@ -121,7 +124,40 @@
                         </div>
                     </div>
                 </div>
+
+               
         </div>
+         <!-- Modal Modificar-->
+         <div class="modal fade" id="editar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle1"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Modificar Mix Comercial</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                </button>
+                            </div>
+                            <div class="modal-body" >
+                                <div class="card-body">
+                                    <div class="row justify-content-center" >
+                                        <div id="editarMixComercial">
+                                            
+                                        </div>
+                                        <div class="row">
+                                    <div class="col-md-9 form-group"></div>
+                                    <div class="col-md-1 form-group" style="padding-top:5%">
+                                        <input type="button" class="btn btn-danger" data-bs-dismiss="modal" value="Cancelar">
+                                    </div>
+                                    <div class="col-md-1 form-group"  style="padding-top:5%">
+                                        <input class="btn btn-primary"  type="submit" id="modificar"  name="modificar" value="Modificar">
+                                    </div>
+                                </div>
+                                    </div>
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
     </div>
 
     <script type="text/javascript" src="./Resources/js/mixComercial.js"></script>
