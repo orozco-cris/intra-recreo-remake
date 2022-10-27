@@ -77,7 +77,6 @@ class ComunUsuaController extends Conexion
 
     public function listadoPermSegOperaciones($query)
     {
-        $query;
         $result = pg_query($this->conn, $query);
         $datos = array();
         if(pg_num_rows($result) > 0)

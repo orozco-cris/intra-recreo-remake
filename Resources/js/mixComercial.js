@@ -111,11 +111,13 @@ $(document).ready(function(){
 $("#modificar").click(function(e){
     e.preventDefault();
     console.log("prueba");
-    modificarMix($("#id_mix").val(),
+    modificarMix($("#usuario").val(),
                 $("#nombreMix").val(),
                 $("#descripcionMix").val());
 
 }); 
      
+
+
 
 });

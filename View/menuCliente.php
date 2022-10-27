@@ -1,21 +1,22 @@
    <!-- Listado de permisos para el los clientes -->
 <div class="container-fluid">
-        <div class="row" style="position: relative;">
-            <div class="encabezado" style="padding: 0px">
-                <img style="object-fit: cover;width:20%;height:100%;" src="Resources/images/logo.PNG" alt="">
-            </div>
-            <div class="inicio">
-                <button type="button" class="form-control btn btn-danger btnCerrar" onclick="window.location.href='?page=logout'">Cerrar Sesión</button>
-            </div>
+    <div class="row" style="position: relative;">
+        <div class="encabezado" style="padding: 0px">
+        <a href="?page=home">
+            <img style="object-fit: cover;width:20%;height:100%;" src="Resources/images/logo.PNG" alt=""></a>
         </div>
-		<div class="row ">
-			<nav class="navbar navbar-expand-lg bg-primary">
-      			<div class="container-fluid">
-        			<a class="navbar-brand" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font></a>
-       				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Navegación de palanca">
-          				<span class="navbar-toggler-icon"></span>
-        			</button>
-       				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="inicio">
+                <button type="button" class="form-control btn btn-danger btnCerrar" onclick="window.location.href='?page=logout'">Cerrar Sesión</button>
+        </div>
+    </div>
+	<div class="row ">
+		<nav class="navbar navbar-expand-lg bg-primary">
+      		<div class="container-fluid">
+        		<a class="navbar-brand" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font></a>
+       			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Navegación de palanca">
+          			<span class="navbar-toggler-icon"></span>
+        		</button>
+       			    <div class="collapse navbar-collapse" id="navbarSupportedContent">
           				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
           					<li class="nav-item dropdown" style="padding-left:30%">
           						<a class="nav-link dropdown-toggle opcion" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
@@ -38,50 +39,56 @@
             				</li>
           				</ul>
         			</div>
-      			</div>
-    		</nav>
-		</div>
+      		</div>
+    	</nav>
+	</div>
 
-		<div class="row  justify-content-center" style="position: relative;">
-		    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 0px">
-                <img class="hidden-xs" style="width:100%; height: auto" src="Resources/images/fondo.jpg" alt="">
-            </div>
-            
-            <div class="contenido1 border border-primary">
-                <div class="col-lg-12 col-md-12">
-                    <div class="card-body" style="padding:15px">
-                       <div class="row">
-                       <button type="button" class="form-control btn btn-success solicitud" data-bs-toggle="modal"  data-bs-target="#solicitud">Nueva Solicitud</button>
+	<div class="row  justify-content-center" style="position: relative;">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 0px">
+            <img class="hidden-xs" style="width:100%; height: auto" src="Resources/images/fondo.jpg" alt="">
+        </div>            
+        <div class="contenido1 border border-primary">
+            <div class="col-lg-12 col-md-12">
+                <div class="card-body" style="padding:15px">
+                    <div class="row">
+                       <button type="button" class="form-control btn btn-success solicitud" data-bs-toggle="modal"  data-bs-target="#nuevo">Nueva Solicitud</button>
                     </div>
                     <div id="tblAuditadasRep">
-                            <div class="row text-center">
-                                <div class="col-sm-3">ASUNTO</div>   
-                                <div class="col-sm-3">FECHA</div> 
-                                <div class="col-sm-3">DEPARTAMENTO</div> 
-                                <div class="col-sm-3"></div>                             
+                        <div class="row text-center">
+                            <div class="col-sm-3">ASUNTO</div>   
+                            <div class="col-sm-3">FECHA</div> 
+                            <div class="col-sm-3">DEPARTAMENTO</div> 
+                            <div class="col-sm-3"></div>                             
+                        </div>
+                        <div class="row  justify-content-center" style="padding:5px">
+                            <div class="col-sm-12 border border-dark text-center fila">
+                                <label for=""></label>
                             </div>
-                            <div class="row  justify-content-center" style="padding:5px">
-                                <div class="col-sm-12 border border-dark text-center fila">
-                                    <label for=""></label>
-                                 </div>
+                        </div>
+                        <div class="row  justify-content-center" style="padding:5px">
+                            <div class="col-sm-12 border border-dark text-center fila">
+                                <label for=""></label>
                             </div>
-                            <div class="row  justify-content-center" style="padding:5px">
-                                <div class="col-sm-12 border border-dark text-center fila">
-                                    <label for=""></label>
-                                 </div>
+                        </div>
+                        <div class="row  justify-content-center" style="padding:5px">
+                            <div class="col-sm-12 border border-dark text-center fila">
+                                <label for=""></label>
                             </div>
-                            <div class="row  justify-content-center" style="padding:5px">
-                                <div class="col-sm-12 border border-dark text-center fila">
-                                    <label for=""></label>
-                                 </div>
-                            </div> -->
+                        </div> 
                     </div>
                 </div>
-            </div>
+            </div>            
         </div>
 
-             <!-- Modal -->
-        <div class="modal fade" id="solicitud" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+
+   
+
+
+
+	</div>
+    <div class="row">
+             <!-- Modal ingreso-->
+        <div class="modal fade" id="nuevo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
             aria-hidden="true">
             <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -159,14 +166,55 @@
                                         </div>
                                     </form>
                                 </div>
-                            </di>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+
+        <div class="modal fade" id="solicitud" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Datos Solicitud</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card-body">
+                            <div class="row justify-content-center">
+                                <div class="col-md-12">
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <div class="row justify-content-center">
+                                                <div class="col-md-10">
+                                                    <br>
+                                                    <form class="form form-horizontal">
+                                                        <div class="form-body"  >                                                                
+                                                            <div class="row" id="permiso" >                                                                        
+                                                                    
+                                                            </div>
+                                                        </div>
+                                                    </form><br>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-		</div>
-    </div>
+        
+
+</div>
+
+
 
 <style>
 .ck-editor__editable_inline {
@@ -176,3 +224,4 @@
 
 <script type="text/javascript" src="./Resources/js/permisosClientes.js"></script>
 <script type="text/javascript" src="./Resources/js/usuarios.js"></script>
+<script type="text/javascript" src="./Resources/js/solModal.js"></script>

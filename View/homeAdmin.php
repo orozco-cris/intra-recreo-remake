@@ -2,7 +2,8 @@
 <div class="container-fluid">
         <div class="row" style="position: relative;">
             <div class="encabezado" style="padding: 0px">
-                <img style="object-fit: cover;width:20%;height:100%;" src="Resources/images/logo.PNG" alt="">
+			<a href="?page=home">
+                <img style="object-fit: cover;width:20%;height:100%;" src="Resources/images/logo.PNG" alt=""></a>
             </div>
             <div class="inicio">
                 <button type="button" class="form-control btn btn-danger btnCerrar" data-bs-toggle="modal"
@@ -32,7 +33,7 @@
                 					CIRCULARES
               					</font></font></a>
               					<ul class="dropdown-menu bg-primary" style="border: none !important; left:35%">
-                					<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Añadir usuario interno</font></font></a></li>
+                					<li><a class="dropdown-item opcion" href="?page=usuarioInterno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Añadir usuario interno</font></font></a></li>
                 					<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Circulares no reviados</font></font></a></li>
                 					<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Crear circulares</font></font></a></li>       
               					</ul>
@@ -42,7 +43,7 @@
                 					ADMINISTRACIÓN
               					</font></font></a>
               					<ul class="dropdown-menu bg-primary" style="border: none !important; left:42%">
-                					<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Usuarios</font></font></a></li>
+                					<li><a class="dropdown-item opcion" href="?page=usuarioSistema"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Usuarios</font></font></a></li>
                 					<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Locales</font></font></a></li>
 									<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Islas</font></font></a></li>
 									<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Publicidades</font></font></a></li>

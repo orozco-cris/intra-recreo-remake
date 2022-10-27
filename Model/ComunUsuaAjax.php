@@ -106,6 +106,7 @@ if($_POST["crud"])
             $con_usuario_comunicado_controller = new ComunUsuaController();
             $query = " select *from comunicado where id_comunicado=".$id_permiso."";
             $con_usuario_comunicado = $con_usuario_comunicado_controller->PermisoDeterminado($query);
+          
             $html = '';
             if($con_usuario_comunicado[0]["success"])
             {
@@ -218,6 +219,7 @@ if($_POST["crud"])
                         $c='text-success';
                     }
                     else if($color==2){
+                        
                         $c='text-warning';
                     }
                     $html .= '<tr>

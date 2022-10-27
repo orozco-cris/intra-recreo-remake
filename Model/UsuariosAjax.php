@@ -9,8 +9,8 @@ require_once "./../Controller/ComunUsuaController.php";
         switch($crud)
         {
             case 'read':
-				//$clave=md5($_POST["clave"]);
-				$clave=$_POST["clave"];
+				$clave=md5($_POST["clave"]);
+				//$clave=$_POST["clave"];
                 $usuario = new Usuario();
 				$conUsuario = new UsuarioController();
 				$query = "select * from usuario where estado_usuario = 1 and login_usuario = '".$_POST["usuario"]."' and clave_usuario = '".$clave."'";
@@ -89,7 +89,7 @@ require_once "./../Controller/ComunUsuaController.php";
 					$operaciones=3;
 					$query = " select *from usuario where id_tipo_usuario=".$seguridad." or id_tipo_usuario=".$operaciones." ";
 					$con_usuario_comunicado = $usuario_comunicado->listClientes($query);
-					$html = ' <div id="usuarios">
+					$html = '
 					<select class="form-control" id="destinatario">';
 					if($con_usuario_comunicado[0]["success"])
 					{
@@ -100,10 +100,128 @@ require_once "./../Controller/ComunUsuaController.php";
 						}
 					}
 					$html .='</select>
-						</div>';
+						';
 					
 					
 						echo $html;
+				break;
+				case 'clientesEmpresa':
+					$usuario_comunicado = new UsuarioController();
+					$query = "select *from usuario where id_tipo_usuario=2 and id_usuario not in(select id_usuario from empresa where id_usuario is not null)";
+					$con_usuario_comunicado = $usuario_comunicado->listClientes($query);
+					$html = '
+					<select class="form-control" id="id_usuario">';
+					$html .='<option value="null">Seleccione</option>';
+					if($con_usuario_comunicado[0]["success"])
+					{					
+						foreach ($con_usuario_comunicado as $row) 
+						{
+							
+							$html .= '<option value="'.$row["id_usuario"].'">'.$row["nombre_usuario"].' '.$row["apellido_usuario"].'</option>';
+						}
+					}
+					$html .='</select>
+						';					
+					
+						echo $html;
+				break;
+				case 'usuariosInternos':
+					$usuario_cliente = new UsuarioController();
+					$query = " select *from usuario where id_tipo_usuario=2";
+					$con_usuario_cliente = $usuario_cliente->UsuarioEmpresa($query);
+					$html = '<table class="table table-bordered text-center table-striped" id="tblUsuarios">
+					<thead>
+						<tr>
+							<th class="back-color text-center">NOMBRES</th>
+							<th class="back-color text-center">LOGIN</th>
+							<th class="back-color text-center">CONTRASEÑA</th>
+							<th class="back-color text-center">EMPRESA</th>
+						</tr>
+					</thead>
+					<tbody>';
+					
+				if($con_usuario_cliente[0]["success"])
+				{
+					foreach ($con_usuario_cliente as $row) 
+					{
+						$html .= '<tr>
+							<td>'.$row["usuario"]->getNombre_usuario().'  '.$row["usuario"]->getApellido_usuario().'</td>
+							<td>'.$row["usuario"]->getLogin_usuario().'</td>
+							<td>'.$row["usuario"]->getClave_usuario().'</td>
+							<td>'.$row["empresa"]->getNombre_comercial().'</td>
+						</td>
+						</tr>';
+						
+					}
+				}
+				else
+					{
+						$html .= "<tr><td colspan='4' class='text-center'>No se encontraron registros</td></tr>";
+					}
+					$html .= '</tbody></table>';
+					echo $html;
+				break;
+
+
+				case 'createCliente':
+					$usuario = new Usuario();
+					$con_usuario = new UsuarioController();
+					$usuario-> setId_tipo_usuario($_POST["tipo_usuario"]);
+					$usuario-> setNombre_usuario($_POST["nombre"]);
+					$usuario-> setApellido_usuario($_POST["apellido"]);
+					$usuario-> setCedula_usuario($_POST["cedula"]);
+					$usuario-> setLogin_usuario($_POST["login"]);
+					$usuario-> setClave_usuario($_POST["clave"]);
+					$usuario-> setCorreo_usuario($_POST["correo"]);
+					$usuario-> setDireccion_usuario($_POST["direccion"]);
+					$usuario-> setEstado_usuario(1);
+					
+					$result = $con_usuario->createCliente($usuario);
+					
+					if($result)
+					{
+						echo 'correcto';
+					}else
+					{
+						echo 'incorrecto';
+					}
+				break;    
+
+				case 'usuariosAdmin':
+					$usuario_cliente = new UsuarioController();
+					$query = "select *from usuario where id_tipo_usuario<>2";
+					$con_usuario_admin = $usuario_cliente->UsuarioTipo($query);
+					$html = '<table class="table table-bordered text-center table-striped" id="tblUsuarioAdmin">
+					<thead>
+						<tr>
+							<th class="back-color text-center">NOMBRES</th>
+							<th class="back-color text-center">LOGIN</th>
+							<th class="back-color text-center">CONTRASEÑA</th>
+							<th class="back-color text-center">ROL</th>
+						</tr>
+					</thead>
+					<tbody>';
+					
+				if($con_usuario_admin[0]["success"])
+				{
+					foreach ($con_usuario_admin as $row) 
+					{
+						$html .= '<tr>
+							<td>'.$row["usuario"]->getNombre_usuario().'  '.$row["usuario"]->getApellido_usuario().'</td>
+							<td>'.$row["usuario"]->getLogin_usuario().'</td>
+							<td>'.$row["usuario"]->getClave_usuario().'</td>
+							<td>'.$row["tipo_usuario"]->getNombre_tipo_usuario().'</td>
+						</td>
+						</tr>';
+						
+					}
+				}
+				else
+					{
+						$html .= "<tr><td colspan='4' class='text-center'>No se encontraron registros</td></tr>";
+					}
+					$html .= '</tbody></table>';
+					echo $html;
 				break;
         }
     }

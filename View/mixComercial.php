@@ -2,7 +2,8 @@
     <div class="container-fluid">
         <div class="row" style="position: relative;">
             <div class="encabezado" style="padding: 0px">
-                <img style="object-fit: cover;width:20%;height:100%;" src="Resources/images/logo.PNG" alt="">
+            <a href="?page=home">
+                <img style="object-fit: cover;width:20%;height:100%;" src="Resources/images/logo.PNG" alt=""></a>
             </div>
             <div class="inicio">
                 <button type="button" class="form-control btn btn-danger btnCerrar" data-bs-toggle="modal"
@@ -32,7 +33,7 @@
                 					CIRCULARES
               					</font></font></a>
               					<ul class="dropdown-menu bg-primary" style="border: none !important; left:40%">
-                					<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Añadir usuario interno</font></font></a></li>
+                					<li><a class="dropdown-item opcion" href="?page=usuarioInterno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Añadir usuario interno</font></font></a></li>
                 					<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Circulares no reviados</font></font></a></li>
                 					<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Crear circulares</font></font></a></li>       
               					</ul>
@@ -42,7 +43,7 @@
                 					ADMINISTRACIÓN
               					</font></font></a>
               					<ul class="dropdown-menu bg-primary" style="border: none !important; left:42%">
-                					<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Usuarios</font></font></a></li>
+                					<li><a class="dropdown-item opcion" href="?page=usuarioSistema"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Usuarios</font></font></a></li>
                 					<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Locales</font></font></a></li>
 									<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Islas</font></font></a></li>
 									<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Publicidades</font></font></a></li>
@@ -62,11 +63,11 @@
             
             <div class="contenido border border-primary">
                 <div class="col-lg-12 col-md-12">
-                <div class="row" style="padding:10px">
+                    <div class="row" style="padding:10px">
                          <button type="button" class="form-control btn btn-success solicitud"  data-bs-toggle="modal"  data-bs-target="#solicitud">Nueva Solicitud</button>
-                        </div>                           
-                    </div>
-                    <div class="card-body" style="padding:15px" id="tblMixComercial">
+                    </div>                           
+                </div>
+                <div class="card-body" style="padding:15px" id="tblMixComercial">
                    
                 </div>
             </div>
@@ -130,34 +131,34 @@
          <!-- Modal Modificar-->
          <div class="modal fade" id="editar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle1"
                     aria-hidden="true">
-                    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Modificar Mix Comercial</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                                </button>
-                            </div>
-                            <div class="modal-body" >
-                                <div class="card-body">
-                                    <div class="row justify-content-center" >
-                                        <div id="editarMixComercial">
+                <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Modificar Mix Comercial</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            </button>
+                        </div>
+                        <div class="modal-body" >
+                            <div class="card-body">
+                                <div class="row justify-content-center" >
+                                    <div id="editarMixComercial">
                                             
-                                        </div>
-                                        <div class="row">
-                                    <div class="col-md-9 form-group"></div>
-                                    <div class="col-md-1 form-group" style="padding-top:5%">
-                                        <input type="button" class="btn btn-danger" data-bs-dismiss="modal" value="Cancelar">
                                     </div>
-                                    <div class="col-md-1 form-group"  style="padding-top:5%">
-                                        <input class="btn btn-primary"  type="submit" id="modificar"  name="modificar" value="Modificar">
+                                    <div class="row">
+                                        <div class="col-md-9 form-group"></div>
+                                            <div class="col-md-1 form-group" style="padding-top:5%">
+                                                <input type="button" class="btn btn-danger" data-bs-dismiss="modal" value="Cancelar">
+                                            </div>
+                                        <div class="col-md-1 form-group"  style="padding-top:5%">
+                                            <input class="btn btn-primary"  type="submit" id="modificar"  name="modificar" value="Modificar">
+                                        </div>
                                     </div>
                                 </div>
-                                    </div>
-                                </div>                                
-                            </div>
+                            </div>                                
                         </div>
                     </div>
                 </div>
+            </div>
     </div>
 
     <script type="text/javascript" src="./Resources/js/mixComercial.js"></script>
