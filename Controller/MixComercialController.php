@@ -32,6 +32,26 @@ class MixComercialController extends Conexion
         }
     }
 
+    public function listParameter($parameter)
+	{
+        $query = "select * from mix_comercial where id_mix_comercial = ".$parameter;
+		$result = pg_query($this->conn, $query);
+        $mixComercial = null;
+        if(pg_num_rows($result) > 0)
+		{
+            while($info = pg_fetch_array($result))
+			{
+                $mixComercial = new MixComercial();
+                $mixComercial->setId_mix_comercial($info[0]);
+                $mixComercial->setNombre_mix($info[1]);
+                $mixComercial->setDescripcion_mix($info[2]);
+            }
+            //pg_close($this->conn);
+            return $mixComercial;
+        }
+    }
+
+
 
  public function createMixComercial($mix)
     {

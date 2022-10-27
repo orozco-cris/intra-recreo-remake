@@ -10,6 +10,7 @@ $(document).ready(function(){
             url:"./Model/ComunUsuaAjax.php",
             method: "POST",
             success: function(data){
+                console.log("data");
                 $("#permiso").html(data);
             },
             error: function(error){
@@ -21,6 +22,7 @@ $(document).ready(function(){
 
     $('#solicitud').on('show.bs.modal', function(e) {
         var id = e.relatedTarget.dataset.yourparameter;
+        console.log("id permiso",id);
         obtenerPermiso(id);
       });
 });

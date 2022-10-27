@@ -89,9 +89,7 @@ if($_POST["crud"])
                                         <label> Descripción</label>
                                     </div>
                                     <div class="col-md-8 form-group">
-                                        <textarea id="descripcionMix" class="form-control" type="text" rows="6"  >
-                                        '.$row["mix_comercial"]->getDescripcion_mix().'
-                                        </textarea>
+                                        <textarea id="descripcionMix" class="form-control" type="text" rows="6"  >'.$row["mix_comercial"]->getDescripcion_mix().'</textarea>
                                         <input type="hidden" value="'.($row["mix_comercial"]->getId_mix_comercial()).'" id="id_mix">
                                     </div>   
                                     <div class="col-md-1" style="padding:15px"></div>                                        
@@ -124,6 +122,25 @@ if($_POST["crud"])
             {
                 echo 'incorrecto';
             }
+        break;
+
+        case 'listMix':
+            $con_mix_comercial_controller = new MixComercialController();
+            $query = "select * from mix_comercial";
+            $con_mix_comercial = $con_mix_comercial_controller->listMixComercial($query);
+            $html = '
+            <select class="form-control" id="mixc">';
+            if($con_mix_comercial[0]["success"])
+            {
+                foreach ($con_mix_comercial as $row) 
+                {
+                    
+                    $html .= '<option value="'.($row["mix_comercial"]->getId_mix_comercial()).'">'.$row["mix_comercial"]->getNombre_mix().' </option>';
+                }
+            }
+            $html .='</select>';            
+            
+                echo $html;
         break;
 
        

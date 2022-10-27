@@ -2,7 +2,8 @@
         <div class="row" style="position: relative;">
 
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 0px">
-                <img class="hidden-xs" style="width:100%; height:auto;" src="./Resources/images/inicio.PNG" alt="">
+            <a href="?page=home">
+                <img class="hidden-xs" style="width:100%; height:auto;" src="./Resources/images/inicio.PNG" alt=""></a>
             </div>
             <div class="inicio">
                 <button type="button" class="form-control btn btn-warning btnInicio" data-bs-toggle="modal"
