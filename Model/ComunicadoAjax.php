@@ -49,16 +49,10 @@ if($_POST["crud"])
                             $row["mes_comunicado"].'/'.
                             $row["dia_comunicado"].'</td>
                         <td class="text-center">'.$row["destinatario"]->getId_usuario()->getId_tipo_usuario()->getNombre_tipo_usuario().'</td>
-<<<<<<< HEAD
                         <td class="text-center"><a class="btn btn-link" 
                     href="?page=solEspecificas&comu='.base64_encode($row["id_comunicado"]).'&estado=1">Ver más</a></td>
                         <td class="text-center"><i class="fa fa-circle '.$c.'"></i></td>
                     </tr>';
-=======
-                        <td class="text-center">
-                        <button type="button" class="form-control btn btn-primary" data-bs-toggle="modal"  data-bs-target="#solicitud" data-yourparameter="'.($row["id_comunicado"]).'">Ver Detalles </button></td>
-                        </tr>';
->>>>>>> yesenia
                     
                 }
             }
