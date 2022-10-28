@@ -1,9 +1,9 @@
 $(document).ready(function(){
 
-	function obtenerPermiso(id_usuario, id_estado){
+	function obtenerPermiso(id_comunicado, id_estado){
         var dat = {
             crud:"permisoDeterminado",
-			usuario: id_usuario
+			comunicado: id_comunicado
         };
 
         //console.log("datos",dat);

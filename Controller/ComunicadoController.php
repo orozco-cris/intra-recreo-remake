@@ -22,7 +22,7 @@ class ComunicadoController extends Conexion
 
     public function listParameter($parameter)
 	{
-        $query = "select *from comunicado where id_comunicado = ".$parameter;
+        $query = "select * from comunicado where id_comunicado = ".$parameter;
         $result = pg_query($this->conn, $query);
         $comunicado = null;
         if(pg_num_rows($result) > 0)
@@ -47,6 +47,7 @@ class ComunicadoController extends Conexion
                 $comunicado->setHora_comunicado($info[11]);
                 $comunicado->setFecha_caducidad_comunicado($info[12]);
                 $comunicado->setFoto_comunicado($info[13]);
+                $comunicado->setTipo_comunicado($info[14]);
             }
             //pg_close($this->conn);
             return $comunicado;
@@ -129,9 +130,49 @@ class ComunicadoController extends Conexion
         return $datos;    
     }
 
+    public function getComunicados($query)
+    {
+        $result = pg_query($this->conn, $query);
+        $datos = array();
+        if(pg_num_rows($result) > 0)
+		{
+            while($info = pg_fetch_array($result))
+			{
+                $obj_comunicado = new Comunicado();
+                $con_usuario = new UsuarioController();
+                $usuario = $con_usuario->listParameter($info[1]);
+                $obj_comunicado->setId_comunicado($info[0]);
+                $obj_comunicado->setId_usuario_creador($con_usuario);
+                $obj_comunicado->setDe_comunicado($info[2]);
+                $obj_comunicado->setPara_comunicado($info[3]);
+                $obj_comunicado->setCodigo_comunicado($info[4]);
+                $obj_comunicado->setAsunto_comunicado($info[5]);
+                $obj_comunicado->setMensaje_comunicado($info[6]);
+                $obj_comunicado->setDetalle_comunicado($info[7]);
+                $obj_comunicado->setDia_comunicado($info[8]);
+                $obj_comunicado->setMes_comunicado($info[9]);
+                $obj_comunicado->setAnio_comunicado($info[10]);
+                $obj_comunicado->setHora_comunicado($info[11]);
+                $obj_comunicado->setFecha_caducidad_comunicado($info[12]);
+                $obj_comunicado->setFoto_comunicado($info[13]);
+                $obj_comunicado->setTipo_comunicado($info[14]);
+                $datos[] = array(
+                    "success" => true,
+                    "comunicado" => $obj_comunicado
+                );
+            }
+        }
+        else
+		{
+			$datos[] = array("success" => false);
+		}
+        pg_close($this->conn);
+        return $datos;
+    }
+
     public function listParameterComunUsuari($parameter)
 	{
-        $query = "select *from comunicado_usuario where id_comunicado = ".$parameter;
+        $query = "select * from comunicado_usuario where id_comunicado = ".$parameter;
         $result = pg_query($this->conn, $query);
         $comunicado_usuario=null;
         if(pg_num_rows($result) > 0)
