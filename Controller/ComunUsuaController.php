@@ -21,7 +21,7 @@ class ComunUsuaController extends Conexion
         $this->conn = Conexion::getInstance()->getConexion();
     }
 
-    public function getComunicadosParaCliente($query)
+    public function getCircularesParaCliente($query)
     {
         $result = pg_query($this->conn, $query);
         $datos = array();

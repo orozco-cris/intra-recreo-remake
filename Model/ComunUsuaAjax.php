@@ -11,8 +11,10 @@ if($_POST["crud"])
         case 'listCircularesParaCliente':
             $id_usuario = 2;
             $con_usuario_comunicado_controller = new ComunUsuaController();
-            $query = "select * from comunicado_usuario as cu where cu.id_usuario =".$id_usuario."";
-            $con_usuario_comunicado = $con_usuario_comunicado_controller->getComunicadosParaCliente($query);
+            $query = "select cu.id_comunicado_usuario, cu.id_comunicado, cu.id_usuario, cu.revision 
+                from comunicado_usuario as cu inner join comunicado as co on cu.id_comunicado = co.id_comunicado
+                where cu.id_usuario =".$id_usuario." and co.tipo_comunicado = 'circular' order by cu.id_comunicado_usuario desc";
+            $con_usuario_comunicado = $con_usuario_comunicado_controller->getCircularesParaCliente($query);
             $html = '<table class="table table-bordered table-striped" id="tblAuditadasRep">
 				<thead>
 					<tr>
@@ -102,9 +104,9 @@ if($_POST["crud"])
 
         case 'permisoDeterminado':
             $id_permiso = 0;
-            $id_permiso = $_POST["usuario"];
+            $id_permiso = $_POST["comunicado"];
             $con_usuario_comunicado_controller = new ComunUsuaController();
-            $query = " select *from comunicado where id_comunicado=".$id_permiso."";
+            $query = " select * from comunicado where id_comunicado=".$id_permiso."";
             $con_usuario_comunicado = $con_usuario_comunicado_controller->PermisoDeterminado($query);
             $html = '';
             if($con_usuario_comunicado[0]["success"])
