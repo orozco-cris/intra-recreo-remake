@@ -64,3 +64,22 @@
     border-radius: 2px;
     height: auto;
 }
+
+.contenido2{
+    position: relative; 
+    width: auto;
+    height: auto;
+}
+
+@media (min-width: 700px) { 
+    .contenido2{
+        position: relative; 
+        background-color: antiquewhite ;
+        width: 75% !important;
+        opacity: 0.8;
+        border: 1px solid;
+        border-color: midnightblue !important;
+        border-radius: 2px;
+        height: auto;
+    }
+ }

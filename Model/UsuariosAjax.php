@@ -9,8 +9,8 @@ require_once "./../Controller/ComunUsuaController.php";
         switch($crud)
         {
             case 'read':
-				$clave=md5($_POST["clave"]);
-				//$clave=$_POST["clave"];
+				//$clave=md5($_POST["clave"]);
+				$clave=$_POST["clave"];
                 $usuario = new Usuario();
 				$conUsuario = new UsuarioController();
 				$query = "select * from usuario where estado_usuario = 1 and login_usuario = '".$_POST["usuario"]."' and clave_usuario = '".$clave."'";

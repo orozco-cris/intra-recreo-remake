@@ -3,7 +3,7 @@ $(document).ready(function(){
 	function obtenerPermiso(id_usuario){
         var dat = {
             crud:"permisoDeterminado",
-			usuario: id_usuario
+			comunicado: id_usuario
         };
         $.ajax({
             data: dat,

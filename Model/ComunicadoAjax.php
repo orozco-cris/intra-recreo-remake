@@ -125,14 +125,13 @@ if($_POST["crud"])
             $query = "select * from comunicado where tipo_comunicado = 'circular'
                 order by id_comunicado desc limit 25";
             $obj_comunicado = $obj_comunicado_controller->getComunicados($query);
-            $html = '<table class="table table-bordered table-striped" id="tblAuditadasRep">
+            $html = '<table class="table table-bordered table-striped" id="tblCircularesAll">
 				<thead>
 					<tr>
 						<th class="back-color text-center">Asunto</th>
 						<th class="back-color text-center">Fecha</th>
-						<th class="back-color text-center">Departamento</th>
+						<th class="back-color text-center">Para</th>
                         <th class="back-color text-center">Ver más</th>   
-						<th class="back-color text-center"></th>
 					</tr>
 				</thead>
 				<tbody>';
@@ -142,20 +141,62 @@ if($_POST["crud"])
                 {
                     $html .= '<tr>
                         <td>'.$row["comunicado"]->getAsunto_comunicado().'</td>
-                        <td class="text-center">'.$row["anio_comunicado"].'/'.
-                            $row["mes_comunicado"].'/'.
-                            $row["dia_comunicado"].'</td>
-                        <td class="text-center">'.$row["destinatario"]->getId_usuario()->getId_tipo_usuario()->getNombre_tipo_usuario().'</td>
-                        <td class="text-center"><a class="btn btn-link" 
-                    href="?page=solEspecificas&comu='.base64_encode($row["id_comunicado"]).'&estado=1">Ver más</a></td>
-                        <td class="text-center"><i class="fa fa-circle '.$c.'"></i></td>
+                        <td class="text-center">'.$row["comunicado"]->getAnio_comunicado().'/'.
+                            $row["comunicado"]->getMes_comunicado().'/'.
+                            $row["comunicado"]->getDia_comunicado().'</td>
+                        <td class="text-center">'.$row["comunicado"]->getPara_comunicado().'</td>
+                        <td class="text-center"><a class="btn btn-link" href="#">Ver más</a></td>
                     </tr>';
                     
                 }
             }
             else
 				{
-					$html .= "<tr><td colspan='4' class='text-center'>No existen solicitudes de permisos</td></tr>";
+					$html .= "<tr><td colspan='4' class='text-center'>No existen circulares registradas</td></tr>";
+				}
+				$html .= '</tbody></table>';
+				echo $html;
+        break;
+
+        case 'listCircularesNoRevisadasAdmin':
+            $obj_comunicado_controller = new ComunicadoController();
+            $query = "select co.id_comunicado, co.id_usuario_creador, co.de_comunicado, co.para_comunicado, 
+            co.codigo_comunicado, co.asunto_comunicado, co.mensaje_comunicado, co.detalle_comunicado,
+            co.dia_comunicado, co.mes_comunicado, co.anio_comunicado, co.hora_comunicado, co.fecha_caducidad_comunicado,
+            co.foto_comunicado, co.tipo_comunicado
+            from comunicado as co 
+            inner join comunicado_usuario as cu on co.id_comunicado = cu.id_comunicado
+            where co.tipo_comunicado = 'circular' and cu.revision = 0
+            group by co.id_comunicado, cu.revision order by co.id_comunicado desc limit 50";
+            $obj_comunicado = $obj_comunicado_controller->getComunicados($query);
+            $html = '<table class="table table-bordered table-striped" id="tblCircularesNoRevisadasAdmin">
+				<thead>
+					<tr>
+						<th class="back-color text-center">Asunto</th>
+						<th class="back-color text-center">Fecha</th>
+						<th class="back-color text-center">Para</th>
+                        <th class="back-color text-center">Ver más</th>   
+					</tr>
+				</thead>
+				<tbody>';
+            if($obj_comunicado[0]["success"])
+            {
+                foreach ($obj_comunicado as $row) 
+                {
+                    $html .= '<tr>
+                        <td>'.$row["comunicado"]->getAsunto_comunicado().'</td>
+                        <td class="text-center">'.$row["comunicado"]->getAnio_comunicado().'/'.
+                            $row["comunicado"]->getMes_comunicado().'/'.
+                            $row["comunicado"]->getDia_comunicado().'</td>
+                        <td class="text-center">'.$row["comunicado"]->getPara_comunicado().'</td>
+                        <td class="text-center"><a class="btn btn-link" href="#">Ver más</a></td>
+                    </tr>';
+                    
+                }
+            }
+            else
+				{
+					$html .= "<tr><td colspan='4' class='text-center'>No existen circulares sin visualización</td></tr>";
 				}
 				$html .= '</tbody></table>';
 				echo $html;

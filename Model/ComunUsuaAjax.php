@@ -103,10 +103,10 @@ if($_POST["crud"])
         break;
 
         case 'permisoDeterminado':
-            $id_permiso = 0;
+            //$id_permiso = 2;
             $id_permiso = $_POST["comunicado"];
             $con_usuario_comunicado_controller = new ComunUsuaController();
-            $query = " select * from comunicado where id_comunicado=".$id_permiso."";
+            $query = "select * from comunicado where id_comunicado = ".$id_permiso."";
             $con_usuario_comunicado = $con_usuario_comunicado_controller->PermisoDeterminado($query);
           
             $html = '';

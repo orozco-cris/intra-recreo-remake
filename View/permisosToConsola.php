@@ -14,9 +14,9 @@
                 <img style="object-fit: cover;width:11.7%;height:65%;" src="Resources/images/logo.PNG" alt=""></a>
             </div>
         
-            <div class="row  justify-content-center" style="position:absolute;">
-                <div class="contenido1 border border-primary" >
-                    <div class="col-lg-12 col-md-12">
+            <div class="m-0 row justify-content-center align-items-center" style="position:absolute;">
+                <div class="contenido2" >
+                    <div class="col-lg-12 col-md-12 col-sm-12">
                         <div class="card-body" style="padding:15px" id="permisoTodos">
                             
                         </div>
