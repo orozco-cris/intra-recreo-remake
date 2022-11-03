@@ -96,6 +96,11 @@ class UsuarioController extends Conexion
                 $usuario->setClave_usuario($info[6]);
                 $usuario->setCorreo_usuario($info[7]);
                 $usuario->setDireccion_usuario($info[8]);
+                /* $datos[] = array(
+                    "success" => true,
+                    "usuario"=>$usuario,
+                    "tipo_usuario"=>$tipo_usuario
+                ); */
             }
             //pg_close($this->conn);
             return $usuario;
@@ -200,6 +205,33 @@ class UsuarioController extends Conexion
         '".$cliente->getCorreo_usuario()."','".$cliente-> getDireccion_usuario()."',
         '".$cliente->getEstado_usuario()."')";
    
+        $result = pg_query($this->conn, $query);
+        //pg_close($this->conn);
+        return $result;
+    }
+
+    public function eliminarUsuario($usuario)
+    {
+        $query = "update usuario set estado_usuario=0 where id_usuario=".$usuario."";
+        echo $query;
+        $result = pg_query($this->conn, $query);
+        //pg_close($this->conn);
+        return $result;
+    }
+
+    public function modificarUsuario($usuario)
+    {
+        $query = "update usuario set id_tipo_usuario=".$usuario->getId_tipo_usuario().",
+                                    nombre_usuario='".$usuario-> getNombre_usuario()."',
+                                    apellido_usuario='".$usuario-> getApellido_usuario()."',
+                                    cedula_usuario='".$usuario-> getCedula_usuario()."',
+                                    login_usuario='".$usuario-> getLogin_usuario()."',
+                                    clave_usuario='".$usuario-> getClave_usuario()."',
+                                    correo_usuario='".$usuario-> getCorreo_usuario()."',
+                                    direccion_usuario='".$usuario-> getDireccion_usuario()."',
+                                    estado_usuario=".$usuario-> getEstado_usuario()."
+                        where id_usuario=".$usuario->getId_usuario()."";
+        echo $query;
         $result = pg_query($this->conn, $query);
         //pg_close($this->conn);
         return $result;

@@ -87,7 +87,7 @@ require_once "./../Controller/ComunUsuaController.php";
 					$usuario_comunicado = new UsuarioController();
 					$seguridad=4;
 					$operaciones=3;
-					$query = " select *from usuario where id_tipo_usuario=".$seguridad." or id_tipo_usuario=".$operaciones." ";
+					$query = " select *from usuario where id_tipo_usuario=".$seguridad." or id_tipo_usuario=".$operaciones." and estado_usuario=1";
 					$con_usuario_comunicado = $usuario_comunicado->listClientes($query);
 					$html = '
 					<select class="form-control" id="destinatario">';
@@ -105,29 +105,32 @@ require_once "./../Controller/ComunUsuaController.php";
 					
 						echo $html;
 				break;
+
 				case 'clientesEmpresa':
 					$usuario_comunicado = new UsuarioController();
 					$query = "select *from usuario where id_tipo_usuario=2 and id_usuario not in(select id_usuario from empresa where id_usuario is not null)";
 					$con_usuario_comunicado = $usuario_comunicado->listClientes($query);
-					$html = '
-					<select class="form-control" id="id_usuario">';
-					$html .='<option value="null">Seleccione</option>';
+					$html='<select class="form-control" id="id_usuario">';
+						
+
 					if($con_usuario_comunicado[0]["success"])
 					{					
+						$html.='<option value="NULL">Seleccione</option>';
+
 						foreach ($con_usuario_comunicado as $row) 
 						{
 							
 							$html .= '<option value="'.$row["id_usuario"].'">'.$row["nombre_usuario"].' '.$row["apellido_usuario"].'</option>';
 						}
-					}
+					}			
 					$html .='</select>
-						';					
-					
+						';
 						echo $html;
 				break;
+
 				case 'usuariosInternos':
 					$usuario_cliente = new UsuarioController();
-					$query = " select *from usuario where id_tipo_usuario=2";
+					$query = "select *from usuario where id_tipo_usuario=2 and estado_usuario=1";
 					$con_usuario_cliente = $usuario_cliente->UsuarioEmpresa($query);
 					$html = '<table class="table table-bordered text-center table-striped" id="tblUsuarios">
 					<thead>
@@ -136,6 +139,7 @@ require_once "./../Controller/ComunUsuaController.php";
 							<th class="back-color text-center">LOGIN</th>
 							<th class="back-color text-center">CONTRASEÑA</th>
 							<th class="back-color text-center">EMPRESA</th>
+							<th class="back-color text-center">VER MAS</th>
 						</tr>
 					</thead>
 					<tbody>';
@@ -149,6 +153,11 @@ require_once "./../Controller/ComunUsuaController.php";
 							<td>'.$row["usuario"]->getLogin_usuario().'</td>
 							<td>'.$row["usuario"]->getClave_usuario().'</td>
 							<td>'.$row["empresa"]->getNombre_comercial().'</td>
+							<td>
+							<a class="btn btn-link" 
+                                 href="?page=detalleUsuarioInterno&usuario='.base64_encode($row["usuario"]->getId_usuario()).'&tipo='.$row["tipo_usuario"]->getId_tipo_usuario().'">Ver más
+                            </a>  
+							</td>
 						</td>
 						</tr>';
 						
@@ -189,7 +198,7 @@ require_once "./../Controller/ComunUsuaController.php";
 
 				case 'usuariosAdmin':
 					$usuario_cliente = new UsuarioController();
-					$query = "select *from usuario where id_tipo_usuario<>2";
+					$query = "select *from usuario where id_tipo_usuario<>2 and estado_usuario=1";
 					$con_usuario_admin = $usuario_cliente->UsuarioTipo($query);
 					$html = '<table class="table table-bordered text-center table-striped" id="tblUsuarioAdmin">
 					<thead>
@@ -198,6 +207,7 @@ require_once "./../Controller/ComunUsuaController.php";
 							<th class="back-color text-center">LOGIN</th>
 							<th class="back-color text-center">CONTRASEÑA</th>
 							<th class="back-color text-center">ROL</th>
+							<th class="back-color text-center">VER MAS</th>
 						</tr>
 					</thead>
 					<tbody>';
@@ -211,6 +221,11 @@ require_once "./../Controller/ComunUsuaController.php";
 							<td>'.$row["usuario"]->getLogin_usuario().'</td>
 							<td>'.$row["usuario"]->getClave_usuario().'</td>
 							<td>'.$row["tipo_usuario"]->getNombre_tipo_usuario().'</td>
+							<td>
+							<a class="btn btn-link" 
+                                 href="?page=detalleUsuarioSistema&usuario='.base64_encode($row["usuario"]->getId_usuario()).'&tipo='.$row["tipo_usuario"]->getId_tipo_usuario().'">Ver más
+                            </a>  
+							</td>
 						</td>
 						</tr>';
 						
@@ -223,6 +238,359 @@ require_once "./../Controller/ComunUsuaController.php";
 					$html .= '</tbody></table>';
 					echo $html;
 				break;
+
+				case 'eliminarUsuario':
+					$id_usuario=$_POST["usuario"];
+					$con_Usuario= new UsuarioController();
+					
+					$result = $con_Usuario->eliminarUsuario($id_usuario);
+					
+					if($result)
+					{
+						echo 'correcto';
+					}else
+					{
+						echo 'incorrecto';
+					}
+				break;
+
+				case 'usuarioInternoId':
+					$idUsuario=$_POST["idUsuario"];
+					$usuario_cliente = new UsuarioController();
+					$query = "select *from usuario where id_usuario=".$idUsuario."";
+					$con_usuario_cliente = $usuario_cliente->UsuarioEmpresa($query);		
+					$html;
+					if($con_usuario_cliente[0]["success"])
+					{
+						foreach ($con_usuario_cliente as $row) 
+						{
+						$html =' 
+						<form class="form form-horizontal" id="usuarioInterno">
+                                                <div class="form-body">
+                                                    
+                                                    <div class="row">
+                                                        <div class="col-md-2" style="padding:15px"></div>
+                                                        <div class="col-md-2" style="padding:15px">
+														<strong><label> Nombres</label></strong>
+                                                        </div>
+                                                        <div class="col-md-6 form-group" style="padding:15px">
+                                                            <label>'.$row["usuario"]->getNombre_usuario().'</label>
+                                                        </div>      
+                                                        <div class="col-md-2" style="padding:15px"></div>                                                                                                            
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-2" style="padding:15px"></div>
+                                                        <div class="col-md-2" style="padding:15px">
+														<strong><label> Apellidos</label></strong>
+                                                        </div>
+                                                        <div class="col-md-6 form-group" style="padding:15px">
+														<label>'.$row["usuario"]->getApellido_usuario().'</label>
+                                                        </div>      
+                                                        <div class="col-md-2" style="padding:15px">   </div>                                                                                     
+                                                    </div>
+                                                    <div class="row">
+                                                    	<div class="col-md-2" style="padding:15px"></div>
+                                                        <div class="col-md-2" style="padding:15px">
+														<strong><label> Cédula</label></strong>
+                                                        </div>
+                                                        <div class="col-md-6 form-group" style="padding:15px">
+														<label>'.$row["usuario"]->getCedula_usuario().'</label>
+                                                        </div>      
+                                                        <div class="col-md-2" style="padding:15px"></div>                                                                                               
+                                                    </div>
+													<div class="row">
+														<div class="col-md-2" style="padding:15px"></div>
+														<div class="col-md-2" style="padding:15px">
+															<strong><label> Tipo Usuario</label></strong>
+														</div>
+														<div class="col-md-6 form-group" style="padding:15px">
+															<label>'.$row["tipo_usuario"]->getNombre_tipo_usuario().'</label>
+														</div>      
+														<div class="col-md-2" style="padding:15px"></div>                                                                                               
+													</div>
+													</div> <div class="row">
+                                                        <div class="col-md-2" style="padding:15px"></div>
+                                                        <div class="col-md-2" style="padding:15px">
+														<strong><label> Correo</label></strong>
+                                                        </div>
+                                                        <div class="col-md-6 form-group" style="padding:15px">
+														<label>'.$row["usuario"]->getCorreo_usuario().'</label>
+                                                        </div>      
+                                                        <div class="col-md-2" style="padding:15px"></div>                                                                                                                                                      
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-2" style="padding:15px"></div>
+                                                        <div class="col-md-2" style="padding:15px">
+														<strong><label> Dirección</label></strong>
+                                                        </div>
+                                                        <div class="col-md-6 form-group" style="padding:15px">
+														<label>'.$row["usuario"]->getDireccion_usuario().'</label>
+                                                        </div>      
+                                                        <div class="col-md-2" style="padding:15px"></div>                                                                                                                                                      
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-2" style="padding:15px"></div>
+                                                        <div class="col-md-2" style="padding:15px">
+														<strong><label> Nombre de usuario</label></strong>
+                                                        </div>
+                                                        <div class="col-md-6 form-group" style="padding:15px">
+														<label>'.$row["usuario"]->getLogin_usuario().'</label>
+                                                        </div>      
+                                                        <div class="col-md-2" style="padding:15px"></div>                                                                                                                                                      
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-2" style="padding:15px"></div>
+                                                        <div class="col-md-2" style="padding:15px">
+														<strong><label> Contraseña</label></strong>
+                                                        </div>
+                                                        <div class="col-md-6 form-group" style="padding:15px">
+														<label>'.$row["usuario"]->getClave_usuario().'</label>
+                                                            <input id="id_Usuario" class="form-control" type="hidden" value="'.$row["usuario"]->getId_usuario().'">
+															<input id="id_tipo_usuario" class="form-control" type="hidden" value="'.$row["tipo_usuario"]->getId_tipo_usuario().'">
+                                                        </div>      
+                                                        <div class="col-md-2" style="padding:15px"></div>                                                                                                                                                      
+                                                    </div>
+                                                </div>
+                                            </form>
+				</div>';
+					}
+				}
+					else{
+						echo $error;
+					}
+						echo $html;
+				break;
+
+				case 'modUsuarioInterno':
+					$idUsuario=$_POST["idUsuario"];
+					$usuario_cliente = new UsuarioController();
+					$query = "select *from usuario where id_usuario=".$idUsuario."";
+					$con_usuario_cliente = $usuario_cliente->UsuarioEmpresa($query);
+		
+					$html;
+					if($con_usuario_cliente[0]["success"])
+					{
+						foreach ($con_usuario_cliente as $row) 
+						{
+						$html =' 
+						<form class="form form-horizontal" id="usuarioInterno">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-md-2" style="padding:15px"></div>
+                                    <div class="col-md-2" style="padding:15px">
+										<strong><label> Nombres</label></strong>
+                                    </div>
+                                    <div class="col-md-6 form-group" style="padding:15px">
+                                        <input type="text" class="form-control" id="nombreU" value="'.$row["usuario"]->getNombre_usuario().'">
+                                    </div>      
+                                    <div class="col-md-2" style="padding:15px"></div>                                                                                                            
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2" style="padding:15px"></div>
+                                    <div class="col-md-2" style="padding:15px">
+										<strong><label> Apellidos</label></strong>
+                                    </div>
+                                    <div class="col-md-6 form-group" style="padding:15px">
+										<input type="text" class="form-control" id="apellidoU" value="'.$row["usuario"]->getApellido_usuario().'">
+                                    </div>      
+                                    <div class="col-md-2" style="padding:15px">   </div>                                                                                     
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2" style="padding:15px"></div>
+                                    <div class="col-md-2" style="padding:15px">
+										<strong><label> Cédula</label></strong>
+                                    </div>
+									<div class="col-md-6 form-group" style="padding:15px">
+										<input type="text" class="form-control" id="cedulaU" value="'.$row["usuario"]->getCedula_usuario().'">
+									</div>      
+                                	<div class="col-md-2" style="padding:15px"></div>                                                                                               
+                            	</div>
+                               <div class="row">
+                                    <div class="col-md-2" style="padding:15px"></div>
+                                    <div class="col-md-2" style="padding:15px">
+										<strong><label> Correo</label></strong>
+                                    </div>
+                                    <div class="col-md-6 form-group" style="padding:15px">
+										<input type="text" class="form-control" id="correoU" value="'.$row["usuario"]->getCorreo_usuario().'">
+                                    </div>      
+                                    <div class="col-md-2" style="padding:15px"></div>                                                                                                                                                      
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2" style="padding:15px"></div>
+                                    <div class="col-md-2" style="padding:15px">
+										<strong><label> Dirección</label></strong>
+                                    </div>
+                                    <div class="col-md-6 form-group" style="padding:15px">
+										<input type="text" class="form-control" id="direccionU" value="'.$row["usuario"]->getDireccion_usuario().'">
+									</div>      
+                                    <div class="col-md-2" style="padding:15px"></div>                                                                                                                                                      
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2" style="padding:15px"></div>
+                                    <div class="col-md-2" style="padding:15px">
+										<strong><label> Nombre de usuario</label></strong>
+                                    </div>
+                                    <div class="col-md-6 form-group" style="padding:15px">
+										<input type="text" class="form-control" id="loginU" value="'.$row["usuario"]->getLogin_usuario().'">
+									</div>      
+                                    <div class="col-md-2" style="padding:15px"></div>                                                                                                                                                      
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2" style="padding:15px"></div>
+                                    <div class="col-md-2" style="padding:15px">
+										<strong><label> Contraseña</label></strong>
+                                    </div>
+                                    <div class="col-md-6 form-group" style="padding:15px">
+										<input type="text" class="form-control" id="claveU" value="'.$row["usuario"]->getClave_usuario().'">
+										<input id="id_U" class="form-control" type="hidden" value="'.$row["usuario"]->getId_usuario().'">
+										<input id="tipo_Usuario" class="form-control" type="hidden" value="'.$row["tipo_usuario"]->getId_tipo_usuario().'">
+                                    </div>      
+                                    <div class="col-md-2" style="padding:15px"></div>                                                                                                                                                      
+                                </div>
+                            </div>
+                        </form>
+				</div>';
+					}
+				}
+					else{
+						echo $error;
+					}
+						echo $html;
+				break;
+
+				case 'modUsuarioSistema':
+					$idUsuario=$_POST["idUsuario"];
+					$usuario_cliente = new UsuarioController();
+					$query = "select *from usuario where id_usuario=".$idUsuario."";
+					$con_usuario_cliente = $usuario_cliente->listClientes($query);
+		
+					$html;
+					if($con_usuario_cliente[0]["success"])
+					{
+						foreach ($con_usuario_cliente as $row) 
+						{
+						$html =' 
+						<form class="form form-horizontal" id="usuarioInterno">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-md-2" style="padding:15px"></div>
+                                    <div class="col-md-2" style="padding:15px">
+										<strong><label> Nombres</label></strong>
+                                    </div>
+                                    <div class="col-md-6 form-group" style="padding:15px">
+                                        <input type="text" class="form-control" id="nombreU" value="'.$row["nombre_usuario"].'">
+                                    </div>      
+                                    <div class="col-md-2" style="padding:15px"></div>                                                                                                            
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2" style="padding:15px"></div>
+                                    <div class="col-md-2" style="padding:15px">
+										<strong><label> Apellidos</label></strong>
+                                    </div>
+                                    <div class="col-md-6 form-group" style="padding:15px">
+										<input type="text" class="form-control" id="apellidoU" value="'.$row["apellido_usuario"].'">
+                                    </div>      
+                                    <div class="col-md-2" style="padding:15px">   </div>                                                                                     
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2" style="padding:15px"></div>
+                                    <div class="col-md-2" style="padding:15px">
+										<strong><label> Cédula</label></strong>
+                                    </div>
+									<div class="col-md-6 form-group" style="padding:15px">
+										<input type="text" class="form-control" id="cedulaU" value="'.$row["cedula_usuario"].'">
+									</div>      
+                                	<div class="col-md-2" style="padding:15px"></div>                                                                                               
+                            	</div>
+								<div class="row">
+                                    <div class="col-md-2" style="padding:15px"></div>
+                                        <div class="col-md-2" style="padding:15px">
+										<strong><label> Tipo Usuario</label></strong>
+                                    </div>
+                                    <div class="col-md-6 form-group" id="id_usuario">
+                                                            
+                                     </div>      
+                                    <div class="col-md-2" style="padding:15px"></div>                                                                                                                                                      
+                                </div>
+                               <div class="row">
+                                    <div class="col-md-2" style="padding:15px"></div>
+                                    <div class="col-md-2" style="padding:15px">
+										<strong><label> Correo</label></strong>
+                                    </div>
+                                    <div class="col-md-6 form-group" style="padding:15px">
+										<input type="text" class="form-control" id="correoU" value="'.$row["correo_usuario"].'">
+                                    </div>      
+                                    <div class="col-md-2" style="padding:15px"></div>                                                                                                                                                      
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2" style="padding:15px"></div>
+                                    <div class="col-md-2" style="padding:15px">
+										<strong><label> Dirección</label></strong>
+                                    </div>
+                                    <div class="col-md-6 form-group" style="padding:15px">
+										<input type="text" class="form-control" id="direccionU" value="'.$row["direccion_usuario"].'">
+									</div>      
+                                    <div class="col-md-2" style="padding:15px"></div>                                                                                                                                                      
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2" style="padding:15px"></div>
+                                    <div class="col-md-2" style="padding:15px">
+										<strong><label> Nombre de usuario</label></strong>
+                                    </div>
+                                    <div class="col-md-6 form-group" style="padding:15px">
+										<input type="text" class="form-control" id="loginU" value="'.$row["login_usuario"].'">
+									</div>      
+                                    <div class="col-md-2" style="padding:15px"></div>                                                                                                                                                      
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2" style="padding:15px"></div>
+                                    <div class="col-md-2" style="padding:15px">
+										<strong><label> Contraseña</label></strong>
+                                    </div>
+                                    <div class="col-md-6 form-group" style="padding:15px">
+										<input type="text" class="form-control" id="claveU" value="'.$row["clave_usuario"].'">
+										<input id="id_U" class="form-control" type="hidden" value="'.$row["id_usuario"].'">
+										<input id="idtipo_Usuario" class="form-control" type="hidden" value="'.$row["id_tipo_usuario"].'">
+                                    </div>      
+                                    <div class="col-md-2" style="padding:15px"></div>                                                                                                                                                      
+                                </div>
+                            </div>
+                        </form>
+				</div>';
+					}
+				}
+					else{
+						echo $error;
+					}
+						echo $html;
+				break;
+
+				case 'modificarUsuario':
+					$usuario = new Usuario();
+					$con_Usuario= new UsuarioController();
+					$usuario->setId_usuario($_POST["id_usuario"]);
+					$usuario->setId_tipo_usuario($_POST["id_tipo"]);
+					$usuario-> setCedula_usuario($_POST["cedula"]);
+					$usuario-> setNombre_usuario($_POST["nombre"]);
+					$usuario-> setApellido_usuario($_POST["apellido"]);
+					$usuario-> setDireccion_usuario($_POST["direccion"]);
+					$usuario-> setLogin_usuario($_POST["login"]);
+					$usuario-> setClave_usuario($_POST["clave"]);
+					$usuario-> setCorreo_usuario($_POST["correo"]);
+					$usuario-> setEstado_usuario(1);
+					
+					$result_usuario = $con_Usuario->modificarUsuario($usuario);
+					
+					if($result_usuario)
+					{
+						echo 'correcto';
+					}else
+					{
+						echo 'incorrecto';
+					}
+				break;
+
+				
         }
     }
 

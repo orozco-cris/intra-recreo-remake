@@ -68,6 +68,41 @@ class EmpresaController extends Conexion
     }
 
 
+    public function getEmpresas($parameter)
+	{
+        $query="select *from empresa where id_empresa=".$parameter;
+        $result = pg_query($this->conn, $query);
+        $datos = array();
+        if(pg_num_rows($result) > 0)
+		{
+            while($info = pg_fetch_array($result))
+			{               
+               
+                $mixComercial = new MixComercial();
+                $con_mixComercial = new MixComercialController();
+                $mixComercial = $con_mixComercial->listParameter($info[2]);
+                $usuario = new Usuario();
+                $con_usuario = new UsuarioController();
+                $usuario = $con_usuario->listParameter($info[1]);
+                $empresa =new Empresas();
+                $empresa->setId_empresa($info[0]);
+                $empresa->setId_usuario($usuario);
+                $empresa->setId_mix_comercial($info[2]);
+                $empresa->setNombre_comercial($info[3]);
+                $empresa->setRuc_empresa($info[4]);
+                $empresa->setTelefono_empresa($info[5]);
+                $empresa->setDireccion_empresa($info[6]);
+                $empresa->setCorreo_empresa($info[7]);
+                $empresa->setFecha_registro($info[8]);
+                $empresa->setFecha_deshabilitado($info[9]);
+                $empresa->setEstado_empresa($info[10]);           
+                
+            }
+            return  $empresa;
+        }
+    }
+
+
     public function listEmpresaId($parameter)
 	{
         $query = "select *from empresa where id_empresa = ".$parameter;
@@ -196,6 +231,68 @@ class EmpresaController extends Conexion
         return $result;
     }
     
+    public function buscarEmpresas($parameter)
+	{
+        if(empty($parameter)){
+            $query="Select *from empresa where estado_empresa=1";
+        }
+        else{
+            $query="Select *from empresa where estado_empresa=1 and nombre_comercial LIKE '%".$parameter."%'";
+        }       
+        $result = pg_query($this->conn, $query);
+        $datos = array();
+        if(pg_num_rows($result) > 0)
+		{
+            while($info = pg_fetch_array($result))
+			{               
+               
+                $mixComercial = new MixComercial();
+                $con_mixComercial = new MixComercialController();
+                $mixComercial = $con_mixComercial->listParameter($info[2]);
+                $usuario = new Usuario();
+                $con_usuario = new UsuarioController();
+                $usuario = $con_usuario->listParameter($info[1]);
+                $empresa =new Empresas();
+                $empresa->setId_empresa($info[0]);
+                $empresa->setId_usuario($usuario);
+                $empresa->setId_mix_comercial($info[2]);
+                $empresa->setNombre_comercial($info[3]);
+                $empresa->setRuc_empresa($info[4]);
+                $empresa->setTelefono_empresa($info[5]);
+                $empresa->setDireccion_empresa($info[6]);
+                $empresa->setCorreo_empresa($info[7]);
+                $empresa->setFecha_registro($info[8]);
+                $empresa->setFecha_deshabilitado($info[9]);
+                $empresa->setEstado_empresa($info[10]);
+                if($usuario!=null)
+                {
+                    $datos[] = array(
+                        "success" => true,
+                        "empresa" => $empresa,
+                        "usuario" => $usuario,
+                        "mixComercial"=>$mixComercial,
+                    );
+                }
+                else{
+                    $usuario = new Usuario();
+                    $usuario->setNombre_usuario(null);
+                    $usuario->setApellido_usuario(null);
+                    $datos[] = array(
+                        "success" => true,
+                        "empresa" => $empresa,
+                        "usuario" => $usuario,
+                        "mixComercial"=>$mixComercial,
+                    );
+                }
+                
+            }
+            return  $datos;
+        }
+        else{
+            $datos[] = array("success" => false);
+        }
+    }
+
 
     
 }

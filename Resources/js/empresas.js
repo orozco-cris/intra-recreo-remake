@@ -142,4 +142,29 @@ $(document).ready(function(){
                 //getMixComercial();
 	}); 
 
+
+    function getEmpresaArriendo(){
+        var dat = {
+            crud:"listEmpresaArriendo"
+        };
+        console.log("id mix", dat);
+        $.ajax({
+            data: dat,
+            url:"./Model/EmpresaAjax.php",
+            method: "POST",
+            success: function(data){       
+                console.log(data);
+                $("#listEmpresas").html(data);
+            },
+    
+            error: function(error){
+                console.error(error);
+            }
+            
+        });
+    } 
+
+    getEmpresaArriendo();
+
+
 });

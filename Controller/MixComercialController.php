@@ -55,7 +55,7 @@ class MixComercialController extends Conexion
 
  public function createMixComercial($mix)
     {
-        $query = "insert into mix_Comercial (nombre_mix, descripcion_mix) values 
+        $query = "insert into mix_comercial (nombre_mix, descripcion_mix) values 
         ('".$mix->getNombre_mix()."','".$mix-> getDescripcion_mix()."')";
         $result = pg_query($this->conn, $query);
         //pg_close($this->conn);
@@ -64,7 +64,7 @@ class MixComercialController extends Conexion
 
     public function modificarMixComercial($mix)
     {
-        $query = "update mix_Comercial set nombre_mix='".$mix->getNombre_mix()."',descripcion_mix='".$mix-> getDescripcion_mix()."'
+        $query = "update mix_comercial set nombre_mix='".$mix->getNombre_mix()."',descripcion_mix='".$mix-> getDescripcion_mix()."'
         where id_mix_comercial=".$mix->getId_mix_comercial()."";
         echo $query;
         $result = pg_query($this->conn, $query);

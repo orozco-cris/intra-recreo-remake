@@ -44,7 +44,8 @@ function datosModificar(id){
             console.log(data);            
             $("#empresaEditar").html(data);
             getMixComercial();
-            seleccionar();
+            usuariosEmpresas();
+
         },
 
         error: function(error){
@@ -68,6 +69,10 @@ function getMixComercial(){
         success: function(data){    
             console.log(data) ;          
             $("#mixC").html(data);
+            $mix= $("#idmixComercial").val();
+            console.log("idmixComercial",$mix);
+            $("#mixc option[value="+ $mix +"]").attr("selected",true);
+
         },
 
         error: function(error){
@@ -78,10 +83,38 @@ function getMixComercial(){
 }
 
 
+function usuariosEmpresas(){
+    var dat = {
+        crud:"clientesEmpresa"
+    };
+
+    $.ajax({
+        data: dat,
+        url:"./Model/UsuariosAjax.php",
+        method: "POST",
+        success: function(data){    
+            console.log("usuarios clientes",data) ;          
+            $("#usuarioE").html(data);
+            $usuario=$("#idUsuario").val();
+            $nombre=$("#nombreU").val();
+            $apellido=$("#apellidoU").val();
+            $('#id_usuario').append( '<option value="'+$usuario+'" selected>'+$nombre+' '+$apellido+'</option>' );
+        },
+
+        error: function(error){
+            console.error(error);
+        }
+        
+    });
+}
+
 function seleccionar() {  
-    $id=$("#id_mix").val();
-    console.log("id mix", $id);
-   $("#mixc option[value="+ $id +"]").attr("selected", true);
+   $usuario=$("#idUsuario").val();
+   $nombre=$("#nombreU").val();
+   $apellido=$("#apellidoU").val();
+   //añadir al select la opcion de usuario seleccionada
+   $('#id_usuario').append( '<option value="'+$usuario+'" selected>'+$nombre+' '+$apellido+'</option>' );
+      //$('#id_usuario').prepend("<option value="+ $usuario +" selected>"+$nombre+" "+$apellido+"</option>");
  }
 
  function modificarEmpresa(id_empresa,usuario,mixC,nombreE,rucE,telefonoE,direccionE,correoE,fechaE){

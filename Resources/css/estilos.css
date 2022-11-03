@@ -34,7 +34,7 @@
 
 .contenido{
     position: absolute; 
-    background-color: antiquewhite;
+    background-color: #eff0f4;
     width: 80% !important;
     opacity: 0.8;
     border-color: midnightblue !important;
@@ -57,10 +57,24 @@
 
 .contenido1{
     position: absolute; 
-    background-color: antiquewhite ;
+    background-color: #eff0f4 ;
     width: 80% !important;
     opacity: 0.8;
     border-color: midnightblue !important;
     border-radius: 2px;
     height: auto;
+}
+
+img.zoom {
+    -webkit-transition: all .6s ease-in-out;
+    -moz-transition: all .6s ease-in-out;
+    -o-transition: all .6s ease-in-out;
+    -ms-transition: all .6s ease-in-out;
+}
+ 
+.transition {
+    -webkit-transform: scale(2.8); 
+    -moz-transform: scale(2.8);
+    -o-transform: scale(2.8);
+    transform: scale(2.8);
 }

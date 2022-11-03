@@ -49,7 +49,7 @@ if ($_SESSION["perfil"] == "VIS" || $_SESSION["perfil"] == "ADM")
             						COMERCIAL
           						</font></font></a>
           						<ul class="dropdown-menu bg-primary" style="border: none !important; left:30%">
-            						<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Clientes</font></font></a></li>
+            						<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Empresas</font></font></a></li>
            
           						</ul>
         					</li>
@@ -59,7 +59,7 @@ if ($_SESSION["perfil"] == "VIS" || $_SESSION["perfil"] == "ADM")
               					</font></font></a>
               					<ul class="dropdown-menu bg-primary" style="border: none !important; left:20%">
                 					<li><a class="dropdown-item opcion" href="?page=permisos"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Solicitudes</font></font></a></li>
-                					<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Solicitudes no aprobadas</font></font></a></li>
+                					<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Solicitudes no revisadas</font></font></a></li>
                 					<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Solicitudes aprobadas</font></font></a></li>       
               					</ul>
             				</li>
