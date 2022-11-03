@@ -34,8 +34,8 @@ $(document).ready(function(){
             url:"./Model/UsuariosAjax.php",
             method: "POST",
             success: function(data){    
-                console.log(data) ;          
-                $("#usuario").html(data);
+                console.log("usuarios clientes",data) ;          
+                $("#usuarioE").html(data);
             },
     
             error: function(error){

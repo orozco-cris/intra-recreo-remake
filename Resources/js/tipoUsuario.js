@@ -11,7 +11,8 @@ function getTipoUsuario(){
         method: "POST",
         success: function(data){
             console.log("data",data);
-            $("#tipoUsuario").html(data);
+            $("#id_usuario").html(data);
+            
         },
 
         error: function(error){

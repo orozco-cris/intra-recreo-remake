@@ -1,3 +1,5 @@
+<!--     presentar el detalle de una determinada solicitud -->
+    
     <?php 
         $comunicado = 0;
         $estado = 0;

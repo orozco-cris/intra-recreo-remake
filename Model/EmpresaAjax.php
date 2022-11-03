@@ -161,10 +161,12 @@ if($_POST["crud"])
                         </div>
                         <div class="col-md-2" style="padding:15px"> 
                             <strong><label> Mix Comercial</label></strong>
+                            <input id="idmixComercial" class="form-control" type="hidden" value="'.$row["mixComercial"]->getId_mix_comercial().'">
                         </div>
                         <div class="col-md-4 form-group" id="mixC">
                                          
-                         </div>                                                                                               
+                         </div>     
+                                                                                                                   
                     </div>
                     <div class="row">
                         <div class="col-md-2" style="padding:15px">
@@ -205,11 +207,19 @@ if($_POST["crud"])
                         <div class="col-md-2" style="padding:15px"> 
                             <strong><label> Usuario</label></strong>
                         </div>
-                        <div class="col-md-4 form-group" id="usuario" style="padding:15px">
-                        <input type="text" class="form-control" value="'.$row["usuario"]->getNombre_usuario().' '.$row["usuario"]->getApellido_usuario().'" disabled >
-                        <input type="hidden" id="id_usuario" class="form-control" value="'.$row["usuario"]->getId_usuario().'">                
+                        <div class="col-md-4 form-group" id="usuarioE">   
+                                                           
                         </div> 
                     </div>
+                    <div class="row">
+                         <div class="col-md-4 form-group" id="usuario" style="padding:15px">
+                             <input type="hidden" class="form-control" value="'.$row["usuario"]->getNombre_usuario().' '.$row["usuario"]->getApellido_usuario().'" disabled >
+                            <input type="hidden" id="nombreU" class="form-control" value="'.$row["usuario"]->getNombre_usuario().'">
+                            <input type="hidden" id="apellidoU" class="form-control" value="'.$row["usuario"]->getApellido_usuario().'">
+                             <input type="hidden" id="idUsuario" class="form-control" value="'.$row["usuario"]->getId_usuario().'">                
+                        </div> 
+                    </div>
+                </div>
             </form>
         </div>';
             }
@@ -299,6 +309,104 @@ if($_POST["crud"])
             {
                 echo 'incorrecto';
             }
+        break;
+        case 'listEmpresaArriendo':
+            $con_empresa = new EmpresaController();
+            $query = "select * from empresa where estado_empresa=1";
+            $con_empresa_list = $con_empresa->listEmpresas($query);
+            $html = '<table class="table table-bordered text-center table-striped" id="tblEmpresa">
+				<thead>
+					<tr>
+                        <th class="back-color text-center">SELECCIONAR</th>
+						<th class="back-color text-center">NOMBRE</th>
+						<th class="back-color text-center">RUC</th>
+                        <th class="back-color text-center">TELÉFONO</th>
+                        <th class="back-color text-center">DIRECCIÓN</th>
+					</tr>
+				</thead>
+				<tbody>';
+                
+            if($con_empresa_list[0]["success"])
+            {
+                foreach ($con_empresa_list as $row) 
+                {
+                    $html .= '<tr>
+                        <td><input type="checkbox" name="empresa" id="id_empresa" value="'.$row["empresa"]->getId_empresa().'"></td>
+                        <td>'.$row["empresa"]->getNombre_comercial().'</td>
+                        <td>'.$row["empresa"]->getRuc_empresa().'</td>
+                        <td>'.$row["empresa"]->getTelefono_empresa().'</td>
+                        <td>'.$row["empresa"]->getDireccion_empresa().'</td>
+                    </td>
+                    </tr>';
+                    
+                }
+            }
+            else
+				{
+					$html .= "<tr><td colspan='4' class='text-center'>No se pudo obtener el detalle de la empresa</td></tr>";
+				}
+				$html .= '</tbody></table>';
+				echo $html;
+        break;
+
+        case 'buscarEmpresaArriendo':
+            
+            $con_empresa = new EmpresaController();
+            $val=$_POST["campo"];
+            $con_empresa_list = $con_empresa->buscarEmpresas($val);
+            $html = '<table class="table table-bordered text-center table-striped" id="tblEmpresa">
+				<thead>
+					<tr>
+                        <th class="back-color text-center">SELECCIONAR</th>
+						<th class="back-color text-center">NOMBRE</th>
+						<th class="back-color text-center">RUC</th>
+                        <th class="back-color text-center">TELÉFONO</th>
+                        <th class="back-color text-center">DIRECCIÓN</th>
+					</tr>
+				</thead>
+				<tbody>';
+                
+            if($con_empresa_list!=null)
+            {
+                foreach ($con_empresa_list as $row) 
+                {
+                    $html .= '<tr>
+                        <td><input type="checkbox" name="empresaB" id="id_empresa" value="'.$row["empresa"]->getId_empresa().'"></td>
+                        <td>'.$row["empresa"]->getNombre_comercial().'</td>
+                        <td>'.$row["empresa"]->getRuc_empresa().'</td>
+                        <td>'.$row["empresa"]->getTelefono_empresa().'</td>
+                        <td>'.$row["empresa"]->getDireccion_empresa().'</td>
+                    </td>
+                    </tr>';
+                    
+                }
+            }
+            else
+				{
+					$html .= "<tr><td colspan='4' class='text-center'>No se pudo obtener el detalle de la empresa</td></tr>";
+				}
+				$html .= '</tbody></table>';
+				echo $html;
+        break;
+
+        case 'nombreEmpresaPorId':
+            $idEmpresa=$_POST["idEmpresa"];
+            $con_empresa_controller = new EmpresaController();
+            $query = "select * from empresa where id_empresa='$idEmpresa' and estado_empresa=1" ;
+            $con_empresa = $con_empresa_controller->listEmpresas($query);
+
+            $html;
+            if($con_empresa[0]["success"])
+            {
+                foreach ($con_empresa as $row) 
+                {
+                $html =$row["empresa"]->getNombre_comercial();
+            }
+        }
+            else{
+                echo $error;
+            }
+				echo $html;
         break;
 }
 }

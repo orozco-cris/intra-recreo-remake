@@ -96,12 +96,12 @@ $(document).ready(function(){
                 success: function(datos){
                     console.log("datos1",datos);
                     if (datos != 0) {
-                        toastr["success"]("SOLICITUD MODIFICADA.", "Éxito");
+                        toastr["success"]("CATEGORIA MODIFICADA.", "Éxito");
                               setTimeout(() => {
                                 window.location = "?page=mixComercial";
                             }, 4000); 
                     } else {
-                        toastr["error"]("No se puedo MODIFICAR la solicitud.", "Error");
+                        toastr["error"]("No se puedo MODIFICAR la categoria.", "Error");
                     }
                 }
                 });
@@ -111,7 +111,7 @@ $(document).ready(function(){
 $("#modificar").click(function(e){
     e.preventDefault();
     console.log("prueba");
-    modificarMix($("#usuario").val(),
+    modificarMix($("#id_mix").val(),
                 $("#nombreMix").val(),
                 $("#descripcionMix").val());
 
