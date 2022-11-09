@@ -71,9 +71,10 @@
                                             
                                         </div>
                                         <div class="row" style="padding: 8px !important">  
-                                                <div class="col-12 d-flex justify-content-end">
-                                                    <input class="btn float-right login_btn btn-primary d-none" type="submit" id="id_aceptar"  name="id_aceptar" value="ACEPTAR">
-                                                </div>
+                                            <div class="col-12 d-flex justify-content-end">
+                                                <button type="button" class="btn login_btn btn-warning me-3 d-none" data-bs-toggle="modal"  data-bs-target="#retroalimentacion" id="id_comentar"  name="id_comentar" value="">COMENTAR</button>
+                                                <input class="btn float-right login_btn btn-primary d-none" type="submit" id="id_aceptar"  name="id_aceptar" value="ACEPTAR">
+                                            </div>
                                         </div>
                                     </div>
                                 </form><br>
@@ -84,6 +85,38 @@
             </div>
 		</div>
     </div>
+
+    <div class="modal fade" id="retroalimentacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle1"
+                    aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Comentario de retroalimentación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body" >
+                    <div class="card-body">
+                        <div class="row justify-content-center" >
+                            <div id="id_retroalimentacion_permiso" class="form-floating">
+                                <textarea class="form-control" placeholder="Mensaje de retroalimentación" id="id_input_retroalimentacion" style="height: 100px"></textarea>
+                                <label for="floatingTextarea2">Mensaje de retroalimentación</label>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-9 form-group"></div>
+                                    <div class="col-md-1 form-group" style="padding-top:5%">
+                                        <input type="button" class="btn btn-danger" data-bs-dismiss="modal" value="Cancelar">
+                                    </div>
+                                    <div class="col-md-1 form-group"  style="padding-top:5%">
+                                    <button type="button" class="btn btn-primary"  type="submit" id="id_retro_permiso"  name="retro_permiso">Modificar</button>
+                                    </div>
+                        </div>
+                     </div>
+                </div>                                
+            </div>
+        </div>
+    </div>
+
 <div class="d0">
 	<input type="hidden" id="id_comunicado_especifico" value="<?php echo $comunicado; ?>">
     <input type="hidden" id="id_estado_comunicado" value="<?php echo $estado; ?>">

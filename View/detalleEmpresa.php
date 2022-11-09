@@ -74,6 +74,8 @@
             </div>
         </div>
     </div>
+    
+</div>
 <div class="d0">
 	<input type="hidden" id="id_empresa_especifica" value="<?php echo $empresa; ?>">
     <input type="hidden" id="id_mix_empresa" value="<?php echo $mix; ?>">  
