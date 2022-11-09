@@ -190,6 +190,25 @@ if($_POST["crud"])
             }    
         break;
 
+        case 'retroalimentarPermiso':
+            $con_usuario_comunicado_controller = new ComunUsuaController();
+            $obj_usuario_comunicado_controller = new ComunUsuaController();
+            $query = "update comunicado_usuario set revision=2 where id_comunicado=".$_POST["id_comunicado"]."";
+            $con_usuario_comunicado = $con_usuario_comunicado_controller->aceptarPermiso($query);
+
+            $query = "update comunicado set mensaje_comunicado='".$_POST["mensaje"]."' where id_comunicado=".$_POST["id_comunicado"]."";
+            $obj_usuario_comunicado = $obj_usuario_comunicado_controller->aceptarPermiso($query);
+
+            if($con_usuario_comunicado[0]["success"] && $obj_usuario_comunicado[0]["success"])
+            {
+                echo "usuario modificado";
+            }
+            else
+            {
+                echo 0;
+            }    
+        break;
+
         case 'todoslospermisos':
             $con_usuario_comunicado_controller = new ComunUsuaController();
             $query = " select *from comunicado  as c inner join comunicado_usuario as cu 

@@ -6,8 +6,6 @@
         private $nombre_mix;
         private $descripcion_mix;
 
-       
-
         /**
          * Get the value of id_mix_comercial
          */ 
