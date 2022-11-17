@@ -7,7 +7,8 @@ $(document).ready(function(){
         };
 
         //console.log("datos",dat);
-		console.log(id_estado);
+		console.log("estado",id_estado);
+				var revi= $("#id_revision_comunicado").val();
         $.ajax({
             data: dat,
             url:"./Model/ComunUsuaAjax.php",
@@ -20,6 +21,10 @@ $(document).ready(function(){
 					$("#id_comentar").removeClass("d-none");
 					$("#id_aceptar").removeClass("d-none");
 				}
+				 if(revi==2)
+				{
+					$("#id_modificar").removeClass("d-none");
+				} 
             },
     
             error: function(error){

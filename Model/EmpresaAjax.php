@@ -312,7 +312,7 @@ if($_POST["crud"])
         break;
         case 'listEmpresaArriendo':
             $con_empresa = new EmpresaController();
-            $query = "select * from empresa where estado_empresa=1";
+            $query = "    select * from empresa where estado_empresa=1 and id_empresa not in(select id_empresa from arriendo where estado_arriendo=1)";
             $con_empresa_list = $con_empresa->listEmpresas($query);
             $html = '<table class="table table-bordered text-center table-striped" id="tblEmpresa">
 				<thead>
@@ -320,8 +320,6 @@ if($_POST["crud"])
                         <th class="back-color text-center">SELECCIONAR</th>
 						<th class="back-color text-center">NOMBRE</th>
 						<th class="back-color text-center">RUC</th>
-                        <th class="back-color text-center">TELÉFONO</th>
-                        <th class="back-color text-center">DIRECCIÓN</th>
 					</tr>
 				</thead>
 				<tbody>';
@@ -334,8 +332,6 @@ if($_POST["crud"])
                         <td><input type="checkbox" name="empresa" id="id_empresa" value="'.$row["empresa"]->getId_empresa().'"></td>
                         <td>'.$row["empresa"]->getNombre_comercial().'</td>
                         <td>'.$row["empresa"]->getRuc_empresa().'</td>
-                        <td>'.$row["empresa"]->getTelefono_empresa().'</td>
-                        <td>'.$row["empresa"]->getDireccion_empresa().'</td>
                     </td>
                     </tr>';
                     
@@ -406,6 +402,42 @@ if($_POST["crud"])
             else{
                 echo $error;
             }
+				echo $html;
+        break;
+
+        case 'empresasParaCirculares':
+            $con_empresa = new EmpresaController();
+            $query = "select * from empresa where estado_empresa=1 and id_usuario is not null";
+            $con_empresa_list = $con_empresa->listEmpresas($query);
+            $html = '<table class="table table-bordered text-center table-striped">
+				<thead>
+					<tr>
+                        <th class="back-color text-center">SELECCIONAR</th>
+						<th class="back-color text-center">NOMBRE</th>
+						<th class="back-color text-center">RUC</th>
+					</tr>
+				</thead>
+                <input type="checkbox" id="todasEmpresas" value="1" class="todasEmpresas"> Seleccionar todos<br>
+				<tbody id="formEmpresas">';
+                
+            if($con_empresa_list[0]["success"])
+            {
+                foreach ($con_empresa_list as $row) 
+                {
+                    $html .= '<tr>
+                        <td><input type="checkbox" class="ckEmpresas" name="empresa" id="id_empresa" value="'.$row["empresa"]->getId_empresa().'"></td>
+                        <td>'.$row["empresa"]->getNombre_comercial().'</td>
+                        <td>'.$row["empresa"]->getRuc_empresa().'</td>
+                    </td>
+                    </tr>';
+                    
+                }
+            }
+            else
+				{
+					$html .= "<tr><td colspan='4' class='text-center'>No se pudo obtener el detalle de la empresa</td></tr>";
+				}
+				$html .= '</tbody></table>';
 				echo $html;
         break;
 }

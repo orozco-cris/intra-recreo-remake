@@ -137,11 +137,6 @@ if($_POST["crud"])
                 </div>
                 <div class="row" style="padding: 8px !important">  
                     <div class="col-md-12">
-                        <label><b>MENSAJE:</b> '.$row["comunicado"]->getMensaje_comunicado().'</label>
-                    </div>
-                </div>
-                <div class="row" style="padding: 8px !important">  
-                    <div class="col-md-12">
                         <label><b>DETALLE:</b> '.$row["comunicado"]->getDetalle_comunicado().'</label>
                         <input type="hidden" id="id_comunicado" value='.$row["comunicado"]->getId_comunicado().'>
                     </div>
@@ -263,6 +258,181 @@ if($_POST["crud"])
 				$html .= '</tbody></table>';
 				echo $html;
         break;
+
+
+        case 'listPermisosAprobados':
+            $con_usuario_comunicado_controller = new ComunUsuaController();
+            $query = "   
+            select *from comunicado as c inner join comunicado_usuario as cu
+                on c.id_comunicado=cu.id_comunicado where tipo_comunicado='permiso' and cu.revision=1 order by c.id_comunicado desc";
+            $con_usuario_comunicado = $con_usuario_comunicado_controller->listadoPermSegOperaciones($query);
+            $html = '<table class="table table-bordered table-striped" id="tablaPermisos">
+                <thead>
+                    <tr>
+                        <th class="back-color text-center">Asunto</th>
+                        <th class="back-color text-center">De</th>
+                        <th class="back-color text-center">Fecha</th>
+                        <th class="back-color text-center">Ver más</th>                        
+                        <th class="back-color text-center"></th>
+                    </tr>
+                </thead>
+                <tbody>';
+            if($con_usuario_comunicado[0]["success"])
+            {
+                foreach ($con_usuario_comunicado as $row) 
+                {
+                   
+                    $html .= '<tr>
+                        <td>'.$row["comunicado"]->getAsunto_comunicado().'</td>
+                        <td class="text-center">'.$row["comunicado"]->getDe_comunicado().'</td>  
+                        <td class="text-center">'.$row["comunicado"]->getAnio_comunicado().'/'.
+                            $row["comunicado"]->getMes_comunicado().'/'.
+                            $row["comunicado"]->getDia_comunicado().'</td>
+                    <td class="text-center"><a class="btn btn-link" 
+                    href="?page=solEspecificas&comu='.base64_encode($row["comunicado"]->getId_comunicado()).'&estado='.$row["comunicado_usuario"]->getRevision().'">Ver más</a></td>
+                   
+                    </tr>';
+                }
+            }
+            else
+                {
+                    $html .= "<tr><td colspan='4' class='text-center'>No existen permisos</td></tr>";
+                }
+                $html .= '</tbody></table>';
+                echo $html;
+        break;
+    
+        case 'listPermisosNoAprobados':
+            session_start();
+            $con_usuario_comunicado_controller = new ComunUsuaController();
+            $query = "   
+            select *from comunicado as c inner join comunicado_usuario as cu
+                on c.id_comunicado=cu.id_comunicado where tipo_comunicado='permiso' and cu.revision=0 order by c.id_comunicado desc";
+            $con_usuario_comunicado = $con_usuario_comunicado_controller->listadoPermSegOperaciones($query);
+            $html = '<table class="table table-bordered table-striped" id="tablaPermisos">
+                <thead>
+                    <tr>
+                        <th class="back-color text-center">Asunto</th>
+                        <th class="back-color text-center">De</th>
+                        <th class="back-color text-center">Fecha</th>
+                        <th class="back-color text-center">Ver más</th>                        
+                        <th class="back-color text-center"></th>
+                    </tr>
+                </thead>
+                <tbody>';
+            if($con_usuario_comunicado[0]["success"])
+            {
+                foreach ($con_usuario_comunicado as $row) 
+                {
+                    $html .= '<tr>
+                        <td>'.$row["comunicado"]->getAsunto_comunicado().'</td>
+                        <td class="text-center">'.$row["comunicado"]->getDe_comunicado().'</td>  
+                        <td class="text-center">'.$row["comunicado"]->getAnio_comunicado().'/'.
+                            $row["comunicado"]->getMes_comunicado().'/'.
+                            $row["comunicado"]->getDia_comunicado().'</td>
+                    <td class="text-center"><a class="btn btn-link" 
+                    href="?page=solEspecificas&comu='.base64_encode($row["comunicado"]->getId_comunicado()).'&estado='.$row["comunicado_usuario"]->getRevision().'">Ver más</a></td>
+                    
+                    </tr>';
+                }
+            }
+            else
+                {
+                    $html .= "<tr><td colspan='4' class='text-center'>No existen permisos</td></tr>";
+                }
+                $html .= '</tbody></table>';
+                echo $html;
+        break;
+    
+        case 'solicitudesAprobadasCliente':
+            session_start();
+            $con_usuario_comunicado_controller = new ComunUsuaController();
+            $query = "   
+            select *from comunicado as c inner join comunicado_usuario as cu
+                on c.id_comunicado=cu.id_comunicado where cu.id_usuario=".$_SESSION["usuario"]." and tipo_comunicado='permiso' 
+                and and cu.revision=1 order order by c.id_comunicado desc";
+            $con_usuario_comunicado = $con_usuario_comunicado_controller->listadoPermSegOperaciones($query);
+            $html = '<table class="table table-bordered table-striped" id="tablaPermisos">
+                <thead>
+                    <tr>
+                        <th class="back-color text-center">Asunto</th>
+                        <th class="back-color text-center">De</th>
+                        <th class="back-color text-center">Fecha</th>
+                        <th class="back-color text-center">Ver más</th>                        
+                        <th class="back-color text-center"></th>
+                    </tr>
+                </thead>
+                <tbody>';
+            if($con_usuario_comunicado[0]["success"])
+            {
+                foreach ($con_usuario_comunicado as $row) 
+                {
+                    
+                    $html .= '<tr>
+                        <td>'.$row["comunicado"]->getAsunto_comunicado().'</td>
+                        <td class="text-center">'.$row["comunicado"]->getDe_comunicado().'</td>  
+                        <td class="text-center">'.$row["comunicado"]->getAnio_comunicado().'/'.
+                            $row["comunicado"]->getMes_comunicado().'/'.
+                            $row["comunicado"]->getDia_comunicado().'</td>
+                    <td class="text-center"><a class="btn btn-link" 
+                    href="?page=solEspecificas&comu='.base64_encode($row["comunicado"]->getId_comunicado()).'&estado='.$row["comunicado_usuario"]->getRevision().'">Ver más</a></td>
+                   
+                    </tr>';
+                }
+            }
+            else
+                {
+                    $html .= "<tr><td colspan='4' class='text-center'>No existen permisos</td></tr>";
+                }
+                $html .= '</tbody></table>';
+                echo $html;
+        break;
+        case 'solicitudesNoAprobadasCliente':
+            session_start();
+            $con_usuario_comunicado_controller = new ComunUsuaController();
+            $query = "   
+            select *from comunicado as c inner join comunicado_usuario as cu
+                on c.id_comunicado=cu.id_comunicado where cu.id_usuario=".$_SESSION["usuario"]." 
+                and tipo_comunicado='permiso' and cu.revision=0 order order by c.id_comunicado desc";
+            $con_usuario_comunicado = $con_usuario_comunicado_controller->listadoPermSegOperaciones($query);
+            $html = '<table class="table table-bordered table-striped" id="tablaPermisos">
+                <thead>
+                    <tr>
+                        <th class="back-color text-center">Asunto</th>
+                        <th class="back-color text-center">De</th>
+                        <th class="back-color text-center">Fecha</th>
+                        <th class="back-color text-center">Ver más</th>                        
+                        <th class="back-color text-center"></th>
+                    </tr>
+                </thead>
+                <tbody>';
+            if($con_usuario_comunicado[0]["success"])
+            {
+                foreach ($con_usuario_comunicado as $row) 
+                {
+                   
+                    $html .= '<tr>
+                        <td>'.$row["comunicado"]->getAsunto_comunicado().'</td>
+                        <td class="text-center">'.$row["comunicado"]->getDe_comunicado().'</td>  
+                        <td class="text-center">'.$row["comunicado"]->getAnio_comunicado().'/'.
+                            $row["comunicado"]->getMes_comunicado().'/'.
+                            $row["comunicado"]->getDia_comunicado().'</td>
+                    <td class="text-center"><a class="btn btn-link" 
+                    href="?page=solEspecificas&comu='.base64_encode($row["comunicado"]->getId_comunicado()).'&estado='.$row["comunicado_usuario"]->getRevision().'">Ver más</a></td>
+                   
+                    </tr>';
+                }
+            }
+            else
+                {
+                    $html .= "<tr><td colspan='4' class='text-center'>No existen permisos</td></tr>";
+                }
+                $html .= '</tbody></table>';
+                echo $html;
+        break;
+
+
+
     }
 }
 ?>
