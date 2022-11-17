@@ -84,35 +84,54 @@ $(document).ready(function(){
 
 
     function createEspacioFisico(denominacion,ubicacion,medidas,tipo,estado,codigo,etapa,caracteristicas,foto){
-        var dat = {
-            crud: "createEspacioFisico",
-            idEtapa:etapa,
-            denominacion:denominacion,
-            ubicacion:ubicacion,
-            medidas:medidas,
-            caracteristicas:caracteristicas,
-            foto:foto,
-            tipo:tipo,
-            estado:estado,
-            codigo:codigo
-            };
-            console.log("datos",dat);
-            $.ajax({
-                data: dat,
-                url: "./Model/EspacioFisicoAjax.php",
-                method: "POST",
-                success: function(datos){
-                    console.log("datos1",datos);
-                    if (datos != 0) {
-                         toastr["success"]("ESPACIO FÍSICO REGISTRADO.", "Éxito");
-                              setTimeout(() => {
-                                window.location = "?page=home";
-                            }, 4000); 
-                    } else {
-                        toastr["error"]("No se puedo registrar el espacio físico.", "Error");
-                    }
-                }
-                });
+        
+        
+        var formData = new FormData();
+					var files = $('#file')[0].files[0];
+					formData.append('file', files)
+					$.ajax({
+						url: './View/uploadEspacio.php'+'?foo='+denominacion,
+						type: 'post',
+						data: formData,
+						contentType: false,
+						processData: false,
+						success: function (response) {
+					//		console.log("respuesta", data);
+							//if (response != 0) {
+								console.log("response",response);
+                            var dat = {
+                                crud: "createEspacioFisico",
+                                idEtapa:etapa,
+                                denominacion:denominacion,
+                                ubicacion:ubicacion,
+                                medidas:medidas,
+                                caracteristicas:caracteristicas,
+                                foto:response,
+                                tipo:tipo,
+                                estado:estado,
+                                codigo:codigo
+                                };
+                                console.log("datos",dat);
+                                $.ajax({
+                                    data: dat,
+                                    url: "./Model/EspacioFisicoAjax.php",
+                                    method: "POST",
+                                    success: function(datos){
+                                        console.log("datos1",datos);
+                                        if (datos != 0) {
+                                           /* toastr["success"]("ESPACIO FÍSICO REGISTRADO.", "Éxito");
+                                                setTimeout(() => {
+                                                    window.location = "?page=home";
+                                                }, 4000); */
+                                        } else {
+                                            toastr["error"]("No se puedo registrar el espacio físico.", "Error");
+                                        }
+                                    }
+                                    });
+                                }
+                            });
+                                    
+                                    
     }
 
     $("#crear").click(function(e){

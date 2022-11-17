@@ -202,7 +202,7 @@ if($_POST["crud"])
         
         case 'lisEspacioArriendo':
             $con_espacio_fisico= new EspacioFisicoController();
-            $query = "select * from espacio_fisico where estado_espacio=1";
+            $query = "select * from espacio_fisico where estado_espacio=1 and id_espacio_fisico not in(select id_espacio_fisico from arriendo where estado_arriendo=1)";
             $con_espacio = $con_espacio_fisico->listEspacioFisico($query);
             $html = '<table class="table table-bordered text-center table-striped" id="tblEspacioFisico">
 				<thead>
@@ -210,8 +210,6 @@ if($_POST["crud"])
                         <th class="back-color text-center">SELECCIONAR</th>
 						<th class="back-color text-center">DENOMINACIÓN</th>
 						<th class="back-color text-center">ETAPA</th>
-                        <th class="back-color text-center">UBICACION</th>
-                        <th class="back-color text-center">MEDIDAS</th>
 					</tr>
 				</thead>
 				<tbody>';
@@ -224,8 +222,6 @@ if($_POST["crud"])
                         <td><input type="checkbox" id="id_denominacion" value="'.$row["espacio_fisico"]->getId_espacio_fisico().'"></td>
                         <td>'.$row["espacio_fisico"]->getDenominacion().'</td>
                         <td>'.$row["etapa_comercial"]->getNombre_etapa_comercial().'</td>
-                        <td>'.$row["espacio_fisico"]->getUbicacion_espacio().'</td>
-                        <td>'.$row["espacio_fisico"]->getMedidas().'</td>
                         
                     </td>
                     </tr>';
@@ -292,6 +288,44 @@ if($_POST["crud"])
                   $html.=$row["espacio_fisico"]->getDenominacion();                    
                 }
             }
+				echo $html;
+        break;
+
+        case 'espacioFisicoCircular':
+            $id_Espacio=$_POST["idEspacio"];
+            $con_espacio_fisico= new EspacioFisicoController();
+            $query = "select * from espacio_fisico where estado_espacio=1 and tipo_espacio=".$id_Espacio."";
+            $con_espacio = $con_espacio_fisico->listEspacioFisico($query);
+            $html = '<table class="table table-bordered text-center table-striped" id="tblEspacioFisico">
+				<thead>
+					<tr>
+                    <th class="back-color text-center">SELECCIONAR</th>
+						<th class="back-color text-center">DENOMINACIÓN</th>
+						<th class="back-color text-center">ETAPA</th>
+					</tr>
+				</thead>
+                
+						<input type="checkbox" id="todosEspacios" value="1" class="todosEspacios"> Seleccionar todos<br>
+				<tbody id="formEspacioFisico">';
+                
+            if($con_espacio!=null)
+            {
+                foreach ($con_espacio as $row) 
+                {
+                    $html .= '<tr>
+                    <td><input type="checkbox" name="espacioComercial" class="ckEspacios" id="id_espacioComercial" value="'.$row["espacio_fisico"]->getId_espacio_fisico().'"></td>
+                        <td>'.$row["espacio_fisico"]->getDenominacion().'</td>
+                        <td>'.$row["etapa_comercial"]->getNombre_etapa_comercial().'</td>
+                    </td>
+                    </tr>';
+                    
+                }
+            }
+            else
+			{
+				$html .= "<tr><td colspan='12' class='text-center'>No se encontraron espacio fisicos</td></tr>";
+			}
+				$html .= '</tbody></table>';
 				echo $html;
         break;
 }

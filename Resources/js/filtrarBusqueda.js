@@ -1,7 +1,7 @@
 
 $(document).ready(function(){
 
-
+/* 
 
     function getFiltrarArriendos(){
                 var consulta;
@@ -122,6 +122,68 @@ $(document).ready(function(){
 }
 
 getFiltrarEspacioFisico();
+ */
 
+function getArriendos(){
+    var dat = {
+        crud:"listArriendos"
+    };
+
+    $.ajax({
+        data: dat,
+        url:"./Model/ArriendoAjax.php",
+        method: "POST",
+        success: function(data){
+            console.log("data",data);
+            $("#tblArriendos").html(data);
+            
+        },
+
+        error: function(error){
+            console.error(error);
+        }
+        
+    });
+}
+
+
+
+$("#entradas").keyup(function(e){
+   e.preventDefault();
+     clave = $("#entradas").val().trim();
+    if(clave){
+        $('table').find('tbody tr').hide();
+        $('table tbody tr').each(function(){
+            let nombres=$(this).children().eq(0);
+            if(nombres.text().toUpperCase().includes(clave.toUpperCase())){
+                $(this).show()
+            }
+        });
+    }
+    else
+    {
+        getArriendos();
+    }
+
+});
+
+$("#denominacion").keyup(function(e){
+    e.preventDefault();
+      clave = $("#denominacion").val().trim();
+     if(clave){
+         $('table').find('tbody tr').hide();
+         $('table tbody tr').each(function(){
+             let nombres=$(this).children().eq(2);
+             if(nombres.text().toUpperCase().includes(clave.toUpperCase())){
+                 $(this).show()
+             }
+         });
+     }
+     else
+     {
+         getArriendos();
+     }
+ 
+ });
 
 });

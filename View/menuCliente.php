@@ -130,11 +130,11 @@
                                                         <div class="col-md-8 form-group" id="usuarios">
                                                            
                                                         </div>
-                                                        <div class="col-md-4" style="padding:15px">
+                                                       <!--  <div class="col-md-4" style="padding:15px">
                                                             <label> MENSAJE:</label>
-                                                        </div>
+                                                        </div> -->
                                                         <div class="col-md-8 form-group">
-                                                            <textarea id="mensaje" class="form-control" type="text" rows="3"></textarea>
+                                                            <input id="mensaje" class="form-control" type="hidden" rows="3">
                                                             <input id="tipo" class="form-control" type="hidden" value="permiso">
                                                             <input id="fechacaducidad" class="form-control" type="hidden" value="2022/10/15">
                                                         </div>
@@ -145,8 +145,7 @@
                                                     <div class="col-md-10 form-group" id="imagen"></div>                                                     
                                                         <div class="col-md-10 form-group" style="padding:10px" >
                                                             <input type="file" class="btn btn-primary" id="file" name="file" accept="image/gif, image/jpeg, image/png">
-                                                        </div>
-                                                        
+                                                        </div>                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -161,7 +160,7 @@
                                                     <input type="button" class="btn btn-danger" data-bs-dismiss="modal" id="id_cancelar" value="Cancelar">
                                                 </div>
                                                 <div class="col-md-1 form-group"  style="padding-top:13%">
-                                                        <input class="btn btn-primary"  type="submit" id="id_aceptar"  name="id_aceptar" value="Crear">
+                                                        <input class="btn btn-primary"  type="submit" id="id_crearSol"  name="id_crearSol" value="Crear">
                                                 </div>        
                                         </div>
                                     </form>

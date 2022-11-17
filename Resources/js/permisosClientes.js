@@ -22,7 +22,7 @@ $(document).ready(function () {
 
 	getPermisosClientes();
 
-	function crearSolicitud(de, para, asunto, mensaje, imagen, descripcion, tipo, destinatario, fecha) {
+	function crearSolicitud(de, para, asunto, mensaje, image, descripcion, tipo, destinatario, fecha) {
 				var formData = new FormData();
 					var files = $('#file')[0].files[0];
 					formData.append('file', files);
@@ -73,9 +73,8 @@ $(document).ready(function () {
 		});
 	}
 
-	$("#id_aceptar").click(function (e) {
+	$("#id_crearSol").click(function (e) {
 		e.preventDefault();
-		//var desc = CKEDITOR.instances['descripcion'].getData();
 		var desc = myEditor.getData();
 		var filename = $('input[type=file]').val().split('\\').pop();
 		crearSolicitud($("#de").val(),

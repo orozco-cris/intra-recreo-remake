@@ -32,8 +32,7 @@ $(document).ready(function(){
             data: dat,
             url:"./Model/mixComercialAjax.php",
             method: "POST",
-            success: function(data){    
-                console.log(data) ;          
+            success: function(data){  
                 $("#mix").html(data);
             },
     
@@ -58,7 +57,6 @@ $(document).ready(function(){
             correo:correo,
             fechar,fechar
             };
-            console.log("datos",dat);
             $.ajax({
                 data: dat,
                 url: "./Model/EmpresaAjax.php",
@@ -97,13 +95,11 @@ $(document).ready(function(){
             crud:"empresaPorId",
             idEmpresa:id
         };
-        console.log("id mix", dat);
         $.ajax({
             data: dat,
             url:"./Model/EmpresaAjax.php",
             method: "POST",
-            success: function(data){       
-                console.log(data);
+            success: function(data){    
                 $("#editarEmpresa").html(data);
             },
     
@@ -147,13 +143,11 @@ $(document).ready(function(){
         var dat = {
             crud:"listEmpresaArriendo"
         };
-        console.log("id mix", dat);
         $.ajax({
             data: dat,
             url:"./Model/EmpresaAjax.php",
             method: "POST",
-            success: function(data){       
-                console.log(data);
+            success: function(data){ 
                 $("#listEmpresas").html(data);
             },
     
@@ -166,5 +160,27 @@ $(document).ready(function(){
 
     getEmpresaArriendo();
 
+
+    //empresas para circulares
+    function empresasParaCirculares(){
+        var dat = {
+            crud:"empresasParaCirculares"
+        };
+        $.ajax({
+            data: dat,
+            url:"./Model/EmpresaAjax.php",
+            method: "POST",
+            success: function(data){      
+                $("#empresaCircular").html(data);
+            },
+    
+            error: function(error){
+                console.error(error);
+            }
+            
+        });
+    } 
+
+    empresasParaCirculares();
 
 });

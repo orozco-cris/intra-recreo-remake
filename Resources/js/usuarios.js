@@ -33,8 +33,7 @@ $(document).ready(function(){
             data: dat,
             url:"./Model/UsuariosAjax.php",
             method: "POST",
-            success: function(data){    
-                console.log("usuarios clientes",data) ;          
+            success: function(data){           
                 $("#usuarioE").html(data);
             },
     
@@ -86,13 +85,13 @@ $(document).ready(function(){
            
             direccion:direccion
             };
-            console.log("datos recibidos",dat);
+            
             $.ajax({
                 data: dat,
                 url: "./Model/UsuariosAjax.php",
                 method: "POST",
                 success: function(datos){
-                    console.log("datos1",datos);
+
                     if (datos != 0) {
                         toastr["success"]("USUARIO REGISTRADO.", "Éxito");
                               setTimeout(() => {
@@ -156,5 +155,27 @@ $(document).ready(function(){
     getUsuariosAdmin();
 
 
+
+    //clientes para circulares
+    function listUsuariosCirculares(){
+        var dat = {
+            crud:"listUsuariosCirculares"
+        };
+
+        $.ajax({
+            data: dat,
+            url:"./Model/UsuariosAjax.php",
+            method: "POST",
+            success: function(data){
+                $("#clienteCircular").html(data);
+            },
+    
+            error: function(error){
+                console.error(error);
+            }
+            
+        });
+    }
+    listUsuariosCirculares();
 
 });

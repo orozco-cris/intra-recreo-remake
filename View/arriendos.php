@@ -17,7 +17,8 @@
                                 <strong><label>Empresa</label></strong>
                             </div>
                             <div class="col-md-3 form-group">
-                                <input id="empresa" name="empresa" class="form-control" type="text">
+                                <!-- <input id="empresa" name="empresa" class="form-control" type="text"> -->
+                                <input id="entradas" name="entrada" class="form-control" type="text">
                             </div>
                             <div class="col-md-2" style="padding:15px"> 
                                 <strong><label> Denominación</label></strong>

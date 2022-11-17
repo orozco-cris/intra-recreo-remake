@@ -7,6 +7,7 @@
         {
             $comunicado = $_GET["comu"];
             $estado = $_GET["estado"];
+            $revision= $_GET["revision"];
         }
     ?>
 
@@ -75,6 +76,11 @@
                                                     <input class="btn float-right login_btn btn-primary d-none" type="submit" id="id_aceptar"  name="id_aceptar" value="ACEPTAR">
                                                 </div>
                                         </div>
+                                        <div class="row" style="padding: 8px !important">  
+                                                <div class="col-12 d-flex justify-content-end">
+                                                    <input class="btn float-right login_btn btn-primary d-none" type="submit" id="id_modificar"  name="id_modificar" value="MODIFICAR">
+                                                </div>
+                                        </div>
                                     </div>
                                 </form><br>
                             </div>
@@ -87,6 +93,7 @@
 <div class="d0">
 	<input type="hidden" id="id_comunicado_especifico" value="<?php echo $comunicado; ?>">
     <input type="hidden" id="id_estado_comunicado" value="<?php echo $estado; ?>">
+    <input type="hidden" id="id_revision_comunicado" value="<?php echo $revision; ?>">
 </div>
 
     <script type="text/javascript" src="./Resources/js/solEspecificas.js"></script>

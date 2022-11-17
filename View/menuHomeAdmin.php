@@ -32,8 +32,8 @@
               					</font></font></a>
               					<ul class="dropdown-menu bg-primary" style="border: none !important; left:35%">
                 					<li><a class="dropdown-item opcion" href="?page=usuarioInterno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Añadir usuario interno</font></font></a></li>
-                					<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Circulares no reviados</font></font></a></li>
-                					<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Crear circulares</font></font></a></li>       
+                					<li><a class="dropdown-item opcion" href="?page=circularesNoRevisadas"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Circulares no revisados</font></font></a></li>
+                					<li><a class="dropdown-item opcion" href="?page=nuevaCircular"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Crear circulares</font></font></a></li>       
               					</ul>
             				</li>
                             <li class="nav-item dropdown" style="padding-left:30%">

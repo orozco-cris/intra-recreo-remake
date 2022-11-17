@@ -9,8 +9,8 @@ require_once "./../Controller/ComunUsuaController.php";
         switch($crud)
         {
             case 'read':
-				//$clave=md5($_POST["clave"]);
-				$clave=$_POST["clave"];
+				$clave=md5($_POST["clave"]);
+				//$clave=$_POST["clave"];
                 $usuario = new Usuario();
 				$conUsuario = new UsuarioController();
 				$query = "select * from usuario where estado_usuario = 1 and login_usuario = '".$_POST["usuario"]."' and clave_usuario = '".$clave."'";
@@ -589,6 +589,43 @@ require_once "./../Controller/ComunUsuaController.php";
 						echo 'incorrecto';
 					}
 				break;
+
+				case 'listUsuariosCirculares':
+					$con_usuario = new UsuarioController();
+					$query = "select * from usuario where estado_usuario=1 and id_tipo_usuario=2";
+					$con_usuario_list = $con_usuario->listClientes($query);
+					$html = '<table class="table table-bordered text-center table-striped" id="tblEmpresa">
+						<thead>
+							<tr>
+								<th class="back-color text-center">SELECCIONAR</th>
+								<th class="back-color text-center">NOMBRES</th>
+								<th class="back-color text-center">CÉDULA</th>
+							</tr>
+						</thead>
+						<input type="checkbox" id="todosClientes" value="1" class="todosClientes"> Seleccionar todos<br>
+						<tbody id="formClientes">';
+						
+					if($con_usuario_list[0]["success"])
+					{
+						foreach ($con_usuario_list as $row) 
+						{
+							$html .= '<tr>
+								<td><input type="checkbox" class="ckClientes" name="clientes" id="id_clientes" value="'.$row["id_usuario"].'"></td>
+								<td>'.$row["nombre_usuario"].' '.$row["apellido_usuario"].'</td>
+								<td>'.$row["cedula_usuario"].'</td>
+							</td>
+							</tr>';
+							
+						}
+					}
+					else
+						{
+							$html .= "<tr><td colspan='4' class='text-center'>No se pudo obtener el detalle de la empresa</td></tr>";
+						}
+						$html .= '</tbody></table>';
+						echo $html;
+				break;
+		
 
 				
         }
