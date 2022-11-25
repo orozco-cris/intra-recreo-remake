@@ -84,7 +84,10 @@ $(document).ready(function(){
         getEmpresaId($idEspacio);
         console.log("empresa",$idEspacio);
         $("#idEmpresa").val($idEspacio);
-       
+        
+    $('#empresa').modal('hide');
+       // $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove(); 
 	}); 
 
     $("#id_aceptarD").click(function(e){
@@ -94,6 +97,10 @@ $(document).ready(function(){
         
         console.log("espacio",$idEspacio);
         $("#idDenominacion").val($idEspacio);
+        $('#denominacion').modal('hide');
+//$('body').removeClass('modal-open');
+        $('.modal-backdrop').remove(); 
+
        
 	}); 
     

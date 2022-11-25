@@ -23,6 +23,7 @@ class ComunUsuaController extends Conexion
 
     public function getCircularesParaCliente($query)
     {
+        echo $query;
         $result = pg_query($this->conn, $query);
         $datos = array();
         if(pg_num_rows($result) > 0)
@@ -164,6 +165,58 @@ class ComunUsuaController extends Conexion
         //pg_close($this->conn);
         return $result;
     }
+
+
+    public function updateComunicadoUsuario($comunicado_usuario)
+    {
+        $query = "update comunicado_usuario set revision=0 where id_comunicado= ".$comunicado_usuario."" ;
+       
+        $result = pg_query($this->conn, $query);
+        //pg_close($this->conn);
+        return $result;
+    }
+
+
+    public function getClientesCircular($query)
+    {
+       
+        $result = pg_query($this->conn, $query);
+        $datos = array();
+        if(pg_num_rows($result) > 0)
+		{
+            while($info = pg_fetch_array($result))
+			{
+                $obj_comunicado = new Comunicado();
+                $obj_usuario = new Usuario();
+                $con_comunicado = new ComunicadoController();
+                $con_usuario = new UsuarioController();
+                $usuario = $con_usuario->listParameter($info[0]);
+                $comunicado_usuario = new ComunicadoUsuario();
+                $comunicado_usuario->setId_comunicado_usuario($info[11]);
+                $comunicado_usuario->setId_usuario($usuario);
+                $comunicado_usuario->setId_comunicado($info[12]);
+                $comunicado_usuario->setRevision($info[13]);
+                $obj_comunicado = $con_comunicado->listParameter($info[11]);
+                $datos[] = array(
+                    "success" => true,
+                    "comunicado" => $obj_comunicado,
+                    "cliente" => $usuario,
+                    "comunicado_usuario"=> $comunicado_usuario,
+                    "check" => $info[3]
+                );
+            }
+        }
+        else
+		{
+			$datos[] = array("success" => false);
+		}
+        pg_close($this->conn);
+        return $datos;
+    }
+
+  
+
+    
 
 }
 

@@ -179,6 +179,7 @@ if($_POST["crud"])
             $espacio_fisico = new EspacioFisico();
 
             $con_espacio_fisico = new EspacioFisicoController();
+            $denominacion=$_POST["denominacion"];
             $espacio_fisico-> setId_etapa_comercial($_POST["idEtapa"]);
             $espacio_fisico-> setDenominacion($_POST["denominacion"]);
             $espacio_fisico-> setUbicacion_espacio($_POST["ubicacion"]);
@@ -189,16 +190,50 @@ if($_POST["crud"])
             $espacio_fisico-> setEstado_espacio($_POST["estado"]);
             $espacio_fisico-> setCodigo_espacio($_POST["codigo"]);
             
-            $result_espacio_fisico = $con_espacio_fisico->createEspacioFisico($espacio_fisico);
-            
-            if($result_espacio_fisico)
-            {
-                echo 'correcto';
-            }else
-            {
-                echo 'incorrecto';
+    
+            $con_denominacion= new EspacioFisicoController();
+            $result=$con_denominacion->verificarEspacioFisico($denominacion);
+            if($result) {
+                
+                $result_espacio_fisico = $con_espacio_fisico->createEspacioFisico($espacio_fisico);
+                
+                if($result_espacio_fisico)
+                {
+                    $var=1;
+                    //echo json_encode(array('success' => 1));
+                   echo $var; 
+                }else
+                {
+                    $var=0;
+                    //echo json_encode(array('success' => 1));
+                   echo $var; 
+                }
             }
-        break;          
+            else{
+                $var=2;
+                echo $var;
+
+            }                     
+        
+        break;      
+        
+        case 'verificarEspacioFisico':
+
+            $denominacion=$_POST["denominacion"];
+               
+            $con_denominacion= new EspacioFisicoController();
+            $result=$con_denominacion->verificarEspacioFisico($denominacion);
+            if($result) {                
+                echo 0;              
+            }
+            else{                
+                echo 1;
+
+            }                     
+        
+        break;      
+
+        
         
         case 'lisEspacioArriendo':
             $con_espacio_fisico= new EspacioFisicoController();
@@ -294,31 +329,31 @@ if($_POST["crud"])
         case 'espacioFisicoCircular':
             $id_Espacio=$_POST["idEspacio"];
             $con_espacio_fisico= new EspacioFisicoController();
-            $query = "select * from espacio_fisico where estado_espacio=1 and tipo_espacio=".$id_Espacio."";
+            $query = "select * from espacio_fisico where estado_espacio=1 and id_espacio_fisico in (select id_espacio_fisico from arriendo) and tipo_espacio=".$id_Espacio."";
             $con_espacio = $con_espacio_fisico->listEspacioFisico($query);
-            $html = '<table class="table table-bordered text-center table-striped" id="tblEspacioFisico">
+            $html = '<table class="table table-bordered text-center table-striped" id="tblEspacioFiscoCirculares">
 				<thead>
 					<tr>
                     <th class="back-color text-center">SELECCIONAR</th>
 						<th class="back-color text-center">DENOMINACIÓN</th>
-						<th class="back-color text-center">ETAPA</th>
+						<th class="back-color text-center">IMAGEN</th>
 					</tr>
 				</thead>
                 
-						<input type="checkbox" id="todosEspacios" value="1" class="todosEspacios"> Seleccionar todos<br>
+					
 				<tbody id="formEspacioFisico">';
                 
             if($con_espacio!=null)
             {
                 foreach ($con_espacio as $row) 
                 {
+                    $imagen=$row["espacio_fisico"]->getFotografia_espacio();
                     $html .= '<tr>
                     <td><input type="checkbox" name="espacioComercial" class="ckEspacios" id="id_espacioComercial" value="'.$row["espacio_fisico"]->getId_espacio_fisico().'"></td>
                         <td>'.$row["espacio_fisico"]->getDenominacion().'</td>
-                        <td>'.$row["etapa_comercial"]->getNombre_etapa_comercial().'</td>
+                        <td style="with: 150px;"><img src="./Resources/uploads/'.$imagen.'.jpg" style="width:20%; heigth:10%"></td>
                     </td>
-                    </tr>';
-                    
+                    </tr>';                    
                 }
             }
             else

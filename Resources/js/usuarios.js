@@ -156,26 +156,6 @@ $(document).ready(function(){
 
 
 
-    //clientes para circulares
-    function listUsuariosCirculares(){
-        var dat = {
-            crud:"listUsuariosCirculares"
-        };
-
-        $.ajax({
-            data: dat,
-            url:"./Model/UsuariosAjax.php",
-            method: "POST",
-            success: function(data){
-                $("#clienteCircular").html(data);
-            },
-    
-            error: function(error){
-                console.error(error);
-            }
-            
-        });
-    }
-    listUsuariosCirculares();
+  
 
 });

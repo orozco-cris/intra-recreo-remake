@@ -115,9 +115,25 @@
                                         <div class="col-md-12">
                                             <form class="form form-horizontal">
                                                 <div class="form-body">
-                                                   <div id="clienteCircular">
+                                                <div class="row">
+                                                <div class="col-md-2 form-group"></div>
+                                                <div class="col-md-8 form-group">
+                                                    <input class="form-control" type="text" placeholder="Buscar" id="buscarcliente">                                                                             
+                                                </div>  
+                                            </div>    <br>  
+                                            <div class="row" >
+                                                <div class="col-md-1 form-group"></div>
+                                                <div class="col-md-8 form-group">
+                                                <input type="checkbox" id="selClientes" class="todosClientes"> Seleccionar todos<br>
+                                                </div>
+                                            
+                                            </div>
+                                                    <div class="row">
 
-                                                   </div>
+                                                        <div id="clienteCircular">
+
+                                                        </div>
+                                                    </div>
                                                     <div class="row">
                                                         <div class="col-md-10 form-group"></div>
                                                         <div class="col-md-1 form-group" style="padding-top:5%">
@@ -153,9 +169,28 @@
                                         <div class="col-md-12">
                                             <form class="form form-horizontal">
                                                 <div class="form-body">
-                                                   <div id="empresaCircular">
+                                                <div class="row">
+                                                    <div class="col-md-2 form-group"></div>
+                                                    <div class="col-md-8 form-group">
+                                                        <input class="form-control" type="text" placeholder="Buscar" id="buscarempresa">                                                                             
+                                                    </div>  
+                                                </div>    <br>   
+                                                
+                                                
+                                                <div class="row" >
+                                                <div class="col-md-1 form-group"></div>
+                                                <div class="col-md-8 form-group">
+                                                <input type="checkbox" id="selEmpresas"> Seleccionar todos<br>
+                                                </div>
+                                            
+                                            </div>
 
-                                                   </div>
+                                            <div class="row">
+                                                <div id="empresaCircular">
+
+                                                </div>
+                                            </div> 
+                                                   
                                                     <div class="row">
                                                         <div class="col-md-10 form-group"></div>
                                                         <div class="col-md-1 form-group" style="padding-top:5%">
@@ -191,9 +226,25 @@
                                         <div class="col-md-12">
                                             <form class="form form-horizontal">
                                                 <div class="form-body">
-                                                   <div id="espacioFisicoCircular">
+                                                <div class="row">
+                                                    <div class="col-md-2 form-group"></div>
+                                                    <div class="col-md-8 form-group">
+                                                        <input class="form-control" type="text" placeholder="Buscar" id="buscarespaciofisico">                                                                             
+                                                    </div>  
+                                                </div>    <br >
+                                                <div class="row" >
+                                                <div class="col-md-1 form-group"></div>
+                                                <div class="col-md-8 form-group">
+                                                <input type="checkbox" id="selEspacioFisico" class="todosClientes"> Seleccionar todos<br>
+                                                </div>
+                                            
+                                            </div>
+                                                <div class="row">
+                                                    <div id="espacioFisicoCircular">
 
-                                                   </div>
+                                                    </div>
+                                                </div>
+                                                  
                                                     <div class="row">
                                                         <div class="col-md-10 form-group"></div>
                                                         <div class="col-md-1 form-group" style="padding-top:5%">
@@ -229,9 +280,25 @@
                                         <div class="col-md-12">
                                             <form class="form form-horizontal">
                                                 <div class="form-body">
-                                                   <div id="mixComercialCircular">
+                                                <div class="row">
+                                                    <div class="col-md-2 form-group"></div>
+                                                    <div class="col-md-8 form-group">
+                                                        <input class="form-control" type="text" placeholder="Buscar" id="buscarmixcomercial">                                                                             
+                                                    </div>  
+                                                </div>    <br >
+                                                <div class="row" >
+                                                <div class="col-md-1 form-group"></div>
+                                                <div class="col-md-8 form-group">
+                                                <input type="checkbox" id="selMixComercial" class="todosClientes"> Seleccionar todos<br>
+                                                </div>
+                                            
+                                            </div>
+                                                <div class="row">
+                                                    <div id="mixComercialCircular">
 
-                                                   </div>
+                                                    </div>
+                                                </div>
+                                                  
                                                     <div class="row">
                                                         <div class="col-md-10 form-group"></div>
                                                         <div class="col-md-1 form-group" style="padding-top:5%">
@@ -261,5 +328,3 @@
 </style>
 
 <script type="text/javascript" src="./Resources/js/circulares.js"></script>
-<script type="text/javascript" src="./Resources/js/usuarios.js"></script>
-<script type="text/javascript" src="./Resources/js/empresas.js"></script>
