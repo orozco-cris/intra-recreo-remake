@@ -36,7 +36,7 @@ $(document).ready(function(){
                 success: function(datos){
                     console.log("datos1",datos);
                     if (datos != 0) {
-                        toastr["success"]("CATEGORIA CREADA.", "Éxito");
+                        toastr["success"]("Mix comercial creado.", "Éxito");
                               setTimeout(() => {
                                 window.location = "?page=mixComercial";
                             }, 4000); 
@@ -96,7 +96,7 @@ $(document).ready(function(){
                 success: function(datos){
                     console.log("datos1",datos);
                     if (datos != 0) {
-                        toastr["success"]("CATEGORIA MODIFICADA.", "Éxito");
+                        toastr["success"]("Mix comercial modificado.", "Éxito");
                               setTimeout(() => {
                                 window.location = "?page=mixComercial";
                             }, 4000); 
