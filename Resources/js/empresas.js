@@ -61,15 +61,20 @@ $(document).ready(function(){
                 data: dat,
                 url: "./Model/EmpresaAjax.php",
                 method: "POST",
-                success: function(datos){
-                    console.log("datos1",datos);
-                    if (datos != 0) {
+                success: function(response){
+
+                    //jsonData = JSON.parse(response);
+                    console.log("datos recibidos");
+                    console.log(response);
+                    if (response == 1) {
                         toastr["success"]("EMPRESA REGISTRADA.", "Éxito");
                               setTimeout(() => {
                                 window.location = "?page=empresas";
                             }, 4000);
-                    } else {
+                     } else if (response == 0)  {
                         toastr["error"]("No se puedo registrar la empresa.", "Error");
+                    } else{
+                        toastr["error"]("RUC ya registrado.", "Error");
                     }
                 }
                 });
@@ -139,48 +144,9 @@ $(document).ready(function(){
 	}); 
 
 
-    function getEmpresaArriendo(){
-        var dat = {
-            crud:"listEmpresaArriendo"
-        };
-        $.ajax({
-            data: dat,
-            url:"./Model/EmpresaAjax.php",
-            method: "POST",
-            success: function(data){ 
-                $("#listEmpresas").html(data);
-            },
     
-            error: function(error){
-                console.error(error);
-            }
-            
-        });
-    } 
-
-    getEmpresaArriendo();
 
 
-    //empresas para circulares
-    function empresasParaCirculares(){
-        var dat = {
-            crud:"empresasParaCirculares"
-        };
-        $.ajax({
-            data: dat,
-            url:"./Model/EmpresaAjax.php",
-            method: "POST",
-            success: function(data){      
-                $("#empresaCircular").html(data);
-            },
     
-            error: function(error){
-                console.error(error);
-            }
-            
-        });
-    } 
-
-    empresasParaCirculares();
 
 });

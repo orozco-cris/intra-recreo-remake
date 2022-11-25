@@ -148,7 +148,7 @@ if($_POST["crud"])
             $query = "select *from mix_comercial where id_mix_comercial in(        
                 select id_mix_comercial from empresa where estado_empresa=1 and id_usuario is not null)";
             $con_mix_comercial = $con_mix_comercial_controller->listMixComercial($query);
-            $html = '<table class="table table-bordered text-center table-striped" id="tblmixComercial">
+            $html = '<table class="table table-bordered text-center table-striped" id="tblmixComercialCirculares">
 				<thead>
 					<tr>
                     <th class="back-color text-center">SELECCIONAR</th>
@@ -156,7 +156,7 @@ if($_POST["crud"])
 						<th class="back-color text-center">Descripcion</th>
 					</tr>
 				</thead>
-                <input type="checkbox" id="todosMix" value="1" class="todosMix"> Seleccionar todos<br>
+                
 				<tbody id="formMixComercial">';
                 
             if($con_mix_comercial[0]["success"])

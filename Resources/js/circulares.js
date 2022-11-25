@@ -122,8 +122,51 @@ function mixComercialCirculares(){
 }
 
 
+  //clientes para circulares
+  function listUsuariosCirculares(){
+    var dat = {
+        crud:"listUsuariosCirculares"
+    };
 
+    $.ajax({
+        data: dat,
+        url:"./Model/UsuariosAjax.php",
+        method: "POST",
+        success: function(data){
+            $("#clienteCircular").html(data);
+        },
 
+        error: function(error){
+            console.error(error);
+        }
+        
+    });
+}
+listUsuariosCirculares();
+
+//empresas para circulares
+function empresasParaCirculares(){
+    var dat = {
+        crud:"empresasParaCirculares"
+    };
+    $.ajax({
+        data: dat,
+        url:"./Model/EmpresaAjax.php",
+        method: "POST",
+        success: function(data){      
+            $("#empresaCircular").html(data);
+        },
+
+        error: function(error){
+            console.error(error);
+        }
+        
+    });
+} 
+
+empresasParaCirculares();
+
+var esp;
         $("#para").change(function() {
             var option_value = $("#para").val();
             if (option_value == "1") {
@@ -142,22 +185,22 @@ function mixComercialCirculares(){
     
              }else  if (option_value == "4") {
                 //alert("Hai !");
-                $var=1;
-                getEspacioFisicoCircular($var);
+                esp=1;
+                getEspacioFisicoCircular(esp);
              $('#espacioFisico').modal('show');
     
              }
              else  if (option_value == "5") {
                 //alert("Hai !");
-                $var=2;
-                getEspacioFisicoCircular($var);
+                esp=2;
+                getEspacioFisicoCircular(esp);
              $('#espacioFisico').modal('show');
     
              }
              else  if (option_value == "6") {
                 //alert("Hai !");
-                $var=3;
-                getEspacioFisicoCircular($var);
+                esp=3;
+                getEspacioFisicoCircular(esp);
              $('#espacioFisico').modal('show');
     
              }
@@ -175,38 +218,19 @@ function mixComercialCirculares(){
                 }
             });  
             p='Clientes';
+            $('#clientes').modal('hide');
+             $('.modal-backdrop').remove(); 
             console.log(selected);
-           
+            console.log(p);
+
         });
 
-      /*   $('#todosClientes').change(function() {
-            $('#formClientes input[type=checkbox]').prop('checked', $(this).is(':checked'));
-          });*/
-
-$('#todosClientes').click(function(e){
-    console.log("entro");
-    e.preventDefault();  
-            $('#formClientes input[type="checkbox"]').prop('checked',
-            $("#todosClientes").is(':checked'));
-          }); 
-   
+         
+          $("#selClientes").change(function () {
+            $('#formClientes input[type=checkbox]').prop('checked', $(this).prop("checked"));
+        });
 
 
-
-       /*    
-          $("#todosClientes").click(function(event){
-            console.log("selecciona");
-            if($(this).is(":checked")) {
-                $('input:checkbox[id=id_clientes]:checked');
-               
-                /*  $(".ckClientes:checkbox:not(:checked)").prop("checked", true);
-            }else{
-                $(".ckClientes:checkbox:checked").prop("checked",false);
-            }
-          }); 
-          */
-   
-        
         $("#selectEmpresas").click(function(e){
             e.preventDefault();  
             selected = new Array() ; 
@@ -217,8 +241,15 @@ $('#todosClientes').click(function(e){
                 }
             });  
             p='Empresas';
+            console.log(selected);
+            console.log(p);
+            $('#empresas').modal('hide');
+             $('.modal-backdrop').remove(); 
         });
         
+        $("#selEmpresas").change(function () {
+            $('#formEmpresas input[type=checkbox]').prop('checked', $(this).prop("checked"));
+        });
                 
         $("#selectMixes").click(function(e){
             e.preventDefault();  
@@ -229,9 +260,18 @@ $('#todosClientes').click(function(e){
                 }
             });  
             console.log("mixes",selected);
-            p='Mis Comercial';
+            p='Mix Comercial';
+            console.log(p);
+            $('#mixComercial').modal('hide');
+             $('.modal-backdrop').remove(); 
+            
+
         }); 
-        
+
+        $("#selMixComercial").change(function () {
+            $('#formMixComercial input[type=checkbox]').prop('checked', $(this).prop("checked"));
+        });
+
         $("#selectEspacios").click(function(e){
             e.preventDefault();  
             selected = new Array() ; 
@@ -240,10 +280,17 @@ $('#todosClientes').click(function(e){
                     selected.push($(this).val());
                 }
             });
-            p='Espacio Fisico';
-            console.log("espacios",selected);           
+            p="Espacio Fisico";
+            $('#espacioFisico').modal('hide');
+             $('.modal-backdrop').remove(); 
+            console.log("espacios",selected);   
+            console.log(p);        
         }); 
 
+        $("#selEspacioFisico").change(function () {            console.log("marcar clientes");
+            $('#formEspacioFisico input[type=checkbox]').prop('checked', $(this).prop("checked"));
+        });
+        
 
         $("#registrarCircular").click(function (e) {
             e.preventDefault();
@@ -301,7 +348,7 @@ $('#todosClientes').click(function(e){
                                 success: function (datos) {
                                     console.log("datos1", datos);
                                     if (datos != 0) {
-                                     toastr["success"]("CIRCULAR CREADA.", "Éxito");
+                                   toastr["success"]("CIRCULAR CREADA.", "Éxito");
                                     setTimeout(() => {
                                         window.location = "?page=home";
                                     }, 4000);
@@ -318,5 +365,88 @@ $('#todosClientes').click(function(e){
     });
 }
 
+
+//filtros de busqueda
+
+$("#buscarcliente").keyup(function(e){
+    e.preventDefault();
+      clave = $("#buscarcliente").val().trim();
+     if(clave){
+         $('#tblClientesCirculares').find('tbody tr').hide();
+         $('#tblClientesCirculares tbody tr').each(function(){
+             let nombres=$(this).children().eq(1);
+             if(nombres.text().toUpperCase().includes(clave.toUpperCase())){
+                 $(this).show()
+             }
+         });
+     }
+     else
+     {
+        listUsuariosCirculares();
+     }
+ 
+ });
+
+
+ $("#buscarempresa").keyup(function(e){
+    e.preventDefault();
+      clave = $("#buscarempresa").val().trim();
+     if(clave){
+         $('#tblEmpresasCirculares').find('tbody tr').hide();
+         $('#tblEmpresasCirculares tbody tr').each(function(){
+             let nombres=$(this).children().eq(1);
+             if(nombres.text().toUpperCase().includes(clave.toUpperCase())){
+                 $(this).show()
+             }
+         });
+     }
+     else
+     {
+        empresasParaCirculares();
+
+     }
+ 
+ });
+
+
+ $("#buscarespaciofisico").keyup(function(e){
+    e.preventDefault();
+      clave = $("#buscarespaciofisico").val().trim();
+     if(clave){
+         $('#tblEspacioFiscoCirculares').find('tbody tr').hide();
+         $('#tblEspacioFiscoCirculares tbody tr').each(function(){
+             let nombres=$(this).children().eq(1);
+             if(nombres.text().toUpperCase().includes(clave.toUpperCase())){
+                 $(this).show()
+             }
+         });
+     }
+     else
+     {
+        getEspacioFisicoCircular(esp);
+     }
+ 
+ });
+
+ 
+ $("#buscarmixcomercial").keyup(function(e){
+    e.preventDefault();
+      clave = $("#buscarmixcomercial").val().trim();
+     if(clave){
+         $('#tblmixComercialCirculares').find('tbody tr').hide();
+         $('#tblmixComercialCirculares tbody tr').each(function(){
+             let nombres=$(this).children().eq(1);
+             if(nombres.text().toUpperCase().includes(clave.toUpperCase())){
+                 $(this).show()
+             }
+         });
+     }
+     else
+     {
+        mixComercialCirculares();
+     }
+ 
+ });
+ mixComercialCirculares();
 
 });

@@ -92,6 +92,7 @@ class ComunicadoController extends Conexion
 
     public function getPermisosParaCliente($query)
     {
+        
         $result = pg_query($this->conn, $query);
         $datos = array();
         if(pg_num_rows($result) > 0)
@@ -228,6 +229,62 @@ class ComunicadoController extends Conexion
 		}
 		//pg_close($this->conn);
 		return $id;
+    }
+
+    public function updatePermiso($comunicado)
+    {
+        $query = "update comunicado set de_comunicado= '".$comunicado->getDe_comunicado()."', "+
+         "para_comunicado='".$comunicado->getPara_comunicado()."', "+
+         "asunto_comunicado='".$comunicado->getAsunto_comunicado()."', "+
+         "detalle_comunicado='".$comunicado->getDetalle_comunicado()."',"+
+         "foto_comunicado='".$comunicado->getFoto_comunicado()."', "+
+         "codigo_comunicado='".$comunicado->getCodigo_comunicado()."' "+
+         "where id_comunicado=".$comunicado->getId_comunicado();
+     
+        echo $query;
+        $result = pg_query($this->conn, $query);
+        //pg_close($this->conn);
+        return $result;
+    }
+    public function getPermisosAprobadosNoAprobados($query)
+    {
+        
+        $result = pg_query($this->conn, $query);
+        $datos = array();
+        if(pg_num_rows($result) > 0)
+		{
+            while($info = pg_fetch_array($result))
+			{
+                $obj_comunicado_usuario = new ComunicadoUsuario();
+                $con_comunicado_usuario = new ComunUsuaController();
+                $obj_comunicado_usuario = $con_comunicado_usuario->listComunUsuarioByComunicado($info[0]);
+                $datos[] = array(
+                    "success" => true,
+                    "id_comunicado" => $info[0],
+                    "destinatario"=> $obj_comunicado_usuario,
+                    "id_usuario_creador" => $info[1],
+                    "de_comunicado"=> $info[2],
+                    "para_comunicado" => $info[3],
+                    "codigo_comunicado" => $info[4],
+                    "asunto_comunicado" => $info[5],
+                    "mensaje_comunicado" => $info[6],
+                    "detalle_comunicado" => $info[7],
+                    "dia_comunicado" => $info[8],
+                    "mes_comunicado" => $info[9],
+                    "anio_comunicado" => $info[10],
+                    "hora_comunicado" => $info[11],
+                    "fecha_caducidad_comunicado" => $info[12],
+                    "foto_comunicado" => $info[13],
+                    "tipo_comunicado" => $info[14]
+                );
+            }
+        }
+        else
+		{
+			$datos[] = array("success" => false);
+		}
+        pg_close($this->conn);
+        return $datos;    
     }
 }
 

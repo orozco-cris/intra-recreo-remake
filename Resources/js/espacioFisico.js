@@ -99,7 +99,7 @@ $(document).ready(function(){
 					//		console.log("respuesta", data);
 							//if (response != 0) {
 								console.log("response",response);
-                            var dat = {
+                                var dat = {
                                 crud: "createEspacioFisico",
                                 idEtapa:etapa,
                                 denominacion:denominacion,
@@ -111,20 +111,22 @@ $(document).ready(function(){
                                 estado:estado,
                                 codigo:codigo
                                 };
-                                console.log("datos",dat);
+                                console.log("datos a enviar",dat);
                                 $.ajax({
                                     data: dat,
                                     url: "./Model/EspacioFisicoAjax.php",
                                     method: "POST",
-                                    success: function(datos){
-                                        console.log("datos1",datos);
-                                        if (datos != 0) {
-                                           /* toastr["success"]("ESPACIO FÍSICO REGISTRADO.", "Éxito");
-                                                setTimeout(() => {
-                                                    window.location = "?page=home";
-                                                }, 4000); */
-                                        } else {
-                                            toastr["error"]("No se puedo registrar el espacio físico.", "Error");
+                                    success: function(data){
+                                        console.log("datos recibido del ingreso",data);
+                                        if (data==1) {
+                                            toastr["success"]("ESPACIO FISICO REGISTRADO.", "Éxito");
+                                                  setTimeout(() => {
+                                                    window.location = "?page=HOME";
+                                                }, 4000);
+                                         } else if (data == 0)  {
+                                            toastr["error"]("No se puedo registrar el espacio fisico.", "Error");
+                                        } else{
+                                            toastr["error"]("Denominacion ya registrada.", "Error");
                                         }
                                     }
                                     });
@@ -133,6 +135,31 @@ $(document).ready(function(){
                                     
                                     
     }
+
+
+
+    function verificarDenominacion(denominacion){
+        
+        var dat = {
+            crud: "verificarEspacioFisico",
+             denominacion:denominacion,
+            };
+            console.log("datos a enviar",dat);
+            $.ajax({
+                data: dat,
+                url: "./Model/EspacioFisicoAjax.php",
+                method: "POST",
+                success: function(data){
+                    console.log("datos recibido",data);
+                    if (data == 1) {
+                        toastr["error"]("Denominacion ya registrada.", "Error");
+                     } 
+                }
+                });
+                                    
+                                    
+    }
+
 
     $("#crear").click(function(e){
 		e.preventDefault();
@@ -148,31 +175,17 @@ $(document).ready(function(){
                             filename);
 	}); 
 
+   /*  $("#denominacion").blur(function(e){
+        e.preventDefault();
+        verificarDenominacion($("#denominacion").val());
+    });
+ */
 
 
 
-    function getEspacioFisicoArriendo(){
-        var dat = {
-            crud:"lisEspacioArriendo"
-        };
 
-        $.ajax({
-            data: dat,
-            url:"./Model/EspacioFisicoAjax.php",
-            method: "POST",
-            success: function(data){             
-                $("#listDenominacion").html(data);
-               
-            },
-    
-            error: function(error){
-                console.error(error);
-            }
-            
-        });
-    }
 
-    getEspacioFisicoArriendo();
+
 
 
 });

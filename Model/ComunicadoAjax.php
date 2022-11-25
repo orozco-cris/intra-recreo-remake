@@ -145,7 +145,8 @@ if($_POST["crud"])
                             $row["comunicado"]->getMes_comunicado().'/'.
                             $row["comunicado"]->getDia_comunicado().'</td>
                         <td class="text-center">'.$row["comunicado"]->getPara_comunicado().'</td>
-                        <td class="text-center"><a class="btn btn-link" href="#">Ver más</a></td>
+                        <td class="text-center"><a class="btn btn-link" 
+                    href="?page=detalleCircularEspecifica&circular='.base64_encode($row["comunicado"]->getId_comunicado()).'">Ver más</a></td>
                     </tr>';
                     
                 }
@@ -189,7 +190,8 @@ if($_POST["crud"])
                             $row["comunicado"]->getMes_comunicado().'/'.
                             $row["comunicado"]->getDia_comunicado().'</td>
                         <td class="text-center">'.$row["comunicado"]->getPara_comunicado().'</td>
-                        <td class="text-center"><a class="btn btn-link" href="#">Ver más</a></td>
+                        <td class="text-center"><a class="btn btn-link" 
+                        href="?page=usuariosCircularEspecifica&circular='.base64_encode($row["comunicado"]->getId_comunicado()).'">Ver más</a></td>
                     </tr>';
                     
                 }
@@ -197,6 +199,108 @@ if($_POST["crud"])
             else
 				{
 					$html .= "<tr><td colspan='4' class='text-center'>No existen circulares sin visualización</td></tr>";
+				}
+				$html .= '</tbody></table>';
+				echo $html;
+        break;
+
+
+        case 'updatePermiso':
+            session_start();
+            $comunicado = new Comunicado();
+            $con_comunicado = new ComunicadoController();
+            $comunicado_usuario = new ComunicadoUsuario();
+            $con_comunicado_usuario = new ComunUsuaController();
+
+            date_default_timezone_set('America/Guayaquil');
+            $hoy = getdate();
+            $dia = $hoy["mday"];
+            $mes = $hoy["mon"];
+            $anio = $hoy["year"];
+            $circular_codigo = "".$hoy["year"].$hoy["mon"] . $hoy["mday"] . $hoy["hours"] . $hoy["minutes"] . $hoy["seconds"] ."";
+            $hora = $hoy["hours"] . ":" . $hoy["minutes"] . ":" . $hoy["seconds"];
+            
+            //$id=$_POST["id_comunicado"];
+        
+            $imagen=$_POST["foto_comunicado"];
+            //$comunicado->setId_usuario_creador($_POST["usuario"]);
+            //$comunicado->setId_usuario_creador($_SESSION["usuario"]);
+            $comunicado->setId_comunicado($_POST["id_comunicado"]);
+            $comunicado->setDe_comunicado($_POST["de_comunicado"]);
+            $comunicado->setPara_comunicado($_POST["para_comunicado"]);
+            $comunicado->setCodigo_comunicado($circular_codigo);
+            $comunicado->setAsunto_comunicado($_POST["asunto_comunicado"]);
+            //$comunicado->setMensaje_comunicado($_POST["mensaje_comunicado"]);
+            $comunicado->setDetalle_comunicado($_POST["detalle_comunicado"]);
+            $comunicado->setDia_comunicado($dia);
+            $comunicado->setMes_comunicado($mes);
+            $comunicado->setAnio_comunicado($anio);
+            $comunicado->setHora_comunicado($hora);
+           // $comunicado->setFecha_caducidad_comunicado('');
+            $comunicado->setFoto_comunicado($imagen);
+            //$comunicado->setTipo_comunicado($_POST["tipo_comunicado"]);
+
+            
+            $result_comunicado = $con_comunicado->updatePermiso($comunicado);
+            
+            if($result_comunicado)
+            {
+                $result_comunicado_usuario = $con_comunicado_usuario->updateComunicado($_POST["id_comunicado"]);
+                if($result_comunicado_usuario)
+                {
+                    echo 'correcto';
+                }else
+                {
+                    echo 'incorrecto';
+                }
+            }else
+            {
+                echo 'incorrecto';
+            }
+        break;
+
+        case 'usuariosCirculares':
+            $circular = $_POST["circular"];
+            $obj_usuario_controller = new ComunUsuaController();
+            $query = " select *from usuario as u inner join comunicado_usuario as cu
+            on u.id_usuario=cu.id_usuario where id_comunicado=".$circular;
+            $obj_usuario = $obj_usuario_controller->getClientesCircular($query);
+            $html = '<table class="table table-bordered table-striped" id="tblCircularesClientes">
+				<thead>
+					<tr>
+						<th class="back-color text-center">Nombre</th>
+						<th class="back-color text-center">Login</th>
+						<th class="back-color text-center">Contraseña</th>
+                        <th class="back-color text-center">Espacio Fisico</th>   
+					</tr>
+				</thead>
+				<tbody>';
+            if($obj_usuario[0]["success"])
+            {
+                foreach ($obj_usuario as $row) 
+                {
+                    $revision=$row["comunicado_usuario"]->getRevision();
+                    if($revision==0){
+                        $html .= '<tr style="background:#FAAC58; border-radius:3px !important;">
+                        <td >'.$row["cliente"]->getNombre_usuario().'</td>
+                        <td class="text-center">'.$row["cliente"]->getLogin_usuario().'</td>
+                        <td class="text-center">'.$row["cliente"]->getClave_usuario().'</td>
+                        <td class="text-center"></td>                        
+                    </tr>';   
+                    }else{
+                        $html .= '<tr>
+                        <td>'.$row["cliente"]->getNombre_usuario().'</td>
+                        <td class="text-center">'.$row["cliente"]->getLogin_usuario().'</td>
+                        <td class="text-center">'.$row["cliente"]->getClave_usuario().'</td>
+                        <td class="text-center"></td>                        
+                    </tr>';   
+                    }
+                                     
+                }
+            }
+            else
+				{
+					$html .= "<tr><td colspan='4' class='text-center'>No existen clientes registradas</td></tr>";
 				}
 				$html .= '</tbody></table>';
 				echo $html;

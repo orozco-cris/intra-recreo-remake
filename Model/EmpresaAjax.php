@@ -239,6 +239,8 @@ if($_POST["crud"])
             $mes = $hoy["mon"];
             $anio = $hoy["year"];
             $fecha=$anio."-".$mes."-".$dia;
+            $rucEmp=$_POST["ruc"];
+            $val;
             $con_empresa = new EmpresaController();
             $empresa->setId_usuario($_POST["usuario"]);
             $empresa-> setId_mix_comercial($_POST["mixc"]);
@@ -250,16 +252,29 @@ if($_POST["crud"])
             $empresa-> setFecha_registro($fecha);
             $empresa-> setFecha_deshabilitado($fecha);
             $empresa-> setEstado_empresa(1);
+             
+             $con_ruc= new EmpresaController();
+            $result=$con_ruc->verificarEmpresa($rucEmp);
+            if($result) {
+                $result_empresa = $con_empresa->createEmpresa($empresa);
+                
+                if($result_empresa)
+                {
+                    $var=1;
+                    //echo json_encode(array('success' => 1));
+                   echo $var; 
+                }else
+                {
+                    $var=0;
+                    //echo json_encode(array('success' => 0));
+                    echo $var;
+                }   
+            } else{
+                $var=2;
+                //echo json_encode(array('success' => 0));
+                echo $var;
+            }                     
             
-            $result_empresa = $con_empresa->createEmpresa($empresa);
-            
-            if($result_empresa)
-            {
-                echo 'correcto';
-            }else
-            {
-                echo 'incorrecto';
-            }
         break;      
         
         case 'modificarEmpresa':
@@ -409,7 +424,7 @@ if($_POST["crud"])
             $con_empresa = new EmpresaController();
             $query = "select * from empresa where estado_empresa=1 and id_usuario is not null";
             $con_empresa_list = $con_empresa->listEmpresas($query);
-            $html = '<table class="table table-bordered text-center table-striped">
+            $html = '<table class="table table-bordered text-center table-striped" id="tblEmpresasCirculares">
 				<thead>
 					<tr>
                         <th class="back-color text-center">SELECCIONAR</th>
@@ -417,7 +432,7 @@ if($_POST["crud"])
 						<th class="back-color text-center">RUC</th>
 					</tr>
 				</thead>
-                <input type="checkbox" id="todasEmpresas" value="1" class="todasEmpresas"> Seleccionar todos<br>
+                
 				<tbody id="formEmpresas">';
                 
             if($con_empresa_list[0]["success"])

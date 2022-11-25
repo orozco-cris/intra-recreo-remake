@@ -142,10 +142,40 @@ class EspacioFisicoController extends Conexion
         '".$espacio_fisico->getCaracteristicas()."','".$espacio_fisico-> getFotografia_espacio()."',
         ".$espacio_fisico->getTipo_espacio().",".$espacio_fisico-> getEstado_espacio().",
         '".$espacio_fisico->getCodigo_espacio()."')";
-        echo $query;
+        
         $result = pg_query($this->conn, $query);
         //pg_close($this->conn);
         return $result;
+    }
+
+    
+    public function verificarEspacioFisico($denominacion)
+    {
+        $query = "select *from espacio_fisico where denominacion='".$denominacion."'";       
+        //echo $query;
+        $result = pg_query($this->conn, $query);
+
+        //pg_close($this->conn);
+        return $result;
+    }
+
+
+    public function usuarioEspacioFisicoCircular($espacioFisico){
+        $datos = array();
+        $query="select e.id_usuario from arriendo as arr inner join espacio_fisico as ef
+                on arr.id_espacio_fisico=ef.id_espacio_fisico inner join empresa as e
+                on arr.id_empresa=e.id_empresa where ef.id_espacio_fisico=".$espacioFisico;
+        echo $query;
+        $result=pg_query($this->conn, $query);
+        if(pg_num_rows($result) > 0)
+		{
+            while($info = pg_fetch_array($result))
+			{ 
+                $usuario=$info[0];
+            }
+        }
+        echo $usuario;
+        return  $usuario;
     }
 
 

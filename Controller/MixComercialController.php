@@ -72,6 +72,24 @@ class MixComercialController extends Conexion
         return $result;
     }
     
+
+    public function usuarioEmpresaMixComercialCircular($mixComercial){
+        $datos = array();
+        $query="select u.id_usuario from mix_comercial as mc inner join Empresa as e
+        on mc.id_mix_comercial=e.id_mix_comercial inner join usuario as u
+        on e.id_usuario=u.id_usuario where mc.id_mix_comercial=".$mixComercial;
+        echo $query;
+        $result=pg_query($this->conn, $query);
+        if(pg_num_rows($result) > 0)
+		{
+            while($info = pg_fetch_array($result))
+			{ 
+                $usuario=$info[0];
+            }
+        }
+        echo $usuario;
+        return  $usuario;
+    }
 }
 
 ?>

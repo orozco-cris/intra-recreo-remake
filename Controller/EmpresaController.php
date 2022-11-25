@@ -196,8 +196,9 @@ class EmpresaController extends Conexion
         '".$empresa->getTelefono_empresa()."','".$empresa-> getDireccion_empresa()."',
         '".$empresa->getCorreo_empresa()."','".$empresa-> getFecha_registro()."',
         '".$empresa->getFecha_deshabilitado()."',".$empresa-> getEstado_empresa().")";
-        echo $query;
+    
         $result = pg_query($this->conn, $query);
+        
         //pg_close($this->conn);
         return $result;
     }
@@ -293,6 +294,33 @@ class EmpresaController extends Conexion
         }
     }
 
+
+    
+    public function verificarEmpresa($ruc)
+    {
+        $query = "select *from empresa where ruc_empresa='".$ruc."'";
+        
+        $result = pg_query($this->conn, $query);
+        
+        //pg_close($this->conn);
+        return $result;
+    }
+
+    public function usuarioEmpresaCircular($empresa){
+        $datos = array();
+        $query="select id_usuario from empresa where id_empresa=".$empresa;
+        echo $query;
+        $result=pg_query($this->conn, $query);
+        if(pg_num_rows($result) > 0)
+		{
+            while($info = pg_fetch_array($result))
+			{ 
+                $usuario=$info[0];
+            }
+        }
+        echo $usuario;
+        return  $usuario;
+    }
 
     
 }

@@ -594,7 +594,7 @@ require_once "./../Controller/ComunUsuaController.php";
 					$con_usuario = new UsuarioController();
 					$query = "select * from usuario where estado_usuario=1 and id_tipo_usuario=2";
 					$con_usuario_list = $con_usuario->listClientes($query);
-					$html = '<table class="table table-bordered text-center table-striped" id="tblEmpresa">
+					$html = '<table class="table table-bordered text-center table-striped" id="tblClientesCirculares">
 						<thead>
 							<tr>
 								<th class="back-color text-center">SELECCIONAR</th>
@@ -602,15 +602,15 @@ require_once "./../Controller/ComunUsuaController.php";
 								<th class="back-color text-center">CÉDULA</th>
 							</tr>
 						</thead>
-						<input type="checkbox" id="todosClientes" value="1" class="todosClientes"> Seleccionar todos<br>
-						<tbody id="formClientes">';
 						
+						<tbody id="formClientes">
+						';
 					if($con_usuario_list[0]["success"])
 					{
 						foreach ($con_usuario_list as $row) 
 						{
 							$html .= '<tr>
-								<td><input type="checkbox" class="ckClientes" name="clientes" id="id_clientes" value="'.$row["id_usuario"].'"></td>
+								<td><input type="checkbox" class="ckClientes" name="clientes" value="'.$row["id_usuario"].'"></td>
 								<td>'.$row["nombre_usuario"].' '.$row["apellido_usuario"].'</td>
 								<td>'.$row["cedula_usuario"].'</td>
 							</td>

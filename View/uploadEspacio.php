@@ -19,17 +19,15 @@
             $target_file = $uploaddir . $nombre . ".".$imageFileType;
             // $uploadfile = $uploaddir . basename($_FILES['userfile']['name']) . "." . $imageFileType;
             if(move_uploaded_file($_FILES['file']['tmp_name'],$target_file)){
-                echo $nombre.".".$imageFileType;
+                $nombre= $nombre.".".$imageFileType;
                 return $nombre;
             }else{
                 $nombre="";
-                echo $nombre;
             return  $nombre;
             }
 
         }else{
             $nombre="";
-            echo $nombre;
             return  $nombre;
         }
     }

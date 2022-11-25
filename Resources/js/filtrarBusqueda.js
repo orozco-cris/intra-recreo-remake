@@ -185,5 +185,113 @@ $("#denominacion").keyup(function(e){
      }
  
  });
+ 
+
+ $("#denominacion").keyup(function(e){
+    e.preventDefault();
+      clave = $("#denominacion").val().trim();
+     if(clave){
+         $('table').find('tbody tr').hide();
+         $('table tbody tr').each(function(){
+             let nombres=$(this).children().eq(2);
+             if(nombres.text().toUpperCase().includes(clave.toUpperCase())){
+                 $(this).show()
+             }
+         });
+     }
+     else
+     {
+         getArriendos();
+     }
+ 
+ });
+
+
+ function getEmpresaArriendo(){
+    var dat = {
+        crud:"listEmpresaArriendo"
+    };
+    $.ajax({
+        data: dat,
+        url:"./Model/EmpresaAjax.php",
+        method: "POST",
+        success: function(data){ 
+            $("#listEmpresas").html(data);
+        },
+
+        error: function(error){
+            console.error(error);
+        }
+        
+    });
+} 
+
+getEmpresaArriendo();
+
+
+$("#buscarempresa").keyup(function(e){
+    e.preventDefault();
+      clave = $("#buscarempresa").val().trim();
+     if(clave){
+         $('#tblEmpresa').find('tbody tr').hide();
+         $('#tblEmpresa tbody tr').each(function(){
+             let nombres=$(this).children().eq(1);
+             if(nombres.text().toUpperCase().includes(clave.toUpperCase())){
+                 $(this).show()
+             }
+         });
+     }
+     else
+     {
+         getEmpresaArriendo();
+     }
+ 
+ });
+
+
+ function getEspacioFisicoArriendo(){
+    var dat = {
+        crud:"lisEspacioArriendo"
+    };
+
+    $.ajax({
+        data: dat,
+        url:"./Model/EspacioFisicoAjax.php",
+        method: "POST",
+        success: function(data){             
+            $("#listDenominacion").html(data);
+           
+        },
+
+        error: function(error){
+            console.error(error);
+        }
+        
+    });
+}
+
+
+
+ $("#buscardenominacion").keyup(function(e){
+    e.preventDefault();
+      clave = $("#buscardenominacion").val().trim();
+     if(clave){
+         $('#tblEspacioFisico').find('tbody tr').hide();
+         $('#tblEspacioFisico tbody tr').each(function(){
+             let nombres=$(this).children().eq(1);
+             if(nombres.text().toUpperCase().includes(clave.toUpperCase())){
+                 $(this).show()
+             }
+         });
+     }
+     else
+     {
+        getEspacioFisicoArriendo();
+     }
+ 
+ });
+ 
+ getEspacioFisicoArriendo();
+
 
 });
