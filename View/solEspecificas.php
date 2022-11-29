@@ -3,10 +3,15 @@
     <?php 
         $comunicado = 0;
         $estado = 0;
+        $revision = 0;
         if(isset($_GET["comu"]))
         {
             $comunicado = $_GET["comu"];
             $estado = $_GET["estado"];
+            //$revision= $_GET["revision"];
+        }
+        if(isset($_GET["revision"]))
+        {
             $revision= $_GET["revision"];
         }
     ?>
