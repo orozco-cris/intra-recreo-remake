@@ -67,12 +67,12 @@ $(document).ready(function(){
                     console.log("datos recibidos");
                     console.log(response);
                     if (response == 1) {
-                        toastr["success"]("EMPRESA REGISTRADA.", "Éxito");
+                        toastr["success"]("Empresa registrada.", "Éxito");
                               setTimeout(() => {
                                 window.location = "?page=empresas";
                             }, 4000);
                      } else if (response == 0)  {
-                        toastr["error"]("No se puedo registrar la empresa.", "Error");
+                        toastr["error"]("No se puede registrar la empresa.", "Error");
                     } else{
                         toastr["error"]("RUC ya registrado.", "Error");
                     }
@@ -145,8 +145,51 @@ $(document).ready(function(){
 
 
     
+    function getEmpresasSegOper(){
+        var dat = {
+            crud:"lisEmpresasSegOper"
+        };
 
-
+        $.ajax({
+            data: dat,
+            url:"./Model/EmpresaAjax.php",
+            method: "POST",
+            success: function(data){ 
+                console.log(data);              
+                $("#tblEmpresasSegOpe").html(data);
+            },
     
+            error: function(error){
+                console.error(error);
+            }
+            
+        });
+    }
+
+    getEmpresasSegOper();
+
+
+    $("#buscarEmpresa").keyup(function(e){
+        e.preventDefault();
+          clave = $("#buscarEmpresa").val().trim();
+         if(clave){
+             $('#tblEmpresasSegOpe').find('tbody tr').hide();
+             $('#tblEmpresasSegOpe tbody tr').each(function(){
+                 let nombres=$(this).children().eq(0);
+                 if(nombres.text().toUpperCase().includes(clave.toUpperCase())){
+                     $(this).show()
+                 }
+             });
+         }
+         else
+         {
+            getEmpresasSegOper();
+         }
+     
+     });
+
+
+
+    //
 
 });

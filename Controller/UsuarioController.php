@@ -213,9 +213,10 @@ class UsuarioController extends Conexion
     public function eliminarUsuario($usuario)
     {
         $query = "update usuario set estado_usuario=0 where id_usuario=".$usuario."";
-        echo $query;
+        //echo $query;
         $result = pg_query($this->conn, $query);
         //pg_close($this->conn);
+        
         return $result;
     }
 
@@ -236,6 +237,26 @@ class UsuarioController extends Conexion
         //pg_close($this->conn);
         return $result;
     }
+
+    public function verificarUsuarioEliminar($usuario)
+    {
+        $query = "select *from usuario as u inner join empresa as e
+                    on u.id_usuario=e.id_usuario where u.id_usuario=".$usuario."";
+        //echo $query;
+        $result = pg_query($this->conn, $query);
+        $var=0;
+        if(pg_num_rows($result) > 0)
+		{
+            $var=1;
+        }
+        //print_r($result);
+        //pg_close($this->conn);
+        return $var;
+    }
+
+
+
+    
 }
 
 ?>

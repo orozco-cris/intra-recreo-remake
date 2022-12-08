@@ -48,7 +48,7 @@
         </div>
     </div>
     <div>
-        <input type="hiden" id="tipo" value="<?php echo $tipo; ?>">
+        <input type="hidden" id="tipo" value="<?php echo $tipo; ?>">
     </div>
 
 </div>

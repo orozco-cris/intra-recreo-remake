@@ -124,7 +124,7 @@ $(document).ready(function(){
                 success: function(datos){
                     console.log("datos1",datos);
                     if (datos != 0) {
-                         toastr["success"]("ARRIENDO REGISTRAD.", "Éxito");
+                         toastr["success"]("Arriendo registrado.", "Éxito");
                               setTimeout(() => {
                                 window.location = "?page=arriendos";
                             }, 4000); 
@@ -198,12 +198,12 @@ $(document).ready(function(){
                 method: "POST",
                 success: function(datos){
                     if (datos != 0) {
-                       toastr["success"]("ARRIENDO ELIMINADO.", "Éxito");
+                       toastr["success"]("Arriendo eliminado.", "Éxito");
                               setTimeout(() => {
                                 window.location = "?page=arriendos";
                             }, 4000);
                     } else {
-                        toastr["error"]("No se puedo ELIMINAR el arriendo.", "Error");
+                        toastr["error"]("No se puedo eliminar el arriendo.", "Error");
                     }
                 }
                 });
@@ -269,12 +269,12 @@ $(document).ready(function(){
                     success: function(datos){
                         console.log("datos a modificar",datos);
                         if (datos != 0) {
-                         toastr["success"]("ARRIENDO MODIFICADO.", "Éxito");
+                         toastr["success"]("Arriendo modificado.", "Éxito");
                                   setTimeout(() => {
                                     window.location.reload();
                                 }, 4000);
                         } else {
-                            toastr["error"]("No se puedo MODIFICAR EL ARRIENDO.", "Error");
+                            toastr["error"]("No se puede modificar el arriendo.", "Error");
                         }
                     }
                     });

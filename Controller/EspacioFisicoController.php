@@ -154,9 +154,13 @@ class EspacioFisicoController extends Conexion
         $query = "select *from espacio_fisico where denominacion='".$denominacion."'";       
         //echo $query;
         $result = pg_query($this->conn, $query);
-
+        $var=0;
+        if(pg_num_rows($result) > 0)
+        {
+            $var=1;
+        }
         //pg_close($this->conn);
-        return $result;
+        return $var;
     }
 
 
@@ -178,5 +182,18 @@ class EspacioFisicoController extends Conexion
         return  $usuario;
     }
 
+    public function verificarEspacioFisicoEliminar($id)
+    {
+        $query = "select *from espacio_fisico where id_espacio_fisico='".$id."'";       
+        //echo $query;
+        $result = pg_query($this->conn, $query);
+        $var=0;
+        if(pg_num_rows($result) > 0)
+        {
+            $var=1;
+        }
+        //pg_close($this->conn);
+        return $var;
+    }
 
 }

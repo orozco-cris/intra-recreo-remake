@@ -21,12 +21,12 @@ $(document).ready(function(){
                 success: function(datos){
                     console.log("datos1",datos);
                     if (datos != 0) {
-                        toastr["success"]("EMPRESA MODIFICADA.", "Éxito");
+                        toastr["success"]("Empresa Modificada.", "Éxito");
                               /*setTimeout(() => {
                                 window.location = "?page=empresas";
                             }, 4000); */
                     } else {
-                        toastr["error"]("No se puedo MODIFICAR los datos de la empresa.", "Error");
+                        toastr["error"]("No se puede modificar los datos de la empresa.", "Error");
                     }
                 }
                 });

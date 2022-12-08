@@ -89,6 +89,11 @@ function getEspacioFisicoCircular(id){
         method: "POST",
         success: function(data){             
             $("#espacioFisicoCircular").html(data);
+            $('.zoom').hover(function() {
+                $(this).addClass('transition');
+            }, function() {
+                $(this).removeClass('transition');
+            });
            
         },
 
@@ -348,12 +353,12 @@ var esp;
                                 success: function (datos) {
                                     console.log("datos1", datos);
                                     if (datos != 0) {
-                                   toastr["success"]("CIRCULAR CREADA.", "Éxito");
+                                   toastr["success"]("Circular creada.", "Éxito");
                                     setTimeout(() => {
                                         window.location = "?page=home";
                                     }, 4000);
                                 } else {
-                                    toastr["error"]("No se puedo crear la circular.", "Error");
+                                    toastr["error"]("No se puede crear la circular.", "Error");
                                 }
                     }
                 });

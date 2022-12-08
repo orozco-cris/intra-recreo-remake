@@ -41,7 +41,7 @@ $(document).ready(function(){
                                 window.location = "?page=mixComercial";
                             }, 4000); 
                     } else {
-                        toastr["error"]("No se puedo crear la categoria.", "Error");
+                        toastr["error"]("No se puede crear la categoria.", "Error");
                     }
                 }
                 });
@@ -101,7 +101,7 @@ $(document).ready(function(){
                                 window.location = "?page=mixComercial";
                             }, 4000); 
                     } else {
-                        toastr["error"]("No se puedo MODIFICAR la categoria.", "Error");
+                        toastr["error"]("No se puede modificar la categoría.", "Error");
                     }
                 }
                 });

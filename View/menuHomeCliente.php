@@ -1,5 +1,5 @@
-   <!-- Listado de permisos para el los clientes -->
-<div class="container-fluid">
+   <!-- menu para el cliente -->
+
     <div class="row" style="position: relative;">
         <div class="encabezado" style="padding: 0px">
         <a href="?page=home">
@@ -23,8 +23,8 @@
             						CIRCULARES
           						</font></font></a>
           						<ul class="dropdown-menu bg-primary" style="border: none !important; left:15%">
-            						<li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Circulares</font></font></a></li>
-                                    <li><a class="dropdown-item opcion" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Circulares no revisadas</font></font></a></li>    
+            						<li><a class="dropdown-item opcion" href="?page=circularesClientes"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Circulares</font></font></a></li>
+                                    <li><a class="dropdown-item opcion" href="?page=circularesNoRevisadasClientes"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Circulares no revisadas</font></font></a></li>    
           						</ul>
         					</li>
            					<li class="nav-item dropdown" style="padding-left:30%">
