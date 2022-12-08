@@ -61,7 +61,7 @@ $(document).ready(function(){
                 success: function(datos){
                     console.log("datos1",datos);
                     if (datos != 0) {
-                        toastr["success"]("ETAPA COMERCIAL.", "Éxito");
+                        toastr["success"]("Etapa comercial creada.", "Éxito");
                               setTimeout(() => {
                                 window.location = "?page=etapaComercial";
                             }, 4000); 

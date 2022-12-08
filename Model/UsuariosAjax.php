@@ -144,7 +144,7 @@ require_once "./../Controller/ComunUsuaController.php";
 					</thead>
 					<tbody>';
 					
-				if($con_usuario_cliente[0]["success"])
+				if($con_usuario_cliente!=null && $con_usuario_cliente[0]["success"])
 				{
 					foreach ($con_usuario_cliente as $row) 
 					{
@@ -243,15 +243,33 @@ require_once "./../Controller/ComunUsuaController.php";
 					$id_usuario=$_POST["usuario"];
 					$con_Usuario= new UsuarioController();
 					
-					$result = $con_Usuario->eliminarUsuario($id_usuario);
+					$res=$con_Usuario->verificarUsuarioEliminar($id_usuario);
 					
-					if($result)
+				
+					if($res==0)
 					{
-						echo 'correcto';
-					}else
-					{
-						echo 'incorrecto';
-					}
+						$con_eliminarUsuario=new UsuarioController();
+						$result = $con_eliminarUsuario->eliminarUsuario($id_usuario);
+							if($result)
+							{
+								//echo "elimino el usuario";
+								$var=1;
+								//echo json_encode(array('success' => 1));
+								echo $var; 
+							}else
+							{
+								$var=0;
+								//echo json_encode(array('success' => 0));
+								 //"no se elimino el usuario";
+								echo $var;
+							}   
+					} else{
+						$var=2;
+						//echo "usuario asignado a una empresa";
+						//echo json_encode(array('success' => 0));
+						echo $var;
+					}                     
+		
 				break;
 
 				case 'usuarioInternoId':
@@ -628,6 +646,21 @@ require_once "./../Controller/ComunUsuaController.php";
 		
 
 				
+				case 'verificarUsuarioEliminar':
+					$id_usuario=$_POST["usuario"];
+					$con_Usuario= new UsuarioController();
+					
+					$result = $con_Usuario->verificarUsuarioEliminar($id_usuario);
+					
+					if($result)
+					{
+						echo 'correcto';
+					}else
+					{
+						echo 'incorrecto';
+					}
+					return $result;
+				break;
         }
     }
 

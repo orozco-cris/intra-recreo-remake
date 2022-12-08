@@ -104,7 +104,58 @@
                                 <div class="col-md-12">
                                     <form class="form form-horizontal" >
                                         <div class="form-body" id="permisoAModificar">
-
+                                        <div class="row" style="position: relative;" id="modificarPermiso">
+                                                <div class="col-md-6">
+                                                    <div class="row" style="padding:5px">
+                                                        <div class="col-md-4" style="padding:15px">
+                                                            <label> DE:</label>
+                                                        </div>
+                                                        <div class="col-md-8 form-group">
+                                                            <input id="de" class="form-control" type="text" >
+                                                        </div>
+                                                        <div class="col-md-4" style="padding:15px">
+                                                            <label> ASUNTO:</label>
+                                                        </div>
+                                                        <div class="col-md-8 form-group">
+                                                            <input id="asunto" class="form-control" type="text">
+                                                        </div>
+                                                        <div class="col-md-4" style="padding:15px">
+                                                            <label> PARA:</label>
+                                                        </div>
+                                                        <div class="col-md-8 form-group">
+                                                        <input id="para" class="form-control" type="text" >
+                                                        </div>
+                                                        <input id="codigo" class="form-control" type="hidden" >
+                                                       <!--  <div class="col-md-4" style="padding:15px">
+                                                            <label> MENSAJE:</label>
+                                                        </div> -->
+                                                        <div class="col-md-8 form-group">
+                                                            <input id="mensaje" class="form-control" type="hidden" rows="3">
+                                                            <input id="tipo" class="form-control" type="hidden" value="permiso">
+                                                            <input id="fechacaducidad" class="form-control" type="hidden" value="2022/10/15">
+                                                        </div>
+                                                        <div class="row">
+                                                <div class="col-md-4" style="padding:10px">
+                                                    <label> DESCRIPCION:</label>
+                                                </div>
+                                                <div class="col-md-8 form-group">
+                                                    <textarea class="fom-control" name="txtDescripcion" id="txtDescripcion" rows="8"></textarea> 
+                                                </div>
+                                                <input type="hidden" id="id_comunicado">
+                                            </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="row" id="val">   
+                                                    <div class="col-md-10 form-group" id="imagen">
+                                                    <img style="width:80%; heigth:50px">  
+                                                    </div>                                                     
+                                                        <div class="col-md-10 form-group" style="padding:10px" >
+                                                            <input type="file" class="btn btn-primary" id="file" name="file" accept="image/gif, image/jpeg, image/png">
+                                                        </div>                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                        <div class="row">
                                             <div class="col-md-9"></div>
@@ -116,7 +167,6 @@
                                             </div>     
                                         </div> 
                                     </form>
-                                    </div>
                                     
                                 </div>
                             </div>
@@ -132,6 +182,8 @@
     <input type="hidden" id="id_estado_comunicado" value="<?php echo $estado; ?>">
     <input type="hidden" id="id_revision_comunicado" value="<?php echo $revision; ?>">
 </div>
+
+
 <style>
 .ck-editor__editable_inline {
     min-height: 150px;

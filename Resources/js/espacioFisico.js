@@ -40,31 +40,44 @@ $(document).ready(function(){
                 data: dat,
                 url: "./Model/EspacioFisicoAjax.php",
                 method: "POST",
-                success: function(datos){
-                    if (datos != 0) {
-                            toastr["success"]("ESPACIO FÍSICO ELIMINADO.", "Éxito");
+                success: function(response){
+                    if (response == 0) {
+                            toastr["success"]("Espacio fisico eliminado.", "Éxito");
                             setTimeout(() => {
                                 window.location.reload();
                           }, 4000);
                       
                        
-                    } else {
-                        toastr["error"]("No se puedo ELIMINAR el espacio físico.", "Error");
+                    } else  if  (response == 1){
+                        toastr["error"]("No se puede eliminar el espacio físico.", "Error");
                     }
+                    else  if  (response == 2){
+                        toastr["error"]("Espacio físico en arriendo.", "Error");
+                    }
+
                 }
                 });
     }
     
   
-     $("#id_espacio").click(function(e){
+     $(".class_espacio").click(function(e){
         e.preventDefault();
+        e.alert($(this).attr("value"));
+        alert($(this).attr("value"));
         console.log("Eliminar espacio fisico");
-       // $id=$("#id_espacio").val();
-        /* $id=$("#id_espacio").val($(this).attr('value'));
+       //$id=$("#id_espacio").val();
+       console.log(e.attr('id_espacio'));
+         $id=$("#id_espacio").val($(this).attr('value'));
         console.log("id espacio", $id);
-        eliminarEspacioFisico($id);     */
-    });  
+        eliminarEspacioFisico($id);     
+    });   
 
+
+  /*   function eliminar(id){
+        console.log("Eliminar espacio fisico");
+        eliminarEspacioFisico($id);     
+
+    } */
 
 	function filePreview(input) {
 		if (input.files && input.files[0]) {
@@ -119,15 +132,13 @@ $(document).ready(function(){
                                     success: function(data){
                                         console.log("datos recibido del ingreso",data);
                                         if (data==1) {
-                                            toastr["success"]("ESPACIO FISICO REGISTRADO.", "Éxito");
+                                            toastr["success"]("Espacio físico registado.", "Éxito");
                                                   setTimeout(() => {
                                                     window.location = "?page=HOME";
                                                 }, 4000);
                                          } else if (data == 0)  {
-                                            toastr["error"]("No se puedo registrar el espacio fisico.", "Error");
-                                        } else{
-                                            toastr["error"]("Denominacion ya registrada.", "Error");
-                                        }
+                                            toastr["error"]("No se puede registrar el espacio fisico.", "Error");
+                                        } 
                                     }
                                     });
                                 }
@@ -151,8 +162,10 @@ $(document).ready(function(){
                 method: "POST",
                 success: function(data){
                     console.log("datos recibido",data);
-                    if (data == 1) {
+                    if (data == 0) {
                         toastr["error"]("Denominacion ya registrada.", "Error");
+                        $("#denominacion").val('');
+                        $("#denominacion").focus();
                      } 
                 }
                 });
@@ -175,11 +188,15 @@ $(document).ready(function(){
                             filename);
 	}); 
 
-   /*  $("#denominacion").blur(function(e){
+
+     $("#denominacion").blur(function(e){
         e.preventDefault();
+        console.log("entro al evento");
+       // $(this).css("background-color", "#FFFFCC");
+
         verificarDenominacion($("#denominacion").val());
     });
- */
+ 
 
 
 

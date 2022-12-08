@@ -97,12 +97,12 @@ $(document).ready(function(){
                 success: function(datos){
                     console.log("datos a modificar",datos);
                     if (datos != 0) {
-                        toastr["success"]("USUARIO MODIFICADO.", "Éxito");
+                        toastr["success"]("Usuario modificado.", "Éxito");
                               setTimeout(() => {
                                 window.location.reload();
                             }, 4000);
                     } else {
-                        toastr["error"]("No se puedo MODIFICAR el usuario.", "Error");
+                        toastr["error"]("No se puede modificar el usuario.", "Error");
                     }
                 }
                 });
@@ -136,29 +136,21 @@ $(document).ready(function(){
                 data: dat,
                 url: "./Model/UsuariosAjax.php",
                 method: "POST",
-                success: function(datos){
-                    console.log("datos a modificar",datos);
-                    if (datos != 0) {
-                        $tipo=$("#id_tipo_usuario").val();
-                        if($tipo==2)
-                        {
-                            toastr["success"]("USUARIO ELIMINADO.", "Éxito");
-                            setTimeout(() => {
+                success: function(response){
+                    console.log("respuesta",response);
+                    if (response == 1) {
+                        toastr["success"]("Usuario eliminado.", "Éxito");
+                               setTimeout(() => {
                                 window.location = "?page=usuarioInterno";
-                          }, 4000);
-                        }else{
-                            
-                            toastr["success"]("USUARIO ELIMINADO.", "Éxito");
-                            setTimeout(() => {
-                                window.location = "?page=usuarioSistema";
-                          }, 4000);
-                        }
-                       
-                    } else {
-                        toastr["error"]("No se puedo ELIMINAR el usuario.", "Error");
+                            }, 4000);
+                     } else if (response == 0)  {
+                        toastr["error"]("No se puede eliminar el usuario.", "Error");
+                    }  else if (response == 2){
+                        toastr["error"]("Usuario asignado a una empresa.", "Error");
                     }
                 }
-                });
+            
+           });
     }
     
   

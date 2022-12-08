@@ -30,6 +30,7 @@ if($_POST["crud"])
             {
                 foreach ($con_espacio as $row) 
                 {
+                    $id=$row["espacio_fisico"]->getId_espacio_fisico();
                     $img=$row["espacio_fisico"]->getFotografia_espacio();
                     $html .= '<tr>
                         <td>'.$row["espacio_fisico"]->getDenominacion().'</td>
@@ -43,7 +44,7 @@ if($_POST["crud"])
                             </a>                      
                         </td>
                         <td>
-                            <button class="form-control btn btn-danger" id="id_espacio" type="button" value='.$row["espacio_fisico"]->getId_espacio_fisico().'> Eliminar</button>
+                            <button class="form-control btn btn-danger class_espacio"  id="id_espacio" value='.$id.'> Eliminar</button>
                         </td>
                     </td>
                     </tr>';
@@ -164,15 +165,29 @@ if($_POST["crud"])
             $id_espacio=$_POST["espacio"];
             $con_espacio= new EspacioFisicoController();
             
-            $result = $con_espacio->eliminarEspacioFisico($id_Espacio);
+            $elEspacio=new EspacioFisicoController();
+            $res=$elEspacio->verificarEspacioFisicoEliminar($id_Espacio);
+            if($res==0)
+            {
+                $result = $con_espacio->eliminarEspacioFisico($id_Espacio);
             
-            if($result)
-            {
-                echo 'correcto';
-            }else
-            {
-                echo 'incorrecto';
+                if($result)
+                {
+                    $var=0;
+                    echo $var;
+                }else
+                {
+                    $var=1;
+                echo $var;
+                }
             }
+            else
+            {
+                $var=2;
+                echo $var;
+            }
+
+           
         break;
 
         case 'createEspacioFisico':
@@ -192,8 +207,7 @@ if($_POST["crud"])
             
     
             $con_denominacion= new EspacioFisicoController();
-            $result=$con_denominacion->verificarEspacioFisico($denominacion);
-            if($result) {
+          
                 
                 $result_espacio_fisico = $con_espacio_fisico->createEspacioFisico($espacio_fisico);
                 
@@ -208,12 +222,7 @@ if($_POST["crud"])
                     //echo json_encode(array('success' => 1));
                    echo $var; 
                 }
-            }
-            else{
-                $var=2;
-                echo $var;
-
-            }                     
+            
         
         break;      
         
@@ -223,11 +232,13 @@ if($_POST["crud"])
                
             $con_denominacion= new EspacioFisicoController();
             $result=$con_denominacion->verificarEspacioFisico($denominacion);
-            if($result) {                
-                echo 0;              
+            if($result==1) {  
+                $var=0;              
+                echo $var;              
             }
-            else{                
-                echo 1;
+            else{    
+                $var=1;           
+                echo $var;
 
             }                     
         
@@ -351,7 +362,7 @@ if($_POST["crud"])
                     $html .= '<tr>
                     <td><input type="checkbox" name="espacioComercial" class="ckEspacios" id="id_espacioComercial" value="'.$row["espacio_fisico"]->getId_espacio_fisico().'"></td>
                         <td>'.$row["espacio_fisico"]->getDenominacion().'</td>
-                        <td style="with: 150px;"><img src="./Resources/uploads/'.$imagen.'.jpg" style="width:20%; heigth:10%"></td>
+                        <td style="with: 150px;"><img class="zoom" src="./Resources/uploads/'.$imagen.'.jpg" style="width:20%; heigth:10%"></td>
                     </td>
                     </tr>';                    
                 }

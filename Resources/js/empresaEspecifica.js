@@ -138,12 +138,12 @@ function seleccionar() {
             success: function(datos){
                 console.log("datos a modificar",datos);
                 if (datos != 0) {
-                    toastr["success"]("EMPRESA MODIFICADA.", "Éxito");
+                    toastr["success"]("Empresa modificada.", "Éxito");
                           setTimeout(() => {
                             window.location = "?page=empresas";
                         }, 4000);
                 } else {
-                    toastr["error"]("No se puedo MODIFICAR la empresa.", "Error");
+                    toastr["error"]("No se puede modificar la empresa.", "Error");
                 }
             }
             });
@@ -179,12 +179,12 @@ function eliminarEmpresa(id_empresa){
             success: function(datos){
                 console.log("datos a modificar",datos);
                 if (datos != 0) {
-                   toastr["success"]("EMPRESA ELIMINADA.", "Éxito");
+                   toastr["success"]("Empresa eliminada.", "Éxito");
                           setTimeout(() => {
                             window.location = "?page=empresas";
                         }, 4000);
                 } else {
-                    toastr["error"]("No se puedo ELIMINAR la empresa.", "Error");
+                    toastr["error"]("No se puede eliminar la empresa.", "Error");
                 }
             }
             });

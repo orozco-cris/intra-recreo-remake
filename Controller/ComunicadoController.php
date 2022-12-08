@@ -233,19 +233,22 @@ class ComunicadoController extends Conexion
 
     public function updatePermiso($comunicado)
     {
-        $query = "update comunicado set de_comunicado= '".$comunicado->getDe_comunicado()."', "+
-         "para_comunicado='".$comunicado->getPara_comunicado()."', "+
-         "asunto_comunicado='".$comunicado->getAsunto_comunicado()."', "+
-         "detalle_comunicado='".$comunicado->getDetalle_comunicado()."',"+
-         "foto_comunicado='".$comunicado->getFoto_comunicado()."', "+
-         "codigo_comunicado='".$comunicado->getCodigo_comunicado()."' "+
-         "where id_comunicado=".$comunicado->getId_comunicado();
+        print_r($comunicado);
+        $query = "update comunicado set de_comunicado='".$comunicado->getDe_comunicado()."',
+         para_comunicado='".$comunicado->getPara_comunicado()."',
+         asunto_comunicado='".$comunicado->getAsunto_comunicado()."',
+         detalle_comunicado='".$comunicado->getDetalle_comunicado()."',
+         foto_comunicado='".$comunicado->getFoto_comunicado()."',
+         codigo_comunicado='".$comunicado->getCodigo_comunicado()."'
+         where id_comunicado=".$comunicado->getId_comunicado();
      
         echo $query;
         $result = pg_query($this->conn, $query);
         //pg_close($this->conn);
         return $result;
     }
+
+    
     public function getPermisosAprobadosNoAprobados($query)
     {
         

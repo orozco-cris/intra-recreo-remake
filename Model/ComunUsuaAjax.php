@@ -348,7 +348,7 @@ if($_POST["crud"])
                 echo $html;
         break;
 
-        case 'permisoAModificar':
+/*         case 'permisoAModificar':
             //$id_permiso = 2;
             $id_permiso = $_POST["comunicado"];
             $con_usuario_comunicado_controller = new ComunUsuaController();
@@ -397,7 +397,7 @@ if($_POST["crud"])
                                                     <label> DESCRIPCION:</label>
                                                 </div>
                                                 <div class="col-md-8 form-group">
-                                                    <textarea type="text" class="fom-control" id="descripcion" name="descripcion" id="txtDescripcion" rows="8"> '.$row["comunicado"]->getDetalle_comunicado().'</textarea> 
+                                                    <textarea class="fom-control" name="txtDescripcion" id="txtDescripcion" rows="8"> '.$row["comunicado"]->getDetalle_comunicado().'</textarea> 
                                                 </div>
                                                 <input type="hidden" id="id_comunicado" value='.$row["comunicado"]->getId_comunicado().'>
                                             </div>
@@ -424,6 +424,21 @@ if($_POST["crud"])
 				}
             echo $html;
         break;
+ */
+
+case 'permisoAModificar':
+    //$id_permiso = 2;
+    $id_permiso = $_POST["comunicado"];
+    $con_usuario_comunicado_controller = new ComunUsuaController();
+    $query = "select * from comunicado where id_comunicado = ".$id_permiso."";
+    $con_usuario_comunicado = $con_usuario_comunicado_controller->datosPermiso($query);
+   //array ($con_usuario_comunicado= $con_usuario_comunicado_controller->datosPermiso($query));
+    $test = json_encode($con_usuario_comunicado);
+    //print_r($con_usuario_comunicado);
+    echo $test;
+
+
+break;
 
         case 'listPermisosAprobados':
             session_start();
@@ -541,6 +556,57 @@ if($_POST["crud"])
 				}
 				$html .= '</tbody></table>';
 				echo $html;
+        break;
+        case 'updatePermiso':
+            echo "entro al controlador";
+            session_start();
+            $comunicado = new Comunicado();
+            $con_comunicado = new ComunicadoController();
+            $comunicado_usuario = new ComunicadoUsuario();
+            $con_comunicado_usuario = new ComunUsuaController();
+
+            date_default_timezone_set('America/Guayaquil');
+            $hoy = getdate();
+            $dia = $hoy["mday"];
+            $mes = $hoy["mon"];
+            $anio = $hoy["year"];
+            $circular_codigo = "".$hoy["year"].$hoy["mon"] . $hoy["mday"] . $hoy["hours"] . $hoy["minutes"] . $hoy["seconds"] ."";
+            $hora = $hoy["hours"] . ":" . $hoy["minutes"] . ":" . $hoy["seconds"];
+            
+            //$id=$_POST["id_comunicado"];
+        
+            $imagen=$_POST["foto_comunicado"];
+            //echo $imagen;
+            //$comunicado->setId_usuario_creador($_POST["usuario"]);
+            //$comunicado->setId_usuario_creador($_SESSION["usuario"]);
+            $comunicado->setId_comunicado($_POST["id_comunicado"]);
+            $comunicado->setDe_comunicado($_POST["de_comunicado"]);
+            $comunicado->setPara_comunicado($_POST["para_comunicado"]);
+            $comunicado->setCodigo_comunicado($_POST["codigo_comunicado"]);
+            $comunicado->setAsunto_comunicado($_POST["asunto_comunicado"]);
+            //$comunicado->setMensaje_comunicado($_POST["mensaje_comunicado"]);
+            $comunicado->setDetalle_comunicado($_POST["detalle_comunicado"]);
+           // $comunicado->setFecha_caducidad_comunicado('');
+            $comunicado->setFoto_comunicado($_POST["foto_comunicado"]);
+            //$comunicado->setTipo_comunicado($_POST["tipo_comunicado"]);
+
+            
+            $result_comunicado = $con_comunicado->updatePermiso($comunicado);
+            
+            if($result_comunicado)
+            {
+                $result_comunicado_usuario = $con_comunicado_usuario->updateComunicado($_POST["id_comunicado"]);
+                if($result_comunicado_usuario)
+                {
+                    echo 'correcto';
+                }else
+                {
+                    echo 'incorrecto';
+                }
+            }else
+            {
+                echo 'incorrecto';
+            }
         break;
 
     }

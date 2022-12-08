@@ -170,7 +170,7 @@ class ComunUsuaController extends Conexion
     public function updateComunicadoUsuario($comunicado_usuario)
     {
         $query = "update comunicado_usuario set revision=0 where id_comunicado= ".$comunicado_usuario."" ;
-       
+       echo $query;
         $result = pg_query($this->conn, $query);
         //pg_close($this->conn);
         return $result;
@@ -214,7 +214,37 @@ class ComunUsuaController extends Conexion
         return $datos;
     }
 
-  
+    public function datosPermiso($query)
+    {        
+        //$query="select * from comunicado where id_comunicado = ".$id_permiso."";
+        $result = pg_query($this->conn, $query);
+        $datos = array();
+        if(pg_num_rows($result) > 0)
+		{
+            while($info = pg_fetch_array($result))
+			{
+                $obj_comunicado = new Comunicado();
+                $con_comunicado = new ComunicadoController();
+                $obj_comunicado = $con_comunicado->listParameter($info[0]);
+                $datos[] = array(
+                   // "success" => true,
+                    "comunicado" => $obj_comunicado,
+                   // "check" => $info[3]
+                );
+               //json_encode($datos);
+               $consulta = json_encode($datos);
+            } 
+
+        }
+        else
+		{
+			$datos[] = array("success" => false);
+		}
+    
+        echo $consulta;
+    }
+
+
 
     
 

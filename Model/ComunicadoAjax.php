@@ -206,6 +206,7 @@ if($_POST["crud"])
 
 
         case 'updatePermiso':
+            echo "entro al controlador";
             session_start();
             $comunicado = new Comunicado();
             $con_comunicado = new ComunicadoController();
@@ -223,21 +224,18 @@ if($_POST["crud"])
             //$id=$_POST["id_comunicado"];
         
             $imagen=$_POST["foto_comunicado"];
+            //echo $imagen;
             //$comunicado->setId_usuario_creador($_POST["usuario"]);
             //$comunicado->setId_usuario_creador($_SESSION["usuario"]);
             $comunicado->setId_comunicado($_POST["id_comunicado"]);
             $comunicado->setDe_comunicado($_POST["de_comunicado"]);
             $comunicado->setPara_comunicado($_POST["para_comunicado"]);
-            $comunicado->setCodigo_comunicado($circular_codigo);
+            $comunicado->setCodigo_comunicado($_POST["codigo_comunicado"]);
             $comunicado->setAsunto_comunicado($_POST["asunto_comunicado"]);
             //$comunicado->setMensaje_comunicado($_POST["mensaje_comunicado"]);
             $comunicado->setDetalle_comunicado($_POST["detalle_comunicado"]);
-            $comunicado->setDia_comunicado($dia);
-            $comunicado->setMes_comunicado($mes);
-            $comunicado->setAnio_comunicado($anio);
-            $comunicado->setHora_comunicado($hora);
            // $comunicado->setFecha_caducidad_comunicado('');
-            $comunicado->setFoto_comunicado($imagen);
+            $comunicado->setFoto_comunicado($_POST["foto_comunicado"]);
             //$comunicado->setTipo_comunicado($_POST["tipo_comunicado"]);
 
             
@@ -245,7 +243,7 @@ if($_POST["crud"])
             
             if($result_comunicado)
             {
-                $result_comunicado_usuario = $con_comunicado_usuario->updateComunicado($_POST["id_comunicado"]);
+                $result_comunicado_usuario = $con_comunicado_usuario->updateComunicadoUsuario($_POST["id_comunicado"]);
                 if($result_comunicado_usuario)
                 {
                     echo 'correcto';
@@ -305,7 +303,123 @@ if($_POST["crud"])
 				$html .= '</tbody></table>';
 				echo $html;
         break;
+
+        case 'listCircularesParaCliente':
+            session_start();
+            $id_usuario=$_SESSION["usuario"];
+            //$id_usuario = 2;
+            $con_comunicado_controller = new ComunicadoController();
+            $query = "select * from comunicado as co where co.id_usuario_creador =".$id_usuario."
+                and co.tipo_comunicado = 'circular' order by co.id_comunicado desc";
+            $con_comunicado_controller = new ComunicadoController();           
+            $con_comunicado = $con_comunicado_controller->getPermisosParaCliente($query);
+            $html = '<table class="table table-bordered table-striped" id="tblAuditadasRep">
+                <thead>
+                    <tr>
+                        <th class="back-color text-center">Asunto</th>
+                        <th class="back-color text-center">Fecha</th>
+                        <th class="back-color text-center">Departamento</th>
+                        <th class="back-color text-center">Ver más</th>   
+                        <th class="back-color text-center"></th>
+                    </tr>
+                </thead>
+                <tbody>';
+            if($con_comunicado[0]["success"])
+            {
+                foreach ($con_comunicado as $row) 
+                {$color=$row["destinatario"]->getRevision();
+                    $c='';
+                    if($color==0){
+                        $c='text-danger';
+                    }
+                    else if($color==1){
+                        $c='text-success';
+                    }
+                    else if($color==2){
+                        $c='text-warning';
+                    }
+                    $html .= '<tr>
+                        <td>'.$row["asunto_comunicado"].'</td>
+                        <td class="text-center">'.$row["anio_comunicado"].'/'.
+                            $row["mes_comunicado"].'/'.
+                            $row["dia_comunicado"].'</td>
+                        <td class="text-center">'.$row["destinatario"]->getId_usuario()->getId_tipo_usuario()->getNombre_tipo_usuario().'</td>
+                        <td class="text-center"><a class="btn btn-link" 
+                    href="?page=solEspecificas&comu='.base64_encode($row["id_comunicado"]).'&estado=1&revision='.$color.'">Ver más</a></td>
+
+                    </tr>';
+                    
+                }
+            }
+            else
+                {
+                    $html .= "<tr><td colspan='4' class='text-center'>No existen solicitudes de permisos</td></tr>";
+                }
+                $html .= '</tbody></table>';
+                echo $html;
+        break;
+
+
+        case 'listCircularesNoRevisadasCliente':
+            session_start();
+            $id_usuario=$_SESSION["usuario"];
+            //$id_usuario = 2;
+            $con_comunicado_controller = new ComunicadoController();
+            $query = "select * from comunicado as co inner join comunicado_usuario cu
+                        on co.id_comunicado=cu.id_comunicado
+                    where co.id_usuario_creador =".$id_usuario." and cu.revision=0
+                and co.tipo_comunicado = 'circular' order by co.id_comunicado desc";
+            $con_comunicado_controller = new ComunicadoController();           
+            $con_comunicado = $con_comunicado_controller->getPermisosParaCliente($query);
+            $html = '<table class="table table-bordered table-striped" id="tblAuditadasRep">
+                <thead>
+                    <tr>
+                        <th class="back-color text-center">Asunto</th>
+                        <th class="back-color text-center">Fecha</th>
+                        <th class="back-color text-center">Departamento</th>
+                        <th class="back-color text-center">Ver más</th>   
+                        <th class="back-color text-center"></th>
+                    </tr>
+                </thead>
+                <tbody>';
+            if($con_comunicado[0]["success"])
+            {
+                foreach ($con_comunicado as $row) 
+                {$color=$row["destinatario"]->getRevision();
+                    $c='';
+                    if($color==0){
+                        $c='text-danger';
+                    }
+                    else if($color==1){
+                        $c='text-success';
+                    }
+                    else if($color==2){
+                        $c='text-warning';
+                    }
+                    $html .= '<tr>
+                        <td>'.$row["asunto_comunicado"].'</td>
+                        <td class="text-center">'.$row["anio_comunicado"].'/'.
+                            $row["mes_comunicado"].'/'.
+                            $row["dia_comunicado"].'</td>
+                        <td class="text-center">'.$row["destinatario"]->getId_usuario()->getId_tipo_usuario()->getNombre_tipo_usuario().'</td>
+                        <td class="text-center"><a class="btn btn-link" 
+                    href="?page=solEspecificas&comu='.base64_encode($row["id_comunicado"]).'&estado=1&revision='.$color.'">Ver más</a></td>
+
+                    </tr>';
+                    
+                }
+            }
+            else
+                {
+                    $html .= "<tr><td colspan='4' class='text-center'>No existen solicitudes de permisos</td></tr>";
+                }
+                $html .= '</tbody></table>';
+                echo $html;
+        break;
+
     }
+
+    
 }
 
 ?>

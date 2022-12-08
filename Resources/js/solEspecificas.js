@@ -107,7 +107,12 @@ $(document).ready(function(){
 
 
 
-	function getPermisoModificar(id_comunicado){
+	/* function getPermisoModificar(id_comunicado){
+		ClassicEditor.create(document.querySelector("#txtDescripcion")).then(editor => instance = editor);
+		//document.querySelector("[name=details}]").value = instance.getData();
+		//var objeto = new Object();
+		//objeto['txtDescripcion'] = CKEDITOR.instances['txtDescripcion'].getData()
+
         var dat = {
             crud:"permisoAModificar",
 			comunicado: id_comunicado
@@ -119,6 +124,48 @@ $(document).ready(function(){
             success: function(data){
 				console.log(data);
                 $("#permisoAModificar").html(data);
+				 
+            },
+    
+            error: function(error){
+                console.error(error);
+            }
+            
+        });
+    }
+ */
+
+	function getPermisoModificar(id_comunicado){
+		
+        var dat = {
+            crud:"permisoAModificar",
+			comunicado: id_comunicado
+        };
+		var x = 'hola';
+        $.ajax({
+            data: dat,
+            url:"./Model/ComunUsuaAjax.php",
+            method: "POST",
+            success: function(response){
+				//var array = JSON.parse(response);
+				console.log("datos recibidos",JSON.parse(response));
+				//var arreglo =<?php echo json_encode(response); ?>;
+
+				//x = JSON.decode(response)
+				//console.log(x)
+				//console.log(x['comunicado'].para_comunicado)
+				//console.log("datos recuperados",response);
+				//console.log("success",response.comunicado[0].de_comunicado)
+				//$("#de").val(response[0].de_comunicado);
+             /*    $("#asunto").val(response.comunicado.asunto_comunicado);
+				$("#para").val(response.comunicado.para_comunicado);
+				$("#codigo").val(response.comunicado.codigo_comunicado);
+				$("#mensaje").val(response.comunicado.mensaje_comunicado);
+				$("#txtDesxripcion").val(response.comunicado.detalle_comunicado);
+				$("#id_comunicado").val(response.comunicado.id_comunicado); */
+//<img style="width:80%"; heigth:50px" src="./Resources/uploads/'.$row["comunicado"]->getFoto_comunicado().'">  
+               /*  CKupdate();
+                CKEDITOR.instances['eaddress'].setData(eaddress);     */
 				 
             },
     
@@ -151,8 +198,9 @@ $(document).ready(function(){
 		
 	var myEditor;
 
+	
 	ClassicEditor
-		.create(document.querySelector("#descripcion"))
+		.create(document.querySelector("#txtDescripcion"))
 		.then(editor => {
 			myEditor = editor;
 		})
@@ -172,10 +220,10 @@ $(document).ready(function(){
 					processData: false,
 					success: function (response) {
 				//		console.log("respuesta", data);
-						 if(response) {
+						 if(response=='') {
 							response=codigo+'.jpg';
-							}
 							console.log("response",response);
+							}
 							var dat = {
 								crud: "updatePermiso",
 								id_comunicado:id,
@@ -183,25 +231,26 @@ $(document).ready(function(){
 								para_comunicado: para,
 								asunto_comunicado: asunto,
 								foto_comunicado: response,
-								detalle_comunicado: descripcion
+								detalle_comunicado: descripcion,
+								codigo_comunicado:codigo
 							};
 							console.log("datos",dat);
 							$.ajax({
-								data: dat,
-								url: "./Model/ComunicadoAjax.php",
-								method: "POST",
-								success: function (datos) {
-									console.log("datos1", datos);
-									if (datos != 0) {
-									/*toastr["success"]("SOLICITUD MODIFICADA.", "Éxito");
-									setTimeout(() => {
-										window.location = "?page=menuCliente";
-									}, 4000);*/
-								} else {
-									/*toastr["error"]("No se puedo modificar la solicitud.", "Error");*/
-								}
-					}
-				});
+                                data: dat,
+                                url: "./Model/ComunicadoAjax.php",
+                                method: "POST",
+                                success: function (datos) {
+                                    console.log("datos1", datos);
+                                    if (datos != 0) {
+                                   toastr["success"]("Permiso Modificado.", "Éxito");
+                                   /* setTimeout(() => {
+                                        window.location = "?page=home";
+                                    }, 4000);*/
+                                } else {
+                                    toastr["error"]("No se puede modificar el permiso.", "Error");
+                                }
+                    }
+                });
 
 			/* } else {
 				toastr["error"]("Imagen no permitida.", "Error")
@@ -211,18 +260,19 @@ $(document).ready(function(){
 }
 $("#id_modificarPermiso").click(function (e) {
 	e.preventDefault();
-	var desc = myEditor.getData();
+	//var desc = myEditor.getData();
 	var filename = $('input[type=file]').val().split('\\').pop();
 	modificarPermiso($("#id_comunicado").val(),
 		$("#de").val(),
 		$("#para").val(),
 		$("#asunto").val(),
 		filename,
-		desc,
-		//$("#descripcion").val(),
+		//desc,
+		$("#txtDescripcion").val(),
 		$("#codigo").val());
 
 });
+
 
 
 });

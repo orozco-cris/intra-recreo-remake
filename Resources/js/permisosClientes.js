@@ -56,12 +56,12 @@ $(document).ready(function () {
 									success: function (datos) {
 										console.log("datos1", datos);
 										if (datos != 0) {
-										toastr["success"]("SOLICITUD CREADA.", "Éxito");
+										toastr["success"]("Solicitud creada.", "Éxito");
 										setTimeout(() => {
 											window.location = "?page=menuCliente";
 										}, 4000);
 									} else {
-										toastr["error"]("No se puedo crear la solicitud.", "Error");
+										toastr["error"]("No se puede crear la solicitud.", "Error");
 									}
 						}
 					});
