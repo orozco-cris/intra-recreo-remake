@@ -1,44 +1,152 @@
 <?php
 
-require_once "./../Controller/Conexion.php";
-require_once "./../Class/Usuario.php";
+require_once "./../../Model/PersonaModel.php";
+require_once "./../../Model/SuperAdminModel.php";
+require_once "./../../Model/Conexion.php";
+
+require_once "./../../vendor/autoload.php";
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+/*require_once "./../Class/Usuario.php";
 require_once "./../Class/TipoUsuario.php";
 require_once "./../Controller/TipoUsuarioController.php";
 require_once "./../Class/Empresas.php";
-require_once "./../Controller/EmpresaController.php";
+require_once "./../Controller/EmpresaController.php"; */
 //session_start();
 
-class UsuarioController extends Conexion
+class PersonaController
 {
-    private $conn;
-	public function __construct()
-	{
-		$this->conn = Conexion::getInstance()->getConexion();
-	}
+    public function loginPost($json)
+    {
+        if(isset($json['json']))
+        {
+            $objJson = json_decode($json['json']);
+            switch($objJson->method)
+            {
+                case 'getPorId':
+                    $result = PersonaModel::readOne($objJson->objeto);
+                    if($result)
+                    {
+                        $objetoJson = $result->toJSON();
+                        $this->fnReturnJson(200, $objetoJson);
+                    }else
+                    {
+                        $this->fnReturnJson(500, null);
+                    } 
+                break;
+                case 'registroSuperAdmin':
+                    $clave = $objJson->objeto2->str_clave_login;
+                    $claveEn = crypt($clave, '$6$rounds=5000$tecentel+2022$');
+                    $objJson->objeto2->str_clave_login = $claveEn;
+                    $result = SuperAdminModel::saveNew($objJson->objeto1, $objJson->objeto2);
+                    if($result)
+                    {
+                        $objetoJson = $result;
+                        $this->fnReturnJson(200, $objetoJson);
+                    }else
+                    {
+                        $this->fnReturnJson(500, null);
+                    }
+                    break; 
+                case 'loginSuperAdmin':
+                    $clave = $objJson->objeto->str_clave_login;
+                    $claveEn = crypt($clave, '$6$rounds=5000$tecentel+2022$');
+                    $objJson->objeto->str_clave_login = $claveEn;
+                    $result = LoginUsuarioModel::loginSuperAdmin($objJson->objeto);
+                    if($result)
+                    {
+                        $key = "tecentel+2022";
+                        $token = Conexion::setToken($result, $objJson->objeto);
+                        $jwt = JWT::encode($token, $key, 'HS256');
+                        $tokens = array(
+                            "token" => $jwt,
+                            "token_exp" => $token["exp"]
+                        );
+                        $update = LoginUsuarioModel::updateToken($tokens, $result);
 
-     public function readOne($query)
-	{
-		$result = pg_query($this->conn, $query);
-		$usuarios = null;
-		if(pg_num_rows($result) > 0)
-		{
-			while($info = pg_fetch_array($result))
-			{
-				$usuarios = new Usuario();
-				$usuarios->setId_usuario($info[0]);
-				$usuarios->setId_tipo_usuario($info[1]);
-				$usuarios->setNombre_usuario(utf8_encode($info[2]));
-				$usuarios->setApellido_usuario(utf8_encode($info[3]));
-				$usuarios->setCedula_usuario($info[4]);
-				$usuarios->setLogin_usuario($info[5]);
-				$usuarios->setClave_usuario($info[6]);
-				$usuarios->setCorreo_usuario($info[7]);				
-				$usuarios->setEstado_usuario($info[9]);
-			}
-		}
-		//pg_close($this->conn);
-		return $usuarios;
-	} 
+                        $this->fnReturnJson(200, $update);
+                    }else
+                    {
+                        $this->fnReturnJson(500, null);
+                    }
+                    break;
+            }  
+        }else{
+            $this->fnReturnJson(422, null);
+        }
+        
+    }
+
+    /* public function savePerson($json)
+    {
+        if($json['json']){
+            echo 'correcto';
+        }else{
+            $data = [
+                'status' => 422,
+                'message' => 'La información es incorrecta',
+            ];
+            header('HTTP/1.0 422 Unprocessable Entity');
+            echo json_encode($data);
+            exit();
+        }
+    } */
+
+    public function loginGet($json)
+    {
+        if(isset($json['json']))
+        {
+            $objJson = json_decode($json['json']);
+            switch($objJson->method)
+            {
+                case 'getPorId':
+                    $result = PersonaModel::readOne($objJson->objeto);
+                    if($result)
+                    {
+                        $objetoJson = $result->toJSON();
+                        $this->fnReturnJson(200, $objetoJson);
+                    }else
+                    {
+                        $this->fnReturnJson(500, null);
+                    } 
+                break;
+            }  
+        }else{
+            $this->fnReturnJson(422, null);
+        }
+    }
+
+    public function fnReturnJson($status, $objeto)
+    {
+        switch($status)
+        {
+            case 200:
+                $data = array(
+                    "status" => $status,
+                    "message" => 'Success',
+                    "result" => $objeto
+                );
+                echo json_encode($data, http_response_code($data["status"]));
+                break;
+            case 422:
+                $data = array(
+                    'status' => $status,
+                    'message' => 'Data is wrong',
+                );
+                echo json_encode($data, http_response_code($data["status"]));
+                break;
+            case 500:
+                $data = [
+                    'status' => $status,
+                    'message' => 'Internal Server Error'
+                ];
+                echo json_encode($data, http_response_code($data["status"]));
+                break;
+        }
+
+    }
+//-------------------------------------------------OLD---------------------------------------------------------
+     
 
 	public function listClientes($query)
 	{
